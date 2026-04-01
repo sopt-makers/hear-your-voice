@@ -1,7 +1,8 @@
 import './App.css';
+import StartScreen from './pages/StartScreen';
 
 function App() {
-  return <div>Hello World</div>;
+  return <StartScreen />;
 }
 
 export default App;
