@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
 import { colors } from '@sopt-makers/colors';
@@ -9,11 +10,23 @@ import titleImg from '../assets/title.png';
 const PARTICIPATION_START_DATE = new Date('2026-04-01T00:00:00');
 const PARTICIPATION_END_DATE = new Date('2026-04-30T23:59:59');
 
-// 현재 날짜가 참여 기간 내인지 체크
-const now = new Date();
-const isActive = now >= PARTICIPATION_START_DATE && now <= PARTICIPATION_END_DATE;
-
 function StartScreen() {
+  // 현재 날짜가 참여 기간 내인지 체크
+  const [isActive, setIsActive] = useState(() => {
+    const now = new Date();
+    return now >= PARTICIPATION_START_DATE && now <= PARTICIPATION_END_DATE;
+  });
+
+  useEffect(() => {
+    // 1분마다 참여 기간 체크
+    const interval = setInterval(() => {
+      const now = new Date();
+      const newIsActive = now >= PARTICIPATION_START_DATE && now <= PARTICIPATION_END_DATE;
+      setIsActive(newIsActive);
+    }, 60000); // 60초
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className={styles.container}>
       {/* Background Image */}
