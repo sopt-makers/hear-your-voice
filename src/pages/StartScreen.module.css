@@ -1,7 +1,8 @@
 .container {
   position: relative;
-  width: 430px;
-  height: 932px;
+  width: 100%;
+  max-width: 430px;
+  height: 100dvh;
   overflow: hidden;
   margin: 0 auto;
 }
@@ -27,14 +28,9 @@
   z-index: 5;
 }
 
-.titleGroup {
-  text-align: center;
-}
-
 .titleImage {
   width: 280px;
   height: auto;
-  margin: 0 0 10px 0;
 }
 
 .overlay {
@@ -60,11 +56,7 @@
   max-width: 350px;
 }
 
-.disableTitle {
-  text-align: center;
-  margin: 0;
-}
-
+.disableTitle,
 .disableDescription {
   text-align: center;
   margin: 0;
