@@ -13,11 +13,9 @@ assignees: ''
 -->
 
 ## Related Issue 🚀
-
-- closed #{이슈\_번호}
+- closed #{이슈번호}
 
 ## Work Description ✏️
-
 - 작업 설명을 적어주세요.
 
 ## PR Point 📸
