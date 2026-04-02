@@ -23,9 +23,3 @@
   padding: 24px 0 34px;
   align-items: left;
 }
-
-.sprintButtons button {
-  width: 100%;
-  justify-content: flex-start;
-  text-align: left;
-}
