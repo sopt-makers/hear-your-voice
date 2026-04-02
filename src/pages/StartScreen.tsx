@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
 import { colors } from '@sopt-makers/colors';
@@ -11,6 +12,8 @@ const PARTICIPATION_START_DATE = new Date('2026-04-01T00:00:00');
 const PARTICIPATION_END_DATE = new Date('2026-04-30T23:59:59');
 
 function StartScreen() {
+  const navigate = useNavigate();
+
   // 현재 날짜가 참여 기간 내인지 체크
   const [isActive, setIsActive] = useState(() => {
     const now = new Date();
@@ -43,7 +46,7 @@ function StartScreen() {
             theme="white"
             variant="fill"
             style={fontsObject.LABEL_1_18_SB}
-            // TODO: 안내 페이지로 이동
+            onClick={() => navigate('/notice')}
           >
             너목들 시작하기
           </Button>
