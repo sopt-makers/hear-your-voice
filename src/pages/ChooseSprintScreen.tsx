@@ -53,7 +53,7 @@ function ChooseSprintScreen() {
             key={index}
             rounded="md"
             size="lg"
-            theme="white"
+            theme="white" // todo: theme 추가되면 변경 필요
             variant={selectedSprint === index ? 'fill' : 'outlined'}
             style={fontsObject.LABEL_1_18_SB}
             onClick={() => setSelectedSprint(index)}
