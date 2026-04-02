@@ -1,12 +1,22 @@
+import { useNavigate } from 'react-router-dom';
 import { fontsObject } from '@sopt-makers/fonts';
 import styles from './NoticeScreen.module.css';
 import { StepLayout } from '../components';
 import noticeExampleImg from '../assets/notice_example_img.png';
+import { colors } from '@sopt-makers/colors';
 
 function NoticeScreen() {
+  const navigate = useNavigate();
+
+  const handleNext = () => {
+    navigate('/choose-sprint');
+  };
+
   return (
-    <StepLayout>
-      <div className={styles.contentSection}>
+    <StepLayout
+      onNext={handleNext}
+    >
+      <div className={styles.contentSection} style={{ color: colors.white }}>
         <div className={styles.labelSection}>
           <p className={styles.labelText} style={fontsObject.HEADING_5_20_B}>
             안내사항
