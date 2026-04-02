@@ -1,0 +1,31 @@
+.labelSection {
+  padding: 20px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  margin: 0;
+  text-align: left;
+}
+
+.description {
+  margin: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.sprintButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 0 34px;
+  align-items: left;
+}
+
+.sprintButtons button {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+}
