@@ -4,6 +4,7 @@ import { fontsObject } from '@sopt-makers/fonts';
 import { colors } from '@sopt-makers/colors';
 import { IconChevronRight } from '@sopt-makers/icons';
 import headerImg from '../assets/header_img.png';
+import ProgressBar from './ProgressBar';
 import styles from './StepLayout.module.css';
 
 interface StepLayoutProps {
@@ -12,6 +13,9 @@ interface StepLayoutProps {
   onNext?: () => void;
   isNextDisabled?: boolean;
   backgroundColor?: string;
+  showProgressBar?: boolean;
+  currentStep?: number;
+  totalSteps?: number;
 }
 
 function StepLayout({
@@ -20,12 +24,19 @@ function StepLayout({
   onNext,
   isNextDisabled = false,
   backgroundColor = colors.gray950,
+  showProgressBar = false,
+  currentStep,
+  totalSteps,
 }: StepLayoutProps) {
   return (
     <div className={styles.container} style={{ backgroundColor }}>
       <div className={styles.headerSection} style={{ backgroundColor: colors.secondary }}>
         <img src={headerImg} alt="안내사항" className={styles.headerImage} />
       </div>
+
+      {showProgressBar && currentStep !== undefined && totalSteps !== undefined && (
+        <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+      )}
 
       <div className={styles.contentSection}>{children}</div>
 
