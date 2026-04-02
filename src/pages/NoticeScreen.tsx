@@ -37,8 +37,8 @@ function NoticeScreen() {
 
         <div className={styles.noticeExampleSection}>
           <img 
-            src={noticeExampleImg} 
-            alt="Notice Example" 
+            src={noticeExampleImg}
+            alt="너의 목소리가 들려 예시 이미지" 
             className={styles.noticeExampleImage} 
           />
         </div>
