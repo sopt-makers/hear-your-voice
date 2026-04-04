@@ -37,7 +37,7 @@ function NoticePage() {
           <p>위의 내용에 대해 숙지하셨다면, 다음으로 넘어가 주세요. 🔥</p>
         </div>
 
-        <div className={styles.noticeExampleSection}>
+        <div className={styles.noticeExplainSection}>
           <img
             src={noticeExplainImg}
             alt="너의 목소리가 들려 설명 이미지"
