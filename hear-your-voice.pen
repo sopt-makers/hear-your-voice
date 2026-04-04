@@ -1,5 +1,5 @@
 {
-  "version": "2.9",
+  "version": "2.10",
   "children": [
     {
       "type": "frame",
@@ -609,7 +609,6 @@
                             "thickness": 1
                           },
                           "alignItems": "center",
-                          "layoutIncludeStroke": true,
                           "children": [
                             {
                               "type": "frame",
@@ -1554,7 +1553,6 @@
                             "thickness": 1
                           },
                           "alignItems": "center",
-                          "layoutIncludeStroke": true,
                           "children": [
                             {
                               "type": "frame",
@@ -2519,7 +2517,6 @@
                             "thickness": 1
                           },
                           "alignItems": "center",
-                          "layoutIncludeStroke": true,
                           "children": [
                             {
                               "type": "frame",
@@ -6773,7 +6770,6 @@
                             "thickness": 1
                           },
                           "alignItems": "center",
-                          "layoutIncludeStroke": true,
                           "children": [
                             {
                               "type": "frame",
@@ -11007,7 +11003,6 @@
                             "thickness": 1
                           },
                           "alignItems": "center",
-                          "layoutIncludeStroke": true,
                           "children": [
                             {
                               "type": "frame",
@@ -11917,7 +11912,6 @@
                             "thickness": 1
                           },
                           "alignItems": "center",
-                          "layoutIncludeStroke": true,
                           "children": [
                             {
                               "type": "frame",
@@ -12512,7 +12506,6 @@
                             "thickness": 1
                           },
                           "alignItems": "center",
-                          "layoutIncludeStroke": true,
                           "children": [
                             {
                               "type": "frame",
@@ -12863,867 +12856,6 @@
                     {
                       "type": "path",
                       "id": "r5f7F",
-                      "x": 9,
-                      "y": 6,
-                      "name": "Icon",
-                      "geometry": "M0 12l6-6-6-6",
-                      "width": 6,
-                      "height": 12,
-                      "stroke": {
-                        "align": "center",
-                        "thickness": 1.5,
-                        "join": "round",
-                        "cap": "round",
-                        "fill": "#ffffffff"
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "JXyJZ",
-      "x": 4312,
-      "y": 1105,
-      "name": "Frame 2087327103",
-      "clip": true,
-      "width": 430,
-      "height": 932,
-      "fill": "#0f1012ff",
-      "stroke": {
-        "align": "outside",
-        "thickness": 9
-      },
-      "layout": "vertical",
-      "gap": 24,
-      "justifyContent": "space_between",
-      "children": [
-        {
-          "type": "frame",
-          "id": "LkU0s",
-          "name": "Frame 2087327085",
-          "width": "fill_container",
-          "stroke": {
-            "align": "inside",
-            "thickness": 1
-          },
-          "layout": "vertical",
-          "children": [
-            {
-              "type": "frame",
-              "id": "zS58k",
-              "name": "Frame 2087327063",
-              "clip": true,
-              "width": 430,
-              "height": 150,
-              "fill": "#ff6e1dff",
-              "stroke": {
-                "align": "inside",
-                "thickness": 1
-              },
-              "layout": "none",
-              "children": [
-                {
-                  "type": "group",
-                  "id": "UWVTI",
-                  "x": 84.00009155273438,
-                  "y": 44.00017166137695,
-                  "name": "Group 57322"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "7TFHq",
-              "name": "Frame 2087327088",
-              "clip": true,
-              "width": 430,
-              "stroke": {
-                "align": "inside",
-                "thickness": 1
-              },
-              "layout": "vertical",
-              "gap": 10,
-              "padding": [
-                16,
-                20
-              ],
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "AI0er",
-                  "name": "Frame 2087327064",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 12,
-                  "fill": "#ffffffff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "layout": "none"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "Nxtu7",
-              "name": "Frame 2087327089",
-              "width": "fill_container",
-              "stroke": {
-                "align": "inside",
-                "thickness": 1
-              },
-              "padding": [
-                20,
-                28,
-                16,
-                28
-              ],
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "BuWAQ",
-                  "name": "Label",
-                  "width": "fill_container",
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "layout": "vertical",
-                  "gap": 6,
-                  "justifyContent": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "an8Ag",
-                      "name": "Frame 1171275382",
-                      "width": "fill_container",
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "gap": 10,
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "oKHUD",
-                          "name": "스프린트 선택",
-                          "fill": "#ffffffff",
-                          "content": "스프린트 선택",
-                          "lineHeight": 1.5,
-                          "fontFamily": "SUIT",
-                          "fontSize": 20,
-                          "fontWeight": "700",
-                          "letterSpacing": -0.4
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "ROmSt",
-                      "name": "Label",
-                      "width": "fill_container",
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "vertical",
-                      "gap": 12,
-                      "justifyContent": "center",
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "wqakZ",
-                          "name": "Frame 1171275382",
-                          "width": "fill_container",
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1
-                          },
-                          "layout": "vertical",
-                          "gap": 4,
-                          "justifyContent": "center",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "jiYhF",
-                              "name": "어떤 스프린트였는지 선택해주세요.",
-                              "fill": "#ffffffff",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "어떤 스프린트였는지 선택해주세요.",
-                              "lineHeight": 1.4285714285714286,
-                              "fontFamily": "SUIT",
-                              "fontSize": 14,
-                              "fontWeight": "600",
-                              "letterSpacing": -0.21
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "2oava",
-              "name": "Frame 1171275384",
-              "width": 430,
-              "stroke": {
-                "align": "inside",
-                "thickness": 1
-              },
-              "layout": "vertical",
-              "gap": 10,
-              "padding": [
-                24,
-                20,
-                34,
-                20
-              ],
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "2Und4",
-                  "name": "Button_Fill",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 56,
-                  "fill": "#ffffffff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "gap": 4,
-                  "padding": [
-                    16,
-                    26
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "zHrBo",
-                      "x": 26,
-                      "y": 16,
-                      "name": "Icon / Interaction / plus",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "mLZrH",
-                          "x": 5,
-                          "y": 5,
-                          "name": "Icon",
-                          "geometry": "M7 14l0-14m7 7l-14 0",
-                          "width": 14,
-                          "height": 14,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "wvpCH",
-                      "name": "Label",
-                      "fill": "#000000ff",
-                      "content": "(챕터별) 스프린트 0",
-                      "lineHeight": 1.3333333333333333,
-                      "textAlignVertical": "middle",
-                      "fontFamily": "SUIT",
-                      "fontSize": 18,
-                      "fontWeight": "600",
-                      "letterSpacing": -0.36
-                    },
-                    {
-                      "type": "frame",
-                      "id": "3MF7K",
-                      "x": 85,
-                      "y": 16,
-                      "name": "Icon / Interaction / chevron-right",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "aEvFx",
-                          "x": 9,
-                          "y": 6,
-                          "name": "Icon",
-                          "geometry": "M0 12l6-6-6-6",
-                          "width": 6,
-                          "height": 12,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "zx66q",
-                  "name": "Button_Fill",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 56,
-                  "fill": "#ffffffff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "gap": 4,
-                  "padding": [
-                    16,
-                    26
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "OpsNE",
-                      "x": 26,
-                      "y": 16,
-                      "name": "Icon / Interaction / plus",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "SQ3cy",
-                          "x": 5,
-                          "y": 5,
-                          "name": "Icon",
-                          "geometry": "M7 14l0-14m7 7l-14 0",
-                          "width": 14,
-                          "height": 14,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "Bmo06",
-                      "name": "Label",
-                      "fill": "#000000ff",
-                      "content": "(팀별) 스프린트 1",
-                      "lineHeight": 1.3333333333333333,
-                      "textAlignVertical": "middle",
-                      "fontFamily": "SUIT",
-                      "fontSize": 18,
-                      "fontWeight": "600",
-                      "letterSpacing": -0.36
-                    },
-                    {
-                      "type": "frame",
-                      "id": "QDlgc",
-                      "x": 85,
-                      "y": 16,
-                      "name": "Icon / Interaction / chevron-right",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "pNYKY",
-                          "x": 9,
-                          "y": 6,
-                          "name": "Icon",
-                          "geometry": "M0 12l6-6-6-6",
-                          "width": 6,
-                          "height": 12,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "KKDDH",
-                  "name": "Button_Fill",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 56,
-                  "fill": "#ffffffff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "gap": 4,
-                  "padding": [
-                    16,
-                    26
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "NzjAf",
-                      "x": 26,
-                      "y": 16,
-                      "name": "Icon / Interaction / plus",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "VXSOz",
-                          "x": 5,
-                          "y": 5,
-                          "name": "Icon",
-                          "geometry": "M7 14l0-14m7 7l-14 0",
-                          "width": 14,
-                          "height": 14,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "O066k",
-                      "name": "Label",
-                      "fill": "#000000ff",
-                      "content": "(팀별) 스프린트 2",
-                      "lineHeight": 1.3333333333333333,
-                      "textAlignVertical": "middle",
-                      "fontFamily": "SUIT",
-                      "fontSize": 18,
-                      "fontWeight": "600",
-                      "letterSpacing": -0.36
-                    },
-                    {
-                      "type": "frame",
-                      "id": "Z0D2x",
-                      "x": 85,
-                      "y": 16,
-                      "name": "Icon / Interaction / chevron-right",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "XiXTY",
-                          "x": 9,
-                          "y": 6,
-                          "name": "Icon",
-                          "geometry": "M0 12l6-6-6-6",
-                          "width": 6,
-                          "height": 12,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "c1B8K",
-                  "name": "Button_Fill",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 56,
-                  "fill": "#ffffffff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "gap": 4,
-                  "padding": [
-                    16,
-                    26
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "OOLKq",
-                      "x": 26,
-                      "y": 16,
-                      "name": "Icon / Interaction / plus",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "tpCxx",
-                          "x": 5,
-                          "y": 5,
-                          "name": "Icon",
-                          "geometry": "M7 14l0-14m7 7l-14 0",
-                          "width": 14,
-                          "height": 14,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "Q1fwI",
-                      "name": "Label",
-                      "fill": "#000000ff",
-                      "content": "(팀별) 스프린트 3",
-                      "lineHeight": 1.3333333333333333,
-                      "textAlignVertical": "middle",
-                      "fontFamily": "SUIT",
-                      "fontSize": 18,
-                      "fontWeight": "600",
-                      "letterSpacing": -0.36
-                    },
-                    {
-                      "type": "frame",
-                      "id": "nMWRA",
-                      "x": 85,
-                      "y": 16,
-                      "name": "Icon / Interaction / chevron-right",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "WV2Pd",
-                          "x": 9,
-                          "y": 6,
-                          "name": "Icon",
-                          "geometry": "M0 12l6-6-6-6",
-                          "width": 6,
-                          "height": 12,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "0waup",
-                  "name": "Button_Fill",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 56,
-                  "fill": "#ffffffff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "gap": 4,
-                  "padding": [
-                    16,
-                    26
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "xTRSQ",
-                      "x": 26,
-                      "y": 16,
-                      "name": "Icon / Interaction / plus",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "fq2EG",
-                          "x": 5,
-                          "y": 5,
-                          "name": "Icon",
-                          "geometry": "M7 14l0-14m7 7l-14 0",
-                          "width": 14,
-                          "height": 14,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "XTLDz",
-                      "name": "Label",
-                      "fill": "#000000ff",
-                      "content": "(팀별) 스프린트 4",
-                      "lineHeight": 1.3333333333333333,
-                      "textAlignVertical": "middle",
-                      "fontFamily": "SUIT",
-                      "fontSize": 18,
-                      "fontWeight": "600",
-                      "letterSpacing": -0.36
-                    },
-                    {
-                      "type": "frame",
-                      "id": "1ik5H",
-                      "x": 85,
-                      "y": 16,
-                      "name": "Icon / Interaction / chevron-right",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "ZploP",
-                          "x": 9,
-                          "y": 6,
-                          "name": "Icon",
-                          "geometry": "M0 12l6-6-6-6",
-                          "width": 6,
-                          "height": 12,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "lHxOZ",
-          "name": "Frame 2087327065",
-          "width": "fill_container",
-          "stroke": {
-            "align": "inside",
-            "thickness": 1
-          },
-          "layout": "vertical",
-          "gap": 10,
-          "padding": [
-            0,
-            20,
-            34,
-            20
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "id": "I6vjt",
-              "name": "Button_Fill",
-              "clip": true,
-              "width": "fill_container",
-              "height": 56,
-              "fill": "#202025ff",
-              "cornerRadius": 12,
-              "stroke": {
-                "align": "inside",
-                "thickness": 1
-              },
-              "gap": 4,
-              "padding": [
-                16,
-                26
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "uzBWB",
-                  "x": 26,
-                  "y": 16,
-                  "name": "Icon / Interaction / plus",
-                  "enabled": false,
-                  "clip": true,
-                  "width": 24,
-                  "height": 24,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "layout": "none",
-                  "children": [
-                    {
-                      "type": "path",
-                      "id": "NRs4M",
-                      "x": 5,
-                      "y": 5,
-                      "name": "Icon",
-                      "geometry": "M7 14l0-14m7 7l-14 0",
-                      "width": 14,
-                      "height": 14,
-                      "stroke": {
-                        "align": "center",
-                        "thickness": 1.5,
-                        "join": "round",
-                        "cap": "round",
-                        "fill": "#ffffffff"
-                      }
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "GCZQX",
-                  "name": "Label",
-                  "fill": "#515159ff",
-                  "content": "다음으로",
-                  "lineHeight": 1.3333333333333333,
-                  "textAlignVertical": "middle",
-                  "fontFamily": "SUIT",
-                  "fontSize": 18,
-                  "fontWeight": "600",
-                  "letterSpacing": -0.36
-                },
-                {
-                  "type": "frame",
-                  "id": "L4CSY",
-                  "name": "Icon / Interaction / chevron-right",
-                  "clip": true,
-                  "width": 24,
-                  "height": 24,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "layout": "none",
-                  "children": [
-                    {
-                      "type": "path",
-                      "id": "PUWR6",
                       "x": 9,
                       "y": 6,
                       "name": "Icon",
@@ -14294,866 +13426,6 @@
     },
     {
       "type": "frame",
-      "id": "DDaoj",
-      "x": 4762,
-      "y": 1105,
-      "name": "Frame 2087327104",
-      "clip": true,
-      "width": 430,
-      "height": 932,
-      "fill": "#0f1012ff",
-      "stroke": {
-        "align": "outside",
-        "thickness": 9
-      },
-      "layout": "vertical",
-      "gap": 24,
-      "justifyContent": "space_between",
-      "children": [
-        {
-          "type": "frame",
-          "id": "tNPz2",
-          "name": "Frame 2087327085",
-          "width": "fill_container",
-          "stroke": {
-            "align": "inside",
-            "thickness": 1
-          },
-          "layout": "vertical",
-          "children": [
-            {
-              "type": "frame",
-              "id": "ypU9Z",
-              "name": "Frame 2087327063",
-              "clip": true,
-              "width": 430,
-              "height": 150,
-              "fill": "#ff6e1dff",
-              "stroke": {
-                "align": "inside",
-                "thickness": 1
-              },
-              "layout": "none",
-              "children": [
-                {
-                  "type": "group",
-                  "id": "7N3b2",
-                  "x": 84.00009155273438,
-                  "y": 44.00017166137695,
-                  "name": "Group 57322"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "IzTsT",
-              "name": "Frame 2087327088",
-              "clip": true,
-              "width": 430,
-              "stroke": {
-                "align": "inside",
-                "thickness": 1
-              },
-              "layout": "vertical",
-              "gap": 10,
-              "padding": [
-                16,
-                20
-              ],
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "z4Fx6",
-                  "name": "Frame 2087327064",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 12,
-                  "fill": "#ffffffff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "layout": "none"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "hFNsa",
-              "name": "Frame 2087327089",
-              "width": "fill_container",
-              "stroke": {
-                "align": "inside",
-                "thickness": 1
-              },
-              "padding": [
-                20,
-                28,
-                16,
-                28
-              ],
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "JNkE5",
-                  "name": "Label",
-                  "width": "fill_container",
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "layout": "vertical",
-                  "gap": 6,
-                  "justifyContent": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "79BwH",
-                      "name": "Frame 1171275382",
-                      "width": "fill_container",
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "gap": 10,
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "BCbh2",
-                          "name": "스프린트 선택",
-                          "fill": "#ffffffff",
-                          "content": "스프린트 선택",
-                          "lineHeight": 1.5,
-                          "fontFamily": "SUIT",
-                          "fontSize": 20,
-                          "fontWeight": "700",
-                          "letterSpacing": -0.4
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "qodri",
-                      "name": "Label",
-                      "width": "fill_container",
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "vertical",
-                      "gap": 12,
-                      "justifyContent": "center",
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "lWm2Z",
-                          "name": "Frame 1171275382",
-                          "width": "fill_container",
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1
-                          },
-                          "layout": "vertical",
-                          "gap": 4,
-                          "justifyContent": "center",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "WPooO",
-                              "name": "어떤 스프린트였는지 선택해주세요.",
-                              "fill": "#ffffffff",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "어떤 스프린트였는지 선택해주세요.",
-                              "lineHeight": 1.4285714285714286,
-                              "fontFamily": "SUIT",
-                              "fontSize": 14,
-                              "fontWeight": "600",
-                              "letterSpacing": -0.21
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "lac2V",
-              "name": "Frame 1171275384",
-              "width": 430,
-              "stroke": {
-                "align": "inside",
-                "thickness": 1
-              },
-              "layout": "vertical",
-              "gap": 10,
-              "padding": [
-                24,
-                20,
-                34,
-                20
-              ],
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "NhQAz",
-                  "name": "Button_Fill",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 56,
-                  "fill": "#ffffffff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "gap": 4,
-                  "padding": [
-                    16,
-                    26
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "uvdoj",
-                      "x": 26,
-                      "y": 16,
-                      "name": "Icon / Interaction / plus",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "lsYQP",
-                          "x": 5,
-                          "y": 5,
-                          "name": "Icon",
-                          "geometry": "M7 14l0-14m7 7l-14 0",
-                          "width": 14,
-                          "height": 14,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "Rk7r2",
-                      "name": "Label",
-                      "fill": "#000000ff",
-                      "content": "(챕터별) 스프린트 0",
-                      "lineHeight": 1.3333333333333333,
-                      "textAlignVertical": "middle",
-                      "fontFamily": "SUIT",
-                      "fontSize": 18,
-                      "fontWeight": "600",
-                      "letterSpacing": -0.36
-                    },
-                    {
-                      "type": "frame",
-                      "id": "ssI4k",
-                      "x": 85,
-                      "y": 16,
-                      "name": "Icon / Interaction / chevron-right",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "UWyvu",
-                          "x": 9,
-                          "y": 6,
-                          "name": "Icon",
-                          "geometry": "M0 12l6-6-6-6",
-                          "width": 6,
-                          "height": 12,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "lf4C2",
-                  "name": "Button_Fill",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 56,
-                  "fill": "#ff6e1dff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "gap": 4,
-                  "padding": [
-                    16,
-                    26
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "IdYdl",
-                      "x": 26,
-                      "y": 16,
-                      "name": "Icon / Interaction / plus",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "4rxc9",
-                          "x": 5,
-                          "y": 5,
-                          "name": "Icon",
-                          "geometry": "M7 14l0-14m7 7l-14 0",
-                          "width": 14,
-                          "height": 14,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "vilEP",
-                      "name": "Label",
-                      "fill": "#000000ff",
-                      "lineHeight": 1.3333333333333333,
-                      "textAlignVertical": "middle",
-                      "fontFamily": "SUIT",
-                      "fontSize": 18,
-                      "fontWeight": "600",
-                      "letterSpacing": -0.36
-                    },
-                    {
-                      "type": "frame",
-                      "id": "Yo7Kc",
-                      "x": 85,
-                      "y": 16,
-                      "name": "Icon / Interaction / chevron-right",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "r5OmW",
-                          "x": 9,
-                          "y": 6,
-                          "name": "Icon",
-                          "geometry": "M0 12l6-6-6-6",
-                          "width": 6,
-                          "height": 12,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "iCg0p",
-                  "name": "Button_Fill",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 56,
-                  "fill": "#ffffffff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "gap": 4,
-                  "padding": [
-                    16,
-                    26
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "WRbH5",
-                      "x": 26,
-                      "y": 16,
-                      "name": "Icon / Interaction / plus",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "qwetF",
-                          "x": 5,
-                          "y": 5,
-                          "name": "Icon",
-                          "geometry": "M7 14l0-14m7 7l-14 0",
-                          "width": 14,
-                          "height": 14,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "TADmD",
-                      "name": "Label",
-                      "fill": "#000000ff",
-                      "content": "(팀별) 스프린트 2",
-                      "lineHeight": 1.3333333333333333,
-                      "textAlignVertical": "middle",
-                      "fontFamily": "SUIT",
-                      "fontSize": 18,
-                      "fontWeight": "600",
-                      "letterSpacing": -0.36
-                    },
-                    {
-                      "type": "frame",
-                      "id": "JNCnG",
-                      "x": 85,
-                      "y": 16,
-                      "name": "Icon / Interaction / chevron-right",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "chNqM",
-                          "x": 9,
-                          "y": 6,
-                          "name": "Icon",
-                          "geometry": "M0 12l6-6-6-6",
-                          "width": 6,
-                          "height": 12,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "sg27D",
-                  "name": "Button_Fill",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 56,
-                  "fill": "#ffffffff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "gap": 4,
-                  "padding": [
-                    16,
-                    26
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "VZVUc",
-                      "x": 26,
-                      "y": 16,
-                      "name": "Icon / Interaction / plus",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "FiYN9",
-                          "x": 5,
-                          "y": 5,
-                          "name": "Icon",
-                          "geometry": "M7 14l0-14m7 7l-14 0",
-                          "width": 14,
-                          "height": 14,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "ZAGBm",
-                      "name": "Label",
-                      "fill": "#000000ff",
-                      "content": "(팀별) 스프린트 3",
-                      "lineHeight": 1.3333333333333333,
-                      "textAlignVertical": "middle",
-                      "fontFamily": "SUIT",
-                      "fontSize": 18,
-                      "fontWeight": "600",
-                      "letterSpacing": -0.36
-                    },
-                    {
-                      "type": "frame",
-                      "id": "kCKut",
-                      "x": 85,
-                      "y": 16,
-                      "name": "Icon / Interaction / chevron-right",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "TdcPD",
-                          "x": 9,
-                          "y": 6,
-                          "name": "Icon",
-                          "geometry": "M0 12l6-6-6-6",
-                          "width": 6,
-                          "height": 12,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "psWvs",
-                  "name": "Button_Fill",
-                  "clip": true,
-                  "width": "fill_container",
-                  "height": 56,
-                  "fill": "#ffffffff",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "gap": 4,
-                  "padding": [
-                    16,
-                    26
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "NBWte",
-                      "x": 26,
-                      "y": 16,
-                      "name": "Icon / Interaction / plus",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "qb92S",
-                          "x": 5,
-                          "y": 5,
-                          "name": "Icon",
-                          "geometry": "M7 14l0-14m7 7l-14 0",
-                          "width": 14,
-                          "height": 14,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "9Re6s",
-                      "name": "Label",
-                      "fill": "#000000ff",
-                      "content": "(팀별) 스프린트 4",
-                      "lineHeight": 1.3333333333333333,
-                      "textAlignVertical": "middle",
-                      "fontFamily": "SUIT",
-                      "fontSize": 18,
-                      "fontWeight": "600",
-                      "letterSpacing": -0.36
-                    },
-                    {
-                      "type": "frame",
-                      "id": "jPOf1",
-                      "x": 85,
-                      "y": 16,
-                      "name": "Icon / Interaction / chevron-right",
-                      "enabled": false,
-                      "clip": true,
-                      "width": 24,
-                      "height": 24,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1
-                      },
-                      "layout": "none",
-                      "children": [
-                        {
-                          "type": "path",
-                          "id": "Q76AD",
-                          "x": 9,
-                          "y": 6,
-                          "name": "Icon",
-                          "geometry": "M0 12l6-6-6-6",
-                          "width": 6,
-                          "height": 12,
-                          "stroke": {
-                            "align": "center",
-                            "thickness": 1.5,
-                            "join": "round",
-                            "cap": "round",
-                            "fill": "#ffffffff"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "CEhjx",
-          "name": "Frame 2087327065",
-          "width": "fill_container",
-          "stroke": {
-            "align": "inside",
-            "thickness": 1
-          },
-          "layout": "vertical",
-          "gap": 10,
-          "padding": [
-            0,
-            20,
-            34,
-            20
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "id": "uI87o",
-              "name": "Button_Fill",
-              "clip": true,
-              "width": "fill_container",
-              "height": 56,
-              "fill": "#e4e4e5ff",
-              "cornerRadius": 12,
-              "stroke": {
-                "align": "inside",
-                "thickness": 1
-              },
-              "gap": 4,
-              "padding": [
-                16,
-                26
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "JI9Ky",
-                  "x": 26,
-                  "y": 16,
-                  "name": "Icon / Interaction / plus",
-                  "enabled": false,
-                  "clip": true,
-                  "width": 24,
-                  "height": 24,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "layout": "none",
-                  "children": [
-                    {
-                      "type": "path",
-                      "id": "lriyV",
-                      "x": 5,
-                      "y": 5,
-                      "name": "Icon",
-                      "geometry": "M7 14l0-14m7 7l-14 0",
-                      "width": 14,
-                      "height": 14,
-                      "stroke": {
-                        "align": "center",
-                        "thickness": 1.5,
-                        "join": "round",
-                        "cap": "round",
-                        "fill": "#ffffffff"
-                      }
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "5NhQA",
-                  "name": "Label",
-                  "fill": "#000000ff",
-                  "content": "다음으로",
-                  "lineHeight": 1.3333333333333333,
-                  "textAlignVertical": "middle",
-                  "fontFamily": "SUIT",
-                  "fontSize": 18,
-                  "fontWeight": "600",
-                  "letterSpacing": -0.36
-                },
-                {
-                  "type": "frame",
-                  "id": "2EyDK",
-                  "name": "Icon / Interaction / chevron-right",
-                  "clip": true,
-                  "width": 24,
-                  "height": 24,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1
-                  },
-                  "layout": "none",
-                  "children": [
-                    {
-                      "type": "path",
-                      "id": "YVAKY",
-                      "x": 9,
-                      "y": 6,
-                      "name": "Icon",
-                      "geometry": "M0 12l6-6-6-6",
-                      "width": 6,
-                      "height": 12,
-                      "stroke": {
-                        "align": "center",
-                        "thickness": 1.5,
-                        "join": "round",
-                        "cap": "round",
-                        "fill": "#ffffffff"
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
       "id": "wSUHr",
       "x": 6492,
       "y": 2461,
@@ -15527,7 +13799,6 @@
                             "thickness": 1
                           },
                           "alignItems": "center",
-                          "layoutIncludeStroke": true,
                           "children": [
                             {
                               "type": "frame",
@@ -26695,7 +24966,6 @@
                             "thickness": 1
                           },
                           "alignItems": "center",
-                          "layoutIncludeStroke": true,
                           "children": [
                             {
                               "type": "frame",
@@ -30698,7 +28968,7 @@
               "x": 178.68424575116296,
               "y": 9.546661510662261,
               "name": "Group",
-              "rotation": -2.6303932461844655,
+              "rotation": -2.630393246184466,
               "children": [
                 {
                   "type": "path",
@@ -30738,7 +29008,7 @@
               "x": 181.82680969238572,
               "y": 11.355112273778786,
               "name": "Group",
-              "rotation": -2.6303932461844655,
+              "rotation": -2.630393246184466,
               "children": [
                 {
                   "type": "path",
@@ -30780,7 +29050,7 @@
               "x": 190.97068632408264,
               "y": 10.111282580654688,
               "name": "Group",
-              "rotation": -2.6303932461844655,
+              "rotation": -2.630393246184466,
               "children": [
                 {
                   "type": "path",
@@ -30820,7 +29090,7 @@
               "x": 194.41798922418457,
               "y": 11.933059981671022,
               "name": "Group",
-              "rotation": -2.6303932461844655,
+              "rotation": -2.630393246184466,
               "children": [
                 {
                   "type": "path",
@@ -31788,7 +30058,7 @@
               "x": 178.68424575116296,
               "y": 9.546661510662261,
               "name": "Group",
-              "rotation": -2.6303932461844655,
+              "rotation": -2.630393246184466,
               "children": [
                 {
                   "type": "path",
@@ -31828,7 +30098,7 @@
               "x": 181.82680969238572,
               "y": 11.355112273778786,
               "name": "Group",
-              "rotation": -2.6303932461844655,
+              "rotation": -2.630393246184466,
               "children": [
                 {
                   "type": "path",
@@ -31870,7 +30140,7 @@
               "x": 190.97068632408264,
               "y": 10.111282580654688,
               "name": "Group",
-              "rotation": -2.6303932461844655,
+              "rotation": -2.630393246184466,
               "children": [
                 {
                   "type": "path",
@@ -31910,7 +30180,7 @@
               "x": 194.41798922418457,
               "y": 11.933059981671022,
               "name": "Group",
-              "rotation": -2.6303932461844655,
+              "rotation": -2.630393246184466,
               "children": [
                 {
                   "type": "path",
@@ -32490,6 +30760,1198 @@
                   "fontSize": 16,
                   "fontWeight": "500",
                   "letterSpacing": -0.24
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "IAzRF",
+      "x": 0,
+      "y": 0,
+      "name": "ProgressBar",
+      "width": 430,
+      "height": 178,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "YpqFw",
+          "name": "ProgressBackground",
+          "clip": true,
+          "width": 430,
+          "height": 150,
+          "fill": "#ff6e1dff",
+          "layout": "none"
+        },
+        {
+          "type": "frame",
+          "id": "SGyFR",
+          "name": "ProgressContainer",
+          "clip": true,
+          "width": 430,
+          "layout": "vertical",
+          "gap": 10,
+          "padding": [
+            16,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "EQs31",
+              "name": "ProgressBarFill",
+              "clip": true,
+              "width": "fill_container",
+              "height": 12,
+              "fill": "#ffffffff",
+              "cornerRadius": 12,
+              "layout": "none"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "qZIb4",
+      "x": 4751,
+      "y": 1074,
+      "name": "Frame 2087327108",
+      "clip": true,
+      "width": 430,
+      "height": 932,
+      "fill": "#0f1012ff",
+      "stroke": {
+        "align": "outside",
+        "thickness": 9
+      },
+      "layout": "vertical",
+      "gap": 24,
+      "justifyContent": "space_between",
+      "children": [
+        {
+          "type": "frame",
+          "id": "eNIBd",
+          "name": "Frame 2087327085",
+          "width": "fill_container",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "xFwTB",
+              "name": "Frame 2087327090",
+              "clip": true,
+              "width": 430,
+              "height": 150,
+              "fill": "#ff6e1dff",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "group",
+                  "id": "WHJfo",
+                  "x": 84.00009155273438,
+                  "y": 44.00017166137695,
+                  "name": "Group 57322"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vzBme",
+              "name": "Frame 2087327088",
+              "clip": true,
+              "width": 430,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "cnFU5",
+                  "name": "Frame 2087327064",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 12,
+                  "fill": "#ffffffff",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "W11Kb",
+              "name": "Frame 2087327089",
+              "width": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "padding": [
+                20,
+                28,
+                16,
+                28
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "SzuFZ",
+                  "name": "Label",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "justifyContent": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "iT8p5",
+                      "name": "Frame 1171275382",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      },
+                      "gap": 10,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "klU4l",
+                          "name": "스프린트 코드 입력",
+                          "fill": "#ffffffff",
+                          "content": "스프린트 코드 입력",
+                          "lineHeight": 1.5,
+                          "fontFamily": "SUIT",
+                          "fontSize": 20,
+                          "fontWeight": "700",
+                          "letterSpacing": -0.4
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "dtYI6",
+                      "name": "Label",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      },
+                      "layout": "vertical",
+                      "gap": 12,
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "oToOX",
+                          "name": "Frame 1171275382",
+                          "width": "fill_container",
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1
+                          },
+                          "layout": "vertical",
+                          "gap": 4,
+                          "justifyContent": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ifEOf",
+                              "name": "스프린트 확인을 위해 코드를 입력해주세요.",
+                              "fill": "#ffffffff",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "스프린트 확인을 위해 코드를 입력해주세요.",
+                              "lineHeight": 1.4285714285714286,
+                              "fontFamily": "SUIT",
+                              "fontSize": 14,
+                              "fontWeight": "600",
+                              "letterSpacing": -0.21
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "yHgpI",
+              "name": "Frame 2087327082",
+              "width": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                24,
+                28,
+                12,
+                28
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "8g0Pj",
+                  "name": "Input_TextField",
+                  "width": 320,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "HUGzr",
+                      "name": "Label",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      },
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "GLd9B",
+                          "name": "코드를 입력하세요",
+                          "fill": "#ffffffff",
+                          "content": "코드를 입력하세요",
+                          "lineHeight": 1.2857142857142858,
+                          "fontFamily": "SUIT",
+                          "fontSize": 14,
+                          "fontWeight": "600",
+                          "letterSpacing": -0.28
+                        },
+                        {
+                          "type": "text",
+                          "id": "0vWnb",
+                          "name": "*",
+                          "fill": "#f77234ff",
+                          "content": "*",
+                          "lineHeight": 1.3333333333333333,
+                          "fontFamily": "SUIT",
+                          "fontSize": 12,
+                          "fontWeight": "600",
+                          "letterSpacing": -0.24
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "0DmhY",
+                      "name": "Frame 1000003435",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      },
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "jUyhv",
+                          "name": "Modal / CodeBox",
+                          "width": 42,
+                          "height": 60,
+                          "fill": "#1c1d1eff",
+                          "cornerRadius": 8,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#c6a9ffff"
+                          },
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": 10,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "VXFj1",
+                              "name": "8",
+                              "fill": "#c6a9ffff",
+                              "content": "8",
+                              "lineHeight": 1.600000023841858,
+                              "textAlign": "center",
+                              "textAlignVertical": "middle",
+                              "fontFamily": "SUIT",
+                              "fontSize": 16,
+                              "fontWeight": "700",
+                              "letterSpacing": -0.32
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ZeZES",
+                          "name": "Modal / CodeBox",
+                          "width": 42,
+                          "height": 60,
+                          "fill": "#1c1d1eff",
+                          "cornerRadius": 8,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#c6a9ffff"
+                          },
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": 10,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "su4Wz",
+                              "name": "8",
+                              "fill": "#c6a9ffff",
+                              "content": "8",
+                              "lineHeight": 1.600000023841858,
+                              "textAlign": "center",
+                              "textAlignVertical": "middle",
+                              "fontFamily": "SUIT",
+                              "fontSize": 16,
+                              "fontWeight": "700",
+                              "letterSpacing": -0.32
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "mFDOL",
+                          "name": "Modal / CodeBox",
+                          "width": 42,
+                          "height": 60,
+                          "fill": "#1c1d1eff",
+                          "cornerRadius": 8,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#c6a9ffff"
+                          },
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": 10,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "MbXE0",
+                              "name": "8",
+                              "fill": "#c6a9ffff",
+                              "content": "8",
+                              "lineHeight": 1.600000023841858,
+                              "textAlign": "center",
+                              "textAlignVertical": "middle",
+                              "fontFamily": "SUIT",
+                              "fontSize": 16,
+                              "fontWeight": "700",
+                              "letterSpacing": -0.32
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "qWf9t",
+                          "name": "Modal / CodeBox",
+                          "width": 42,
+                          "height": 60,
+                          "fill": {
+                            "type": "color",
+                            "color": "#ffffffff",
+                            "enabled": false
+                          },
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 8,
+                              "id": "QwhWW",
+                              "x": 0,
+                              "y": 0,
+                              "name": "Rectangle 6480",
+                              "fill": "#3c3d40ff",
+                              "width": 42,
+                              "height": 60,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "gqHD9",
+                          "name": "Modal / CodeBox",
+                          "width": 42,
+                          "height": 60,
+                          "fill": {
+                            "type": "color",
+                            "color": "#ffffffff",
+                            "enabled": false
+                          },
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 8,
+                              "id": "tygjo",
+                              "x": 0,
+                              "y": 0,
+                              "name": "Rectangle 6480",
+                              "fill": "#3c3d40ff",
+                              "width": 42,
+                              "height": 60,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "PiYPP",
+          "name": "Frame 2087327065",
+          "width": "fill_container",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": [
+            0,
+            20,
+            34,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "WUkfe",
+              "name": "Button_Fill",
+              "clip": true,
+              "width": "fill_container",
+              "height": 56,
+              "fill": "#e4e4e5ff",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "gap": 4,
+              "padding": [
+                16,
+                26
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "PxKdZ",
+                  "x": 26,
+                  "y": 16,
+                  "name": "Icon / Interaction / plus",
+                  "enabled": false,
+                  "clip": true,
+                  "width": 24,
+                  "height": 24,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "1htn0",
+                      "x": 5,
+                      "y": 5,
+                      "name": "Icon",
+                      "geometry": "M7 14l0-14m7 7l-14 0",
+                      "width": 14,
+                      "height": 14,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1.5,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#ffffffff"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "k4PeQ",
+                  "name": "Label",
+                  "fill": "#000000ff",
+                  "content": "다음으로",
+                  "lineHeight": 1.3333333333333333,
+                  "textAlignVertical": "middle",
+                  "fontFamily": "SUIT",
+                  "fontSize": 18,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.36
+                },
+                {
+                  "type": "frame",
+                  "id": "2rKJS",
+                  "name": "Icon / Interaction / chevron-right",
+                  "clip": true,
+                  "width": 24,
+                  "height": 24,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "lVoNd",
+                      "x": 9,
+                      "y": 6,
+                      "name": "Icon",
+                      "geometry": "M0 12l6-6-6-6",
+                      "width": 6,
+                      "height": 12,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1.5,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#ffffffff"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "iaHSx",
+      "x": 4303,
+      "y": 1074,
+      "name": "Frame 2087327109",
+      "clip": true,
+      "width": 430,
+      "height": 932,
+      "fill": "#0f1012ff",
+      "stroke": {
+        "align": "outside",
+        "thickness": 9
+      },
+      "layout": "vertical",
+      "gap": 24,
+      "justifyContent": "space_between",
+      "children": [
+        {
+          "type": "frame",
+          "id": "YV2kl",
+          "name": "Frame 2087327085",
+          "width": "fill_container",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "o1Dk2",
+              "name": "Frame 2087327091",
+              "clip": true,
+              "width": 430,
+              "height": 150,
+              "fill": "#ff6e1dff",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "group",
+                  "id": "x6pQU",
+                  "x": 84.00009155273438,
+                  "y": 44.00017166137695,
+                  "name": "Group 57322"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "YPcJa",
+              "name": "Frame 2087327088",
+              "clip": true,
+              "width": 430,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "quVnF",
+                  "name": "Frame 2087327064",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 12,
+                  "fill": "#ffffffff",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "HX4LD",
+              "name": "Frame 2087327089",
+              "width": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "padding": [
+                20,
+                28,
+                16,
+                28
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "jTOLV",
+                  "name": "Label",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "justifyContent": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "PNzfA",
+                      "name": "Frame 1171275382",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      },
+                      "gap": 10,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "TmTfS",
+                          "name": "스프린트 코드 입력",
+                          "fill": "#ffffffff",
+                          "content": "스프린트 코드 입력",
+                          "lineHeight": 1.5,
+                          "fontFamily": "SUIT",
+                          "fontSize": 20,
+                          "fontWeight": "700",
+                          "letterSpacing": -0.4
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "9yGhj",
+                      "name": "Label",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      },
+                      "layout": "vertical",
+                      "gap": 12,
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "XZfI6",
+                          "name": "Frame 1171275382",
+                          "width": "fill_container",
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1
+                          },
+                          "layout": "vertical",
+                          "gap": 4,
+                          "justifyContent": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "1kj53",
+                              "name": "스프린트 확인을 위해 코드를 입력해주세요.",
+                              "fill": "#ffffffff",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "스프린트 확인을 위해 코드를 입력해주세요.",
+                              "lineHeight": 1.4285714285714286,
+                              "fontFamily": "SUIT",
+                              "fontSize": 14,
+                              "fontWeight": "600",
+                              "letterSpacing": -0.21
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "sWy7a",
+              "name": "Frame 2087327082",
+              "width": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                24,
+                28,
+                12,
+                28
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "nKDKQ",
+                  "name": "Input_TextField",
+                  "width": 320,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "qcT9W",
+                      "name": "Label",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      },
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "g4ESY",
+                          "name": "코드를 입력하세요",
+                          "fill": "#ffffffff",
+                          "content": "코드를 입력하세요",
+                          "lineHeight": 1.2857142857142858,
+                          "fontFamily": "SUIT",
+                          "fontSize": 14,
+                          "fontWeight": "600",
+                          "letterSpacing": -0.28
+                        },
+                        {
+                          "type": "text",
+                          "id": "picJ4",
+                          "name": "*",
+                          "fill": "#f77234ff",
+                          "content": "*",
+                          "lineHeight": 1.3333333333333333,
+                          "fontFamily": "SUIT",
+                          "fontSize": 12,
+                          "fontWeight": "600",
+                          "letterSpacing": -0.24
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "r2WJJ",
+                      "name": "Frame 1000003435",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      },
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "w0Z36",
+                          "name": "Modal / CodeBox",
+                          "width": 42,
+                          "height": 60,
+                          "fill": "#1c1d1eff",
+                          "cornerRadius": 8,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#c6a9ffff"
+                          },
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": 10,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "CwSqp",
+                              "name": "8",
+                              "fill": "#c6a9ffff",
+                              "content": "8",
+                              "lineHeight": 1.600000023841858,
+                              "textAlign": "center",
+                              "textAlignVertical": "middle",
+                              "fontFamily": "SUIT",
+                              "fontSize": 16,
+                              "fontWeight": "700",
+                              "letterSpacing": -0.32
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "lHn6C",
+                          "name": "Modal / CodeBox",
+                          "width": 42,
+                          "height": 60,
+                          "fill": "#1c1d1eff",
+                          "cornerRadius": 8,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#c6a9ffff"
+                          },
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": 10,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "7PKun",
+                              "name": "8",
+                              "fill": "#c6a9ffff",
+                              "content": "8",
+                              "lineHeight": 1.600000023841858,
+                              "textAlign": "center",
+                              "textAlignVertical": "middle",
+                              "fontFamily": "SUIT",
+                              "fontSize": 16,
+                              "fontWeight": "700",
+                              "letterSpacing": -0.32
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "nrhKn",
+                          "name": "Modal / CodeBox",
+                          "width": 42,
+                          "height": 60,
+                          "fill": "#1c1d1eff",
+                          "cornerRadius": 8,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#c6a9ffff"
+                          },
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": 10,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "btRky",
+                              "name": "8",
+                              "fill": "#c6a9ffff",
+                              "content": "8",
+                              "lineHeight": 1.600000023841858,
+                              "textAlign": "center",
+                              "textAlignVertical": "middle",
+                              "fontFamily": "SUIT",
+                              "fontSize": 16,
+                              "fontWeight": "700",
+                              "letterSpacing": -0.32
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "h8h6U",
+                          "name": "Modal / CodeBox",
+                          "width": 42,
+                          "height": 60,
+                          "fill": {
+                            "type": "color",
+                            "color": "#ffffffff",
+                            "enabled": false
+                          },
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 8,
+                              "id": "JKm4r",
+                              "x": 0,
+                              "y": 0,
+                              "name": "Rectangle 6480",
+                              "fill": "#3c3d40ff",
+                              "width": 42,
+                              "height": 60,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Miq15",
+                          "name": "Modal / CodeBox",
+                          "width": 42,
+                          "height": 60,
+                          "fill": {
+                            "type": "color",
+                            "color": "#ffffffff",
+                            "enabled": false
+                          },
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 8,
+                              "id": "wn35P",
+                              "x": 0,
+                              "y": 0,
+                              "name": "Rectangle 6480",
+                              "fill": "#3c3d40ff",
+                              "width": 42,
+                              "height": 60,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "GR9nk",
+          "name": "Frame 2087327065",
+          "width": "fill_container",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": [
+            0,
+            20,
+            34,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "cAC4y",
+              "name": "Button_Fill",
+              "clip": true,
+              "width": "fill_container",
+              "height": 56,
+              "fill": "#202025ff",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "gap": 4,
+              "padding": [
+                16,
+                26
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "vSPIj",
+                  "x": 26,
+                  "y": 16,
+                  "name": "Icon / Interaction / plus",
+                  "enabled": false,
+                  "clip": true,
+                  "width": 24,
+                  "height": 24,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "nXivL",
+                      "x": 5,
+                      "y": 5,
+                      "name": "Icon",
+                      "geometry": "M7 14l0-14m7 7l-14 0",
+                      "width": 14,
+                      "height": 14,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1.5,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#ffffffff"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "NoajV",
+                  "name": "Label",
+                  "fill": "#515159ff",
+                  "content": "다음으로",
+                  "lineHeight": 1.3333333333333333,
+                  "textAlignVertical": "middle",
+                  "fontFamily": "SUIT",
+                  "fontSize": 18,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.36
+                },
+                {
+                  "type": "frame",
+                  "id": "2YmCb",
+                  "name": "Icon / Interaction / chevron-right",
+                  "clip": true,
+                  "width": 24,
+                  "height": 24,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "rXoDk",
+                      "x": 9,
+                      "y": 6,
+                      "name": "Icon",
+                      "geometry": "M0 12l6-6-6-6",
+                      "width": 6,
+                      "height": 12,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1.5,
+                        "join": "round",
+                        "cap": "round",
+                        "fill": "#ffffffff"
+                      }
+                    }
+                  ]
                 }
               ]
             }
