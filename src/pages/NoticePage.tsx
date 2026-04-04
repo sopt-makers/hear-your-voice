@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { fontsObject } from '@sopt-makers/fonts';
 import styles from './NoticePage.module.css';
 import { StepLayout } from '../components';
-import noticeExampleImg from '../assets/notice_example_img.png';
+import noticeExplainImg from '../assets/notice_explain_img.png';
 import { colors } from '@sopt-makers/colors';
 
 function NoticePage() {
@@ -39,9 +39,9 @@ function NoticePage() {
 
         <div className={styles.noticeExampleSection}>
           <img
-            src={noticeExampleImg}
-            alt="너의 목소리가 들려 예시 이미지"
-            className={styles.noticeExampleImage}
+            src={noticeExplainImg}
+            alt="너의 목소리가 들려 설명 이미지"
+            className={styles.noticeExplainImage}
           />
         </div>
       </div>
