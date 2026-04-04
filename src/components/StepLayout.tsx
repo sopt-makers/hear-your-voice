@@ -13,7 +13,8 @@ interface StepLayoutProps {
   nextLabel?: string;
   onNext?: () => void;
   isNextDisabled?: boolean;
-  backgroundColor?: string;
+  /** false면 하단 버튼에서 오른쪽(다음) 화살표 아이콘을 숨깁니다. */
+  showNextRightIcon?: boolean;
   showProgressBar?: boolean;
   currentStep?: number;
   totalSteps?: number;
@@ -24,13 +25,13 @@ function StepLayout({
   nextLabel = '다음으로',
   onNext,
   isNextDisabled = false,
-  backgroundColor = colors.gray950,
+  showNextRightIcon = true,
   showProgressBar = false,
   currentStep,
   totalSteps,
 }: StepLayoutProps) {
   return (
-    <PageLayout className={styles.container} style={{ backgroundColor }}>
+    <PageLayout className={styles.container} style={{ backgroundColor: colors.gray800 }}>
       <div className={styles.headerSection} style={{ backgroundColor: colors.secondary }}>
         <img src={headerImg} alt="안내사항" className={styles.headerImage} />
       </div>
@@ -48,7 +49,7 @@ function StepLayout({
           theme="white"
           variant="fill"
           style={fontsObject.LABEL_1_18_SB}
-          RightIcon={IconChevronRight}
+          {...(showNextRightIcon ? { RightIcon: IconChevronRight } : {})}
           onClick={onNext}
           disabled={isNextDisabled}
         >
