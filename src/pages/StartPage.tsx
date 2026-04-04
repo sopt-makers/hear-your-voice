@@ -35,7 +35,7 @@ function StartPage() {
   return (
     <PageLayout>
       {/* Background Image */}
-      <img src={backgroundImg} alt="" className={styles.backgroundImage} />
+      <img src={backgroundImg} className={styles.backgroundImage} />
 
       {/* Main Content */}
       <div className={styles.mainContent}>
