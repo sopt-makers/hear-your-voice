@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
 import { colors } from '@sopt-makers/colors';
+import PageLayout from '../components/PageLayout';
 import styles from './StartPage.module.css';
 import backgroundImg from '../assets/background.png';
 import titleImg from '../assets/title.png';
@@ -32,7 +33,7 @@ function StartPage() {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className={styles.container}>
+    <PageLayout>
       {/* Background Image */}
       <img src={backgroundImg} alt="" className={styles.backgroundImage} />
 
@@ -73,7 +74,7 @@ function StartPage() {
           </div>
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 }
 
