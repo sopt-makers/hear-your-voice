@@ -4,7 +4,7 @@ import { fontsObject } from '@sopt-makers/fonts';
 import { colors } from '@sopt-makers/colors';
 import { Button } from '@sopt-makers/ui';
 import StepLayout from '../components/StepLayout';
-import styles from './ChooseSprintScreen.module.css';
+import styles from './SprintCodePage.module.css';
 
 // TODO: 스프린트 목록 조회 필요
 const sprints = [
@@ -15,7 +15,7 @@ const sprints = [
   '(팀별) 스프린트 4',
 ];
 
-function ChooseSprintScreen() {
+function SprintCodePage() {
   const [selectedSprint, setSelectedSprint] = useState<number | null>(null);
   // const navigate = useNavigate();
 
@@ -66,4 +66,4 @@ function ChooseSprintScreen() {
   );
 }
 
-export default ChooseSprintScreen;
+export default SprintCodePage;

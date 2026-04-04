@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import StartScreen from './pages/StartScreen';
-import NoticeScreen from './pages/NoticeScreen';
-import ChooseSprintScreen from './pages/ChooseSprintScreen';
+import StartPage from './pages/StartPage';
+import NoticePage from './pages/NoticePage';
+import SprintCodePage from './pages/SprintCodePage';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<StartScreen />} />
-        <Route path="/notice" element={<NoticeScreen />} />
-        <Route path="/choose-sprint" element={<ChooseSprintScreen />} />
+        <Route path="/" element={<StartPage />} />
+        <Route path="/notice" element={<NoticePage />} />
+        <Route path="/sprint-code" element={<SprintCodePage />} />
       </Routes>
     </BrowserRouter>
   );

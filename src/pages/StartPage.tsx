@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
 import { colors } from '@sopt-makers/colors';
-import styles from './StartScreen.module.css';
+import styles from './StartPage.module.css';
 import backgroundImg from '../assets/background.png';
 import titleImg from '../assets/title.png';
 
@@ -11,7 +11,7 @@ import titleImg from '../assets/title.png';
 const PARTICIPATION_START_DATE = new Date('2026-04-01T00:00:00');
 const PARTICIPATION_END_DATE = new Date('2026-04-30T23:59:59');
 
-function StartScreen() {
+function StartPage() {
   const navigate = useNavigate();
 
   // 현재 날짜가 참여 기간 내인지 체크
@@ -76,4 +76,4 @@ function StartScreen() {
   );
 }
 
-export default StartScreen;
+export default StartPage;
