@@ -8,6 +8,7 @@ import backgroundImg from '../assets/background.png';
 import titleImg from '../assets/title.png';
 
 // 하드코딩된 참여 기간 설정 (추후 Supabase에서 불러올 예정)
+// 참여 기간이 포함된 스프린트가 있는지 확인하도록 변경 필요
 const PARTICIPATION_START_DATE = new Date('2026-04-01T00:00:00');
 const PARTICIPATION_END_DATE = new Date('2026-04-30T23:59:59');
 
