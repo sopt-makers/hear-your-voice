@@ -5,6 +5,7 @@ import { colors } from '@sopt-makers/colors';
 import { IconChevronRight } from '@sopt-makers/icons';
 import headerImg from '../assets/header_img.png';
 import ProgressBar from './ProgressBar';
+import PageLayout from './PageLayout';
 import styles from './StepLayout.module.css';
 
 interface StepLayoutProps {
@@ -29,7 +30,7 @@ function StepLayout({
   totalSteps,
 }: StepLayoutProps) {
   return (
-    <div className={styles.container} style={{ backgroundColor }}>
+    <PageLayout className={styles.container} style={{ backgroundColor }}>
       <div className={styles.headerSection} style={{ backgroundColor: colors.secondary }}>
         <img src={headerImg} alt="안내사항" className={styles.headerImage} />
       </div>
@@ -54,7 +55,7 @@ function StepLayout({
           {nextLabel}
         </Button>
       </div>
-    </div>
+    </PageLayout>
   );
 }
 
