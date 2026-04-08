@@ -1,18 +1,19 @@
 import type { ReactNode } from 'react';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
-import { colors } from '@sopt-makers/colors';
 import { IconChevronRight } from '@sopt-makers/icons';
 import headerImg from '../assets/header_img.png';
 import ProgressBar from './ProgressBar';
-import styles from './StepLayout.module.css';
+import PageLayout from './PageLayout';
+import * as styles from './StepLayout.css';
 
 interface StepLayoutProps {
   children: ReactNode;
   nextLabel?: string;
   onNext?: () => void;
   isNextDisabled?: boolean;
-  backgroundColor?: string;
+  /** false면 하단 버튼에서 오른쪽(다음) 화살표 아이콘을 숨깁니다. */
+  showNextRightIcon?: boolean;
   showProgressBar?: boolean;
   currentStep?: number;
   totalSteps?: number;
@@ -23,14 +24,14 @@ function StepLayout({
   nextLabel = '다음으로',
   onNext,
   isNextDisabled = false,
-  backgroundColor = colors.gray950,
+  showNextRightIcon = true,
   showProgressBar = false,
   currentStep,
   totalSteps,
 }: StepLayoutProps) {
   return (
-    <div className={styles.container} style={{ backgroundColor }}>
-      <div className={styles.headerSection} style={{ backgroundColor: colors.secondary }}>
+    <PageLayout className={styles.container}>
+      <div className={styles.headerSection}>
         <img src={headerImg} alt="안내사항" className={styles.headerImage} />
       </div>
 
@@ -47,14 +48,14 @@ function StepLayout({
           theme="white"
           variant="fill"
           style={fontsObject.LABEL_1_18_SB}
-          RightIcon={IconChevronRight}
+          {...(showNextRightIcon ? { RightIcon: IconChevronRight } : {})}
           onClick={onNext}
           disabled={isNextDisabled}
         >
           {nextLabel}
         </Button>
       </div>
-    </div>
+    </PageLayout>
   );
 }
 

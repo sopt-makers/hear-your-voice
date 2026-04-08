@@ -2,16 +2,17 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
-import { colors } from '@sopt-makers/colors';
-import styles from './StartScreen.module.css';
+import PageLayout from '../components/PageLayout';
+import * as styles from './StartPage.css';
 import backgroundImg from '../assets/background.png';
 import titleImg from '../assets/title.png';
 
 // 하드코딩된 참여 기간 설정 (추후 Supabase에서 불러올 예정)
+// 참여 기간이 포함된 스프린트가 있는지 확인하도록 변경 필요
 const PARTICIPATION_START_DATE = new Date('2026-04-01T00:00:00');
 const PARTICIPATION_END_DATE = new Date('2026-04-30T23:59:59');
 
-function StartScreen() {
+function StartPage() {
   const navigate = useNavigate();
 
   // 현재 날짜가 참여 기간 내인지 체크
@@ -30,10 +31,11 @@ function StartScreen() {
 
     return () => clearInterval(interval);
   }, []);
+
   return (
-    <div className={styles.container}>
+    <PageLayout>
       {/* Background Image */}
-      <img src={backgroundImg} alt="" className={styles.backgroundImage} />
+      <img src={backgroundImg} className={styles.backgroundImage} />
 
       {/* Main Content */}
       <div className={styles.mainContent}>
@@ -55,25 +57,17 @@ function StartScreen() {
 
       {/* Overlay for disabled state */}
       {!isActive && (
-        <div className={styles.overlay} style={{ backgroundColor: colors.backgroundDimmed }}>
+        <div className={styles.overlay}>
           <div className={styles.disableContent}>
-            <h2
-              className={styles.disableTitle}
-              style={{ color: colors.white, ...fontsObject.HEADING_4_24_B }}
-            >
-              작성할 수 있는 기간이 아니에요
-            </h2>
-            <p
-              className={styles.disableDescription}
-              style={{ color: colors.white, ...fontsObject.BODY_2_16_M }}
-            >
+            <h2 className={styles.disableTitle}>작성할 수 있는 기간이 아니에요</h2>
+            <p className={styles.disableDescription}>
               너목들 노션 페이지에 기재된 기간을 확인해주세요
             </p>
           </div>
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 }
 
-export default StartScreen;
+export default StartPage;
