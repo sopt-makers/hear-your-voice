@@ -73,6 +73,7 @@ function CodeInput({
                 className={styles.codeBox}
                 data-active={isActive}
                 data-filled={isFilled}
+                data-error={showError}
               >
                 <span className={styles.codeDigit}>
                   {digit ?? ''}

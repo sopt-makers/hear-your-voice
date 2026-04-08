@@ -68,6 +68,9 @@ export const codeBox = style({
       backgroundColor: colors.gray800,
       borderColor: colors.orange400,
     },
+    '&[data-error="true"]': {
+      borderColor: colors.error,
+    },
   },
 });
 
@@ -77,6 +80,11 @@ export const codeDigit = style({
   textAlign: 'center',
   color: colors.secondary,
   ...fontsObject.HEADING_7_16_B,
+  selectors: {
+    [`${codeBox}[data-error="true"] &`]: {
+      color: colors.error,
+    },
+  },
 });
 
 export const errorText = style({
