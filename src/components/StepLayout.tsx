@@ -1,12 +1,11 @@
 import type { ReactNode } from 'react';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
-import { colors } from '@sopt-makers/colors';
 import { IconChevronRight } from '@sopt-makers/icons';
 import headerImg from '../assets/header_img.png';
 import ProgressBar from './ProgressBar';
 import PageLayout from './PageLayout';
-import styles from './StepLayout.module.css';
+import * as styles from './StepLayout.css';
 
 interface StepLayoutProps {
   children: ReactNode;
@@ -31,8 +30,8 @@ function StepLayout({
   totalSteps,
 }: StepLayoutProps) {
   return (
-    <PageLayout className={styles.container} style={{ backgroundColor: colors.gray800 }}>
-      <div className={styles.headerSection} style={{ backgroundColor: colors.secondary }}>
+    <PageLayout className={styles.container}>
+      <div className={styles.headerSection}>
         <img src={headerImg} alt="안내사항" className={styles.headerImage} />
       </div>
 

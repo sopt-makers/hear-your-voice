@@ -1,9 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { fontsObject } from '@sopt-makers/fonts';
-import styles from './NoticePage.module.css';
-import { StepLayout } from '../components';
+import { StepLayout, ContentHeading, ImageSection } from '../components';
 import noticeExplainImg from '../assets/notice_explain_img.png';
-import { colors } from '@sopt-makers/colors';
+import * as styles from './NoticePage.css';
 
 function NoticePage() {
   const navigate = useNavigate();
@@ -14,14 +12,10 @@ function NoticePage() {
 
   return (
     <StepLayout onNext={handleNext}>
-      <div className={styles.contentSection} style={{ color: colors.white }}>
-        <div className={styles.labelSection}>
-          <p className={styles.labelText} style={fontsObject.HEADING_5_20_B}>
-            안내사항
-          </p>
-        </div>
+      <div className={styles.contentSection}>
+        <ContentHeading title="안내사항" />
 
-        <div className={styles.descriptionSection} style={fontsObject.BODY_3_14_M}>
+        <div className={styles.body}>
           <p>너의 목소리가 들려에서 작성하는 모든 코멘트는 무기명으로 이루어져요.</p>
           <ul className={styles.indentSection}>
             <li>
@@ -37,13 +31,9 @@ function NoticePage() {
           <p>위의 내용에 대해 숙지하셨다면, 다음으로 넘어가 주세요. 🔥</p>
         </div>
 
-        <div className={styles.noticeExplainSection}>
-          <img
-            src={noticeExplainImg}
-            alt="너의 목소리가 들려 설명 이미지"
-            className={styles.noticeExplainImage}
-          />
-        </div>
+        <ImageSection>
+          <ImageSection.Image src={noticeExplainImg} alt="너의 목소리가 들려 설명 이미지" />
+        </ImageSection>
       </div>
     </StepLayout>
   );

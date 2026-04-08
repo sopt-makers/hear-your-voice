@@ -1,15 +1,13 @@
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-import { fontsObject } from '@sopt-makers/fonts';
-import { colors } from '@sopt-makers/colors';
+import { useNavigate } from 'react-router-dom';
 import CodeInput, { SPRINT_CODE_LENGTH } from '../components/CodeInput';
 import StepLayout from '../components/StepLayout';
-import styles from './SprintCodePage.module.css';
+import { ContentHeading } from '../components';
 
 function SprintCodePage() {
   const [code, setCode] = useState('');
   const [showError, setShowError] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleNext = () => {
     if (code.length !== SPRINT_CODE_LENGTH) {
@@ -27,9 +25,7 @@ function SprintCodePage() {
       return;
     }
 
-    console.log('Sprint code:', code);
-    // TODO: 다음 화면으로 이동
-    // navigate('/next-screen');
+    navigate('/sprint-intro');
   };
 
   return (
@@ -40,17 +36,7 @@ function SprintCodePage() {
       currentStep={0}
       totalSteps={7}
     >
-      <div className={styles.labelSection}>
-        <h1 className={styles.title} style={{ color: colors.white, ...fontsObject.HEADING_5_20_B }}>
-          스프린트 코드 입력
-        </h1>
-        <p
-          className={styles.description}
-          style={{ color: colors.white, ...fontsObject.TITLE_7_14_SB }}
-        >
-          스프린트 확인을 위해 코드를 입력해주세요.
-        </p>
-      </div>
+      <ContentHeading title="스프린트 코드 입력" description="스프린트 확인을 위해 코드를 입력해주세요." />
 
       <CodeInput
         value={code}

@@ -1,5 +1,4 @@
-import { colors } from '@sopt-makers/colors';
-import styles from './ProgressBar.module.css';
+import * as styles from './ProgressBar.css';
 
 interface ProgressBarProps {
   currentStep?: number;
@@ -11,11 +10,8 @@ function ProgressBar({ currentStep = 1, totalSteps = 5 }: ProgressBarProps) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.track} style={{ backgroundColor: colors.white }}>
-        <div
-          className={styles.fill}
-          style={{ width: `${progressPercentage}%`, backgroundColor: colors.orange400 }}
-        />
+      <div className={styles.track}>
+        <div className={styles.fill} style={{ width: `${progressPercentage}%` }} />
       </div>
     </div>
   );

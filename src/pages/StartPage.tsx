@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
-import { colors } from '@sopt-makers/colors';
 import PageLayout from '../components/PageLayout';
-import styles from './StartPage.module.css';
+import * as styles from './StartPage.css';
 import backgroundImg from '../assets/background.png';
 import titleImg from '../assets/title.png';
 
@@ -32,6 +31,7 @@ function StartPage() {
 
     return () => clearInterval(interval);
   }, []);
+
   return (
     <PageLayout>
       {/* Background Image */}
@@ -57,18 +57,10 @@ function StartPage() {
 
       {/* Overlay for disabled state */}
       {!isActive && (
-        <div className={styles.overlay} style={{ backgroundColor: colors.backgroundDimmed }}>
+        <div className={styles.overlay}>
           <div className={styles.disableContent}>
-            <h2
-              className={styles.disableTitle}
-              style={{ color: colors.white, ...fontsObject.HEADING_4_24_B }}
-            >
-              작성할 수 있는 기간이 아니에요
-            </h2>
-            <p
-              className={styles.disableDescription}
-              style={{ color: colors.white, ...fontsObject.BODY_2_16_M }}
-            >
+            <h2 className={styles.disableTitle}>작성할 수 있는 기간이 아니에요</h2>
+            <p className={styles.disableDescription}>
               너목들 노션 페이지에 기재된 기간을 확인해주세요
             </p>
           </div>

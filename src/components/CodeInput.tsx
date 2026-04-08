@@ -1,7 +1,7 @@
-import { useId, useRef, useState, type CSSProperties } from 'react';
+import { useId, useRef, useState } from 'react';
 import { fontsObject } from '@sopt-makers/fonts';
 import { colors } from '@sopt-makers/colors';
-import styles from './CodeInput.module.css';
+import * as styles from './CodeInput.css';
 
 export const SPRINT_CODE_LENGTH = 6;
 
@@ -45,13 +45,6 @@ function CodeInput({
 
       <div
         className={styles.codeField}
-        style={
-          {
-            '--code-box-empty-bg': colors.gray600,
-            '--code-box-filled-bg': colors.gray800,
-            '--code-box-border-active': colors.orange400,
-          } as CSSProperties
-        }
         onClick={() => inputRef.current?.focus()}
         role="group"
         aria-labelledby={labelId}
