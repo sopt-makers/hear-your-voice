@@ -4,13 +4,15 @@ import StartPage from './pages/StartPage';
 import NoticePage from './pages/NoticePage';
 import SprintCodePage from './pages/SprintCodePage';
 import SprintIntroPage from './pages/SprintIntroPage';
+import ErrorPage from './pages/ErrorPage';
 import { hasActiveSprint } from './lib/api/period';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <StartPage />,
-    loader: () => hasActiveSprint().catch(() => false),
+    loader: () => hasActiveSprint(),
+    errorElement: <ErrorPage />,
   },
   { path: '/notice', element: <NoticePage /> },
   { path: '/sprint-code', element: <SprintCodePage /> },
