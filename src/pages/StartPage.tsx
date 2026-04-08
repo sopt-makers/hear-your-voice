@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLoaderData } from 'react-router-dom';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
 import PageLayout from '../components/PageLayout';
@@ -7,30 +6,9 @@ import * as styles from './StartPage.css';
 import backgroundImg from '../assets/background.png';
 import titleImg from '../assets/title.png';
 
-// 하드코딩된 참여 기간 설정 (추후 Supabase에서 불러올 예정)
-// 참여 기간이 포함된 스프린트가 있는지 확인하도록 변경 필요
-const PARTICIPATION_START_DATE = new Date('2026-04-01T00:00:00');
-const PARTICIPATION_END_DATE = new Date('2026-04-30T23:59:59');
-
 function StartPage() {
   const navigate = useNavigate();
-
-  // 현재 날짜가 참여 기간 내인지 체크
-  const [isActive, setIsActive] = useState(() => {
-    const now = new Date();
-    return now >= PARTICIPATION_START_DATE && now <= PARTICIPATION_END_DATE;
-  });
-
-  useEffect(() => {
-    // 1분마다 참여 기간 체크
-    const interval = setInterval(() => {
-      const now = new Date();
-      const newIsActive = now >= PARTICIPATION_START_DATE && now <= PARTICIPATION_END_DATE;
-      setIsActive(newIsActive);
-    }, 60000); // 60초
-
-    return () => clearInterval(interval);
-  }, []);
+  const isActive = useLoaderData() as boolean;
 
   return (
     <PageLayout>
