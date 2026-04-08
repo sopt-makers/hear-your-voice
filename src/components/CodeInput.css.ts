@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { colors } from '@sopt-makers/colors';
+import { fontsObject } from '@sopt-makers/fonts';
 
 export const root = style({
   display: 'flex',
@@ -14,6 +15,16 @@ export const fieldLabel = style({
   display: 'flex',
   alignItems: 'center',
   gap: 4,
+});
+
+export const fieldLabelText = style({
+  color: colors.white,
+  ...fontsObject.LABEL_3_14_SB,
+});
+
+export const fieldLabelRequired = style({
+  color: colors.orange400,
+  ...fontsObject.LABEL_4_12_SB,
 });
 
 export const codeField = style({
@@ -64,9 +75,13 @@ export const codeDigit = style({
   display: 'block',
   minHeight: '1em',
   textAlign: 'center',
+  color: colors.secondary,
+  ...fontsObject.HEADING_7_16_B,
 });
 
 export const errorText = style({
   margin: 0,
   textAlign: 'left',
+  color: colors.error,
+  ...fontsObject.BODY_3_14_M,
 });

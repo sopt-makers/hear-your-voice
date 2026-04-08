@@ -10,26 +10,6 @@ export const content = style({
   textAlign: 'center',
 });
 
-export const hero = style({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: 16,
-  boxSizing: 'border-box',
-  width: '100%',
-  maxWidth: 390,
-  padding: '20px 16px 24px',
-  borderRadius: 8,
-  backgroundColor: colors.gray800,
-});
-
-export const successLine = style({
-  margin: 0,
-  whiteSpace: 'pre-line',
-  color: colors.secondary,
-  ...fontsObject.HEADING_4_24_B,
-});
-
 export const characterImage = style({
   width: '430px',
   height: '276px',

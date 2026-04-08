@@ -17,7 +17,7 @@ function SprintIntroPage() {
       totalSteps={7}
     >
       <div className={styles.content}>
-        <img src={sprintCodeVerifiedImg} alt="..." className={styles.characterImage} />
+        <img src={sprintCodeVerifiedImg} alt="" className={styles.characterImage} />
         <p className={styles.introLine}>
           챕터별 스프린트에 대한
           <br /> 너목들을 시작할까요?

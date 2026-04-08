@@ -1,6 +1,4 @@
 import { useId, useRef, useState } from 'react';
-import { fontsObject } from '@sopt-makers/fonts';
-import { colors } from '@sopt-makers/colors';
 import * as styles from './CodeInput.css';
 
 export const SPRINT_CODE_LENGTH = 6;
@@ -37,8 +35,8 @@ function CodeInput({
   return (
     <div className={styles.root}>
       <div className={styles.fieldLabel} id={labelId}>
-        <span style={{ color: colors.white, ...fontsObject.LABEL_3_14_SB }}>코드를 입력하세요</span>
-        <span style={{ color: colors.orange400, ...fontsObject.LABEL_4_12_SB }} aria-hidden>
+        <span className={styles.fieldLabelText}>코드를 입력하세요</span>
+        <span className={styles.fieldLabelRequired} aria-hidden>
           *
         </span>
       </div>
@@ -48,8 +46,6 @@ function CodeInput({
         onClick={() => inputRef.current?.focus()}
         role="group"
         aria-labelledby={labelId}
-        aria-describedby={showError ? errorId : undefined}
-        aria-invalid={showError}
       >
         <input
           ref={inputRef}
@@ -63,6 +59,8 @@ function CodeInput({
           onBlur={() => setIsInputFocused(false)}
           className={styles.hiddenInput}
           aria-label="스프린트 코드 6자리"
+          aria-describedby={showError ? errorId : undefined}
+          aria-invalid={showError}
         />
         <div className={styles.codeBoxes} aria-hidden>
           {Array.from({ length: SPRINT_CODE_LENGTH }, (_, i) => {
@@ -76,10 +74,7 @@ function CodeInput({
                 data-active={isActive}
                 data-filled={isFilled}
               >
-                <span
-                  className={styles.codeDigit}
-                  style={{ color: colors.secondary, ...fontsObject.HEADING_7_16_B }}
-                >
+                <span className={styles.codeDigit}>
                   {digit ?? ''}
                 </span>
               </div>
@@ -92,7 +87,6 @@ function CodeInput({
         <p
           id={errorId}
           className={styles.errorText}
-          style={{ color: colors.error, ...fontsObject.BODY_3_14_M }}
           role="alert"
         >
           {errorMessage}

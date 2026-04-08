@@ -11,7 +11,7 @@ function ContentHeading({ title, description, className }: ContentHeadingProps) 
   return (
     <div className={`${styles.container} ${className ?? ''}`.trim()}>
       <h1 className={styles.title}>{title}</h1>
-      {description && <div className={styles.description}>{description}</div>}
+      {description != null && <div className={styles.description}>{description}</div>}
     </div>
   );
 }
