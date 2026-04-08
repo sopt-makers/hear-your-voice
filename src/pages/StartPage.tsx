@@ -8,7 +8,7 @@ import titleImg from '../assets/title.png';
 
 function StartPage() {
   const navigate = useNavigate();
-  const isActive = useLoaderData() as boolean;
+  const isActive = useLoaderData<boolean>();
 
   return (
     <PageLayout>
