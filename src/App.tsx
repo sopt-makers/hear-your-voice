@@ -6,6 +6,7 @@ import SprintCodePage from './pages/SprintCodePage';
 import SprintIntroPage from './pages/SprintIntroPage';
 import ErrorPage from './pages/ErrorPage';
 import { hasActiveSprint } from './lib/api/sprint';
+import UserInfoPage from './pages/UserInfoPage';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
   { path: '/notice', element: <NoticePage /> },
   { path: '/sprint-code', element: <SprintCodePage /> },
   { path: '/sprint-intro', element: <SprintIntroPage /> },
+  { path: '/user-info', element: <UserInfoPage /> },
 ]);
 
 function App() {

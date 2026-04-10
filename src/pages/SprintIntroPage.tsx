@@ -12,7 +12,7 @@ function SprintIntroPage() {
 
   const handleStart = () => {
     // TODO: 다음 온보딩/챕터 화면으로 이동 (예: navigate('/chapter-…'))
-    navigate('/next', { state: { sprintType } });
+    navigate('/user-info', { state: { sprintType } });
   };
 
   return (
