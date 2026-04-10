@@ -11,7 +11,7 @@ export const body = style({
 });
 
 export const nameWidth = style({
-  width: '70%',
+  width: '50%',
 });
 
 export const inputWrapper = style({

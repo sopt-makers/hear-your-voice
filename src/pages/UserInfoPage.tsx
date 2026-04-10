@@ -7,6 +7,8 @@ import { TextField, useToast } from '@sopt-makers/ui';
 import { getChapterCodes, getTeamCodes } from '../lib/api/chapter';
 import { isValidUser } from '../lib/api/user';
 import { useSubmission } from '../context/SubmissionContext';
+import { useErrorHandler } from '../hooks/useErrorHandler';
+import { callApi } from '../lib/apiClient';
 
 function UserInfoPage() {
   const [name, setName] = useState('');
@@ -18,27 +20,34 @@ function UserInfoPage() {
   const navigate = useNavigate();
   const toast = useToast();
   const { update } = useSubmission();
+  const { handleError } = useErrorHandler();
 
   useEffect(() => {
-    Promise.all([getChapterCodes(), getTeamCodes()]).then(([chapters, teams]) => {
-      setChapterOptions(chapters.map((c) => ({ label: c.name, value: c.code })));
-      setTeamOptions(teams.map((t) => ({ label: t.name, value: t.code })));
-    });
+    callApi(() => Promise.all([getChapterCodes(), getTeamCodes()]))
+      .then(([chapters, teams]) => {
+        setChapterOptions(chapters.map((c) => ({ label: c.name, value: c.code })));
+        setTeamOptions(teams.map((t) => ({ label: t.name, value: t.code })));
+      })
+      .catch(handleError);
   }, []);
 
   const isAllFilled = name.trim() !== '' && chapterCode !== '' && teamCode !== '';
 
   const handleNext = async () => {
-    const valid = await isValidUser(name, teamCode, chapterCode);
+    try {
+      const valid = await callApi(() => isValidUser(name, teamCode, chapterCode));
 
-    if (!valid) {
-      setIsError(true);
-      toast.open({ icon: 'error', content: '존재하지 않는 회원이에요. 다시 확인해주세요.' });
-      return;
+      if (!valid) {
+        setIsError(true);
+        toast.open({ icon: 'error', content: '존재하지 않는 회원이에요. 다시 확인해주세요.' });
+        return;
+      }
+
+      update({ user_name: name, user_team: teamCode, user_chapter: chapterCode });
+      navigate('/next'); // TODO: 다음 페이지 경로로 변경
+    } catch (error) {
+      handleError(error);
     }
-
-    update({ user_name: name, user_team: teamCode, user_chapter: chapterCode });
-    navigate('/next'); // TODO: 다음 페이지 경로로 변경
   };
 
   return (
@@ -79,7 +88,7 @@ function UserInfoPage() {
             required
             isError={isError}
             onChange={(value) => {
-              setChapterCode(value as string);
+              setChapterCode(value);
               setIsError(false);
             }}
           />
@@ -91,7 +100,7 @@ function UserInfoPage() {
             required
             isError={isError}
             onChange={(value) => {
-              setTeamCode(value as string);
+              setTeamCode(value);
               setIsError(false);
             }}
           />

@@ -8,13 +8,14 @@ import SprintCodePage from './pages/SprintCodePage';
 import SprintIntroPage from './pages/SprintIntroPage';
 import ErrorPage from './pages/ErrorPage';
 import { hasActiveSprint } from './lib/api/sprint';
+import { callApi } from './lib/apiClient';
 import UserInfoPage from './pages/UserInfoPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <StartPage />,
-    loader: () => hasActiveSprint(),
+    loader: () => callApi(() => hasActiveSprint()),
     errorElement: <ErrorPage />,
   },
   { path: '/notice', element: <NoticePage /> },

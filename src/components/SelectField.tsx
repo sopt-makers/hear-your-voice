@@ -1,23 +1,23 @@
 import { FieldBox, SelectV2 } from '@sopt-makers/ui';
 import * as styles from './SelectField.css';
 
-interface Option<T> {
+interface Option {
   label: string;
-  value: T;
+  value: string;
 }
 
-interface SelectFieldProps<T extends string | number | boolean> {
+interface SelectFieldProps {
   labelText?: string;
   descriptionText?: string;
   required?: boolean;
   placeholder?: string;
-  options: Option<T>[];
-  defaultValue?: Option<T> | null;
-  onChange?: (value: T | T[]) => void;
+  options: Option[];
+  defaultValue?: Option | null;
+  onChange?: (value: string) => void;
   isError?: boolean;
 }
 
-function SelectField<T extends string | number | boolean>({
+function SelectField({
   labelText,
   descriptionText,
   required,
@@ -26,17 +26,24 @@ function SelectField<T extends string | number | boolean>({
   defaultValue,
   onChange,
   isError,
-}: SelectFieldProps<T>) {
+}: SelectFieldProps) {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} role="group" aria-invalid={isError ? true : undefined}>
       <FieldBox.Label label={labelText} description={descriptionText} required={required} />
-      <SelectV2.Root className={isError ? styles.error : undefined} type="text" defaultValue={defaultValue ?? null} onChange={onChange}>
+      <SelectV2.Root
+        type="text"
+        defaultValue={defaultValue ?? null}
+        onChange={(value) => onChange?.(value as string)}
+      >
         <SelectV2.Trigger>
-          <SelectV2.TriggerContent placeholder={placeholder} />
+          <SelectV2.TriggerContent
+            className={isError ? styles.errorTrigger : undefined}
+            placeholder={placeholder}
+          />
         </SelectV2.Trigger>
         <SelectV2.Menu>
           {options.map((option) => (
-            <SelectV2.MenuItem key={String(option.value)} option={option} />
+            <SelectV2.MenuItem key={option.value} option={option} />
           ))}
         </SelectV2.Menu>
       </SelectV2.Root>

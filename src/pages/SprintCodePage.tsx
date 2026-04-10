@@ -5,12 +5,15 @@ import StepLayout from '../components/StepLayout';
 import { ContentHeading } from '../components';
 import { getSprintInfoByCode } from '../lib/api/sprint';
 import { useSubmission } from '../context/SubmissionContext';
+import { useErrorHandler } from '../hooks/useErrorHandler';
+import { callApi } from '../lib/apiClient';
 
 function SprintCodePage() {
   const [code, setCode] = useState('');
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
   const { update } = useSubmission();
+  const { handleError } = useErrorHandler();
 
   const handleNext = async () => {
     if (code.length !== SPRINT_CODE_LENGTH) {
@@ -18,7 +21,7 @@ function SprintCodePage() {
     }
 
     try {
-      const data = await getSprintInfoByCode(code);
+      const data = await callApi(() => getSprintInfoByCode(code));
 
       if (!data.is_valid) {
         setShowError(true);
@@ -27,8 +30,8 @@ function SprintCodePage() {
 
       update({ p_sprint_auth_code: code });
       navigate('/sprint-intro', { state: { sprintName: data.sprint_name, sprintType: data.sprint_type } });
-    } catch {
-      setShowError(true);
+    } catch (error) {
+      handleError(error);
     }
   };
 
