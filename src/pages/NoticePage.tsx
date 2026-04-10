@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StepLayout, ContentHeading, ImageSection } from '../components';
 import noticeExplainImg from '../assets/notice_explain_img.png';
@@ -6,9 +7,9 @@ import * as styles from './NoticePage.css';
 function NoticePage() {
   const navigate = useNavigate();
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     navigate('/sprint-code');
-  };
+  }, [navigate]);
 
   return (
     <StepLayout onNext={handleNext}>

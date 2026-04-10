@@ -5,7 +5,7 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  backgroundColor: colors.gray800,
+  backgroundColor: colors.gray950,
 });
 
 export const headerSection = style({
