@@ -4,11 +4,13 @@ import CodeInput, { SPRINT_CODE_LENGTH } from '../components/CodeInput';
 import StepLayout from '../components/StepLayout';
 import { ContentHeading } from '../components';
 import { getSprintInfoByCode } from '../lib/api/sprint';
+import { useSubmission } from '../context/SubmissionContext';
 
 function SprintCodePage() {
   const [code, setCode] = useState('');
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
+  const { update } = useSubmission();
 
   const handleNext = async () => {
     if (code.length !== SPRINT_CODE_LENGTH) {
@@ -23,6 +25,7 @@ function SprintCodePage() {
         return;
       }
 
+      update({ p_sprint_auth_code: code });
       navigate('/sprint-intro', { state: { sprintName: data.sprint_name, sprintType: data.sprint_type } });
     } catch {
       setShowError(true);

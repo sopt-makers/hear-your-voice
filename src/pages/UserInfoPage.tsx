@@ -6,6 +6,7 @@ import * as styles from './UserInfoPage.css';
 import { TextField, useToast } from '@sopt-makers/ui';
 import { getChapterCodes, getTeamCodes } from '../lib/api/chapter';
 import { isValidUser } from '../lib/api/user';
+import { useSubmission } from '../context/SubmissionContext';
 
 function UserInfoPage() {
   const [name, setName] = useState('');
@@ -16,6 +17,7 @@ function UserInfoPage() {
   const [teamOptions, setTeamOptions] = useState<{ label: string; value: string }[]>([]);
   const navigate = useNavigate();
   const toast = useToast();
+  const { update } = useSubmission();
 
   useEffect(() => {
     Promise.all([getChapterCodes(), getTeamCodes()]).then(([chapters, teams]) => {
@@ -36,6 +38,7 @@ function UserInfoPage() {
       return;
     }
 
+    update({ user_name: name, user_team: teamCode, user_chapter: chapterCode });
     navigate('/next'); // TODO: 다음 페이지 경로로 변경
   };
 
