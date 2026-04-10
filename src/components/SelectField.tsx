@@ -14,6 +14,7 @@ interface SelectFieldProps<T extends string | number | boolean> {
   options: Option<T>[];
   defaultValue?: Option<T> | null;
   onChange?: (value: T | T[]) => void;
+  isError?: boolean;
 }
 
 function SelectField<T extends string | number | boolean>({
@@ -24,11 +25,12 @@ function SelectField<T extends string | number | boolean>({
   options,
   defaultValue,
   onChange,
+  isError,
 }: SelectFieldProps<T>) {
   return (
     <div className={styles.container}>
       <FieldBox.Label label={labelText} description={descriptionText} required={required} />
-      <SelectV2.Root type="text" defaultValue={defaultValue ?? null} onChange={onChange}>
+      <SelectV2.Root className={isError ? styles.error : undefined} type="text" defaultValue={defaultValue ?? null} onChange={onChange}>
         <SelectV2.Trigger>
           <SelectV2.TriggerContent placeholder={placeholder} />
         </SelectV2.Trigger>

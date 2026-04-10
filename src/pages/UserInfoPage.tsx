@@ -1,33 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StepLayout from '../components/StepLayout';
 import { ContentHeading, SelectField } from '../components';
 import * as styles from './UserInfoPage.css';
-import { TextField } from '@sopt-makers/ui';
-
-const PART_OPTIONS = [
-  { label: 'iOS', value: 'iOS' },
-  { label: 'Android', value: 'Android' },
-  { label: 'Web', value: 'Web' },
-  { label: 'Server', value: 'Server' },
-  { label: 'Design', value: 'Design' },
-  { label: 'PM', value: 'PM' },
-];
+import { TextField, useToast } from '@sopt-makers/ui';
+import { getChapterCodes, getTeamCodes } from '../lib/api/chapter';
+import { isValidUser } from '../lib/api/user';
 
 function UserInfoPage() {
-  const [isValidUser, setIsValidUser] = useState(false);
+  const [name, setName] = useState('');
+  const [chapterCode, setChapterCode] = useState('');
+  const [teamCode, setTeamCode] = useState('');
+  const [isError, setIsError] = useState(false);
+  const [chapterOptions, setChapterOptions] = useState<{ label: string; value: string }[]>([]);
+  const [teamOptions, setTeamOptions] = useState<{ label: string; value: string }[]>([]);
   const navigate = useNavigate();
+  const toast = useToast();
+
+  useEffect(() => {
+    Promise.all([getChapterCodes(), getTeamCodes()]).then(([chapters, teams]) => {
+      setChapterOptions(chapters.map((c) => ({ label: c.name, value: c.code })));
+      setTeamOptions(teams.map((t) => ({ label: t.name, value: t.code })));
+    });
+  }, []);
+
+
+  const isAllFilled = name.trim() !== '' && chapterCode !== '' && teamCode !== '';
 
   const handleNext = async () => {
-    if (!isValidUser) {
+    const valid = await isValidUser(name, teamCode, chapterCode);
+
+    if (!valid) {
+      setIsError(true);
+      toast.open({ icon: 'error', content: '존재하지 않는 회원이에요. 다시 확인해주세요.' });
       return;
     }
+
+    navigate('/next'); // TODO: 다음 페이지 경로로 변경
   };
 
   return (
     <StepLayout
       onNext={handleNext}
-      isNextDisabled={!isValidUser}
+      isNextDisabled={!isAllFilled}
       showProgressBar={true}
       currentStep={1}
       totalSteps={7}
@@ -46,20 +61,36 @@ function UserInfoPage() {
             descriptionText="본명을 입력하세요."
             placeholder="본인의 이름"
             required
+            value={name}
+            isError={isError}
+            onChange={(e) => {
+              setName(e.target.value);
+              setIsError(false);
+            }}
           />
           <SelectField
             labelText="챕터"
             descriptionText="본인의 챕터를 선택하세요."
             placeholder="챕터를 선택하세요."
-            options={PART_OPTIONS}
+            options={chapterOptions}
             required
+            isError={isError}
+            onChange={(value) => {
+              setChapterCode(value as string);
+              setIsError(false);
+            }}
           />
           <SelectField
             labelText="팀"
             descriptionText="본인의 팀을 선택하세요."
             placeholder="팀을 선택하세요."
-            options={PART_OPTIONS}
+            options={teamOptions}
             required
+            isError={isError}
+            onChange={(value) => {
+              setTeamCode(value as string);
+              setIsError(false);
+            }}
           />
         </div>
       </div>

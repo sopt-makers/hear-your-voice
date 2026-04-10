@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ToastProvider } from '@sopt-makers/ui';
 import './App.css';
 import StartPage from './pages/StartPage';
 import NoticePage from './pages/NoticePage';
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ToastProvider>
+      <RouterProvider router={router} />
+    </ToastProvider>
+  );
 }
 
 export default App;
