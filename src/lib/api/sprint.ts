@@ -1,6 +1,5 @@
 import { supabase } from '../supabase';
-import type { SprintType } from '../../types/sprint';
-
+import type { SprintInfo } from '../../types/sprint';
 export type { SprintType } from '../../types/sprint';
 
 export async function hasActiveSprint(): Promise<boolean> {
@@ -10,12 +9,6 @@ export async function hasActiveSprint(): Promise<boolean> {
   if (typeof data !== 'boolean') throw new Error('Unexpected response from server');
 
   return data;
-}
-
-export interface SprintInfo {
-  is_valid: boolean;
-  sprint_type: SprintType;
-  sprint_name: string | null;
 }
 
 export async function getSprintInfoByCode(authCode: string): Promise<SprintInfo> {

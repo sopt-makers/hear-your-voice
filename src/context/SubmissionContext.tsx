@@ -1,26 +1,8 @@
 import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
+import type { SubmissionData } from '../types/submission';
 
-interface Comment {
-  target_user_id: number;
-  comment_text: string;
-}
-
-interface Mvp {
-  target_user_id: number;
-  comment_text: string;
-}
-
-export interface SubmissionData {
-  p_sprint_auth_code: string;
-  user_name: string;
-  user_team: string;
-  user_chapter: string;
-  stop_comments: Comment[];
-  start_comments: Comment[];
-  continue_comments: Comment[];
-  mvp: Mvp | null;
-}
+export type { SubmissionData };
 
 interface SubmissionContextType {
   data: SubmissionData;
