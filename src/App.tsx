@@ -5,7 +5,7 @@ import NoticePage from './pages/NoticePage';
 import SprintCodePage from './pages/SprintCodePage';
 import SprintIntroPage from './pages/SprintIntroPage';
 import ErrorPage from './pages/ErrorPage';
-import { hasActiveSprint } from './lib/api/period';
+import { hasActiveSprint } from './lib/api/sprint';
 
 const router = createBrowserRouter([
   {
