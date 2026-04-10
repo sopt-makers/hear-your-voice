@@ -1,8 +1,8 @@
 import { NetworkError, ServiceError } from './errors';
 
 interface SupabaseError {
-  message?: string;
-  code?: string;
+  message: string;
+  code: string;
 }
 
 function isSupabaseError(error: unknown): error is SupabaseError {
@@ -23,7 +23,7 @@ export async function callApi<T>(fn: () => Promise<T>): Promise<T> {
     }
 
     if (isSupabaseError(error)) {
-      if (error.message?.includes('Failed to fetch')) {
+      if (error.message.includes('Failed to fetch')) {
         throw new NetworkError();
       }
       throw new ServiceError();

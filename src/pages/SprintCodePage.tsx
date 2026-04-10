@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CodeInput, { SPRINT_CODE_LENGTH } from '../components/CodeInput';
 import StepLayout from '../components/StepLayout';
@@ -15,7 +15,7 @@ function SprintCodePage() {
   const { update } = useSubmission();
   const { handleError } = useErrorHandler();
 
-  const handleNext = async () => {
+  const handleNext = useCallback(async () => {
     if (code.length !== SPRINT_CODE_LENGTH) {
       return;
     }
@@ -33,7 +33,7 @@ function SprintCodePage() {
     } catch (error) {
       handleError(error);
     }
-  };
+  }, [code, update, navigate, handleError]);
 
   return (
     <StepLayout

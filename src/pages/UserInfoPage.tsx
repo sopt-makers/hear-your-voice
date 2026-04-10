@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StepLayout from '../components/StepLayout';
 import { ContentHeading, SelectField } from '../components';
@@ -29,11 +29,11 @@ function UserInfoPage() {
         setTeamOptions(teams.map((t) => ({ label: t.name, value: t.code })));
       })
       .catch(handleError);
-  }, []);
+  }, [handleError]);
 
   const isAllFilled = name.trim() !== '' && chapterCode !== '' && teamCode !== '';
 
-  const handleNext = async () => {
+  const handleNext = useCallback(async () => {
     try {
       const valid = await callApi(() => isValidUser(name, teamCode, chapterCode));
 
@@ -48,7 +48,7 @@ function UserInfoPage() {
     } catch (error) {
       handleError(error);
     }
-  };
+  }, [name, teamCode, chapterCode, toast, update, navigate, handleError]);
 
   return (
     <StepLayout

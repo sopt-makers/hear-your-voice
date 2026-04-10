@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { StepLayout } from '../components';
 import * as styles from './SprintIntroPage.css';
@@ -10,10 +11,9 @@ function SprintIntroPage() {
   const sprintName: string = location.state?.sprintName ?? '챕터별 스프린트';
   const sprintType: SprintType = location.state?.sprintType ?? 'chapter';
 
-  const handleStart = () => {
-    // TODO: 다음 온보딩/챕터 화면으로 이동 (예: navigate('/chapter-…'))
+  const handleStart = useCallback(() => {
     navigate('/user-info', { state: { sprintType } });
-  };
+  }, [navigate, sprintType]);
 
   return (
     <StepLayout

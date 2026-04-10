@@ -33,7 +33,9 @@ function SelectField({
       <SelectV2.Root
         type="text"
         defaultValue={defaultValue ?? null}
-        onChange={(value) => onChange?.(value as string)}
+        onChange={(value) => {
+          if (typeof value === 'string') onChange?.(value);
+        }}
       >
         <SelectV2.Trigger>
           <SelectV2.TriggerContent
