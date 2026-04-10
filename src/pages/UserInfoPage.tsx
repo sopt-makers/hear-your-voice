@@ -26,7 +26,6 @@ function UserInfoPage() {
     });
   }, []);
 
-
   const isAllFilled = name.trim() !== '' && chapterCode !== '' && teamCode !== '';
 
   const handleNext = async () => {
@@ -66,6 +65,7 @@ function UserInfoPage() {
             required
             value={name}
             isError={isError}
+            className={styles.nameWidth}
             onChange={(e) => {
               setName(e.target.value);
               setIsError(false);

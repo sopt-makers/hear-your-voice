@@ -10,6 +10,10 @@ export const body = style({
   ...fontsObject.BODY_3_14_M,
 });
 
+export const nameWidth = style({
+  width: '70%',
+});
+
 export const inputWrapper = style({
   display: 'flex',
   flexDirection: 'column',
