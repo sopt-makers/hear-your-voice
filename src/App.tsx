@@ -10,6 +10,7 @@ import ErrorPage from './pages/ErrorPage';
 import { hasActiveSprint } from './lib/api/sprint';
 import { callApi } from './lib/apiClient';
 import UserInfoPage from './pages/UserInfoPage';
+import ClosingPage from './pages/ClosingPage';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
   { path: '/sprint-code', element: <SprintCodePage /> },
   { path: '/sprint-intro', element: <SprintIntroPage /> },
   { path: '/user-info', element: <UserInfoPage /> },
+  { path: '/closing', element: <ClosingPage /> },
 ]);
 
 function App() {
