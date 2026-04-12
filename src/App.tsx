@@ -26,10 +26,10 @@ const router = createBrowserRouter([
   { path: '/sprint-code', element: <SprintCodePage /> },
   { path: '/sprint-intro', element: <SprintIntroPage /> },
   { path: '/user-info', element: <UserInfoPage /> },
-  { path: '/closing', element: <ClosingPage /> },
   { path: '/stop-comment', element: <StopCommentPage /> },
   { path: '/start-comment', element: <StartCommentPage /> },
-  { path: '/continue-comment', element: <ContinueCommentPage /> }
+  { path: '/continue-comment', element: <ContinueCommentPage /> },
+  { path: '/closing', element: <ClosingPage /> },
 ]);
 
 function App() {
