@@ -183,6 +183,7 @@ src/
 
 ---
 
+
 ## API 규칙
 
 - 모든 Supabase 호출은 `callApi()` 래퍼(`src/lib/apiClient.ts`)로 감싸야 함
