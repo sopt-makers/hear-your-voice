@@ -13,7 +13,7 @@ export const headerSection = style({
   justifyContent: 'center',
   alignItems: 'center',
   width: '100%',
-  height: 150,
+  height: 120,
   backgroundColor: colors.secondary,
 });
 
@@ -31,8 +31,16 @@ export const contentSection = style({
   padding: '0 20px',
 });
 
+export const contentSectionWithProgress = style({
+  paddingTop: 0,
+});
+
+export const contentSectionWithoutProgress = style({
+  paddingTop: 36,
+});
+
 export const buttonSection = style({
-  padding: '0 20px 34px',
+  padding: '24px 20px 34px',
 });
 
 globalStyle(`${buttonSection} button`, {

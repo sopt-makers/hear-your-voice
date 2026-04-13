@@ -29,17 +29,23 @@ function StepLayout({
   currentStep,
   totalSteps,
 }: StepLayoutProps) {
+  const contentSectionClassName = showProgressBar
+    ? `${styles.contentSection} ${styles.contentSectionWithProgress}`
+    : `${styles.contentSection} ${styles.contentSectionWithoutProgress}`;
+
   return (
     <PageLayout className={styles.container}>
       <div className={styles.headerSection}>
-        <img src={headerImg} alt="안내사항" className={styles.headerImage} />
+        <img src={headerImg} alt="" className={styles.headerImage} />
       </div>
 
       {showProgressBar && currentStep !== undefined && totalSteps !== undefined && (
         <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
       )}
 
-      <div className={styles.contentSection}>{children}</div>
+      <div className={contentSectionClassName}>
+        {children}
+      </div>
 
       <div className={styles.buttonSection}>
         <Button
