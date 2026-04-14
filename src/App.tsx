@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ToastProvider } from '@sopt-makers/ui';
-import { SubmissionProvider } from './context/SubmissionContext';
+import { CommentFormProvider } from './context/CommentFormContext';
 import './App.css';
 import StartPage from './pages/StartPage';
 import NoticePage from './pages/NoticePage';
@@ -28,11 +28,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <SubmissionProvider>
+    <CommentFormProvider>
       <ToastProvider>
         <RouterProvider router={router} />
       </ToastProvider>
-    </SubmissionProvider>
+    </CommentFormProvider>
   );
 }
 

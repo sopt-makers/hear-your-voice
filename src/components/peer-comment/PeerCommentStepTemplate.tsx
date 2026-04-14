@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ContentHeading, ImageSection, StepLayout } from '../../components';
 import PeerCommentRepeater from './PeerCommentRepeater';
 import type { PeerOption } from './PeerMemberPicker';
-import { useSubmission } from '../../context/SubmissionContext';
+import { useCommentForm } from '../../context/CommentFormContext';
 import { useErrorHandler } from '../../hooks/useErrorHandler';
 import { callApi } from '../../lib/apiClient';
 import { getUsersBySprint } from '../../lib/api/sprintPeers';
@@ -62,7 +62,7 @@ function PeerCommentStepTemplate({
 }: PeerCommentStepTemplateProps) {
   const { title, description, guideImages } = content;
   const navigate = useNavigate();
-  const { data, update } = useSubmission();
+  const { data, update } = useCommentForm();
   const { handleError } = useErrorHandler();
   const [rows, setRows] = useState<PeerCommentRowState[]>(() => [createEmptyPeerCommentRow()]);
   const [peerOptions, setPeerOptions] = useState<PeerOption[]>([]);

@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SprintCodeInput, SPRINT_CODE_LENGTH, StepLayout, ContentHeading } from '../components';
 import { getSprintInfoByCode } from '../lib/api/sprint';
-import { useSubmission } from '../context/SubmissionContext';
+import { useCommentForm } from '../context/CommentFormContext';
 import { useErrorHandler } from '../hooks/useErrorHandler';
 import { callApi } from '../lib/apiClient';
 
@@ -10,7 +10,7 @@ function SprintCodePage() {
   const [code, setCode] = useState('');
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
-  const { update } = useSubmission();
+  const { update } = useCommentForm();
   const { handleError } = useErrorHandler();
 
   const handleNext = useCallback(async () => {

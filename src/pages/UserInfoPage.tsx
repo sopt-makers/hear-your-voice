@@ -5,7 +5,7 @@ import * as styles from './UserInfoPage.css';
 import { TextField, useToast } from '@sopt-makers/ui';
 import { getChapterCodes, getTeamCodes } from '../lib/api/chapter';
 import { isValidUser } from '../lib/api/user';
-import { useSubmission } from '../context/SubmissionContext';
+import { useCommentForm } from '../context/CommentFormContext';
 import { useErrorHandler } from '../hooks/useErrorHandler';
 import { callApi } from '../lib/apiClient';
 
@@ -18,7 +18,7 @@ function UserInfoPage() {
   const [teamOptions, setTeamOptions] = useState<{ label: string; value: string }[]>([]);
   const navigate = useNavigate();
   const toast = useToast();
-  const { update } = useSubmission();
+  const { update } = useCommentForm();
   const { handleError } = useErrorHandler();
 
   useEffect(() => {
