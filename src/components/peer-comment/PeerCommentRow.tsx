@@ -1,6 +1,6 @@
 import { IconTrash } from '@sopt-makers/icons';
-import type { PeerCommentFieldContent } from '../../constants/peerCommentContent';
 import type { PeerCommentRowState } from '../../types/peerComment';
+import type { PeerCommentStepContent } from '../peer-comment/PeerCommentStepTemplate';
 import { type PeerOption } from './PeerMemberPicker';
 import PeerCommentRecipientBlock from './PeerCommentRecipientBlock';
 import InputField from '../common/form/InputField';
@@ -8,7 +8,7 @@ import * as styles from './PeerCommentRow.css';
 
 interface PeerCommentRowProps {
   row: PeerCommentRowState;
-  content: PeerCommentFieldContent;
+  content: PeerCommentStepContent;
   peerOptions: PeerOption[];
   onChange: (next: PeerCommentRowState) => void;
   /** 코멘트 블록이 하나뿐일 때 — 휴지통은 행 삭제 대신 입력 초기화 */

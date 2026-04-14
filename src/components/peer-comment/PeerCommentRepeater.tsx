@@ -1,21 +1,20 @@
 import { Button } from '@sopt-makers/ui';
 import { IconPlus } from '@sopt-makers/icons';
-import type { PeerCommentKind, PeerCommentRowState } from '../../types/peerComment';
-import { getPeerCommentContent } from '../../constants/peerCommentContent';
+import type { PeerCommentRowState } from '../../types/peerComment';
+import type { PeerCommentStepContent } from './PeerCommentStepTemplate';
 import { createEmptyPeerCommentRow } from '../../utils/peerCommentUtils';
 import PeerCommentRow from './PeerCommentRow';
 import type { PeerOption } from './PeerMemberPicker';
 import * as styles from './PeerCommentRepeater.css';
 
 interface PeerCommentRepeaterProps {
-  kind: PeerCommentKind;
+  content: PeerCommentStepContent;
   rows: PeerCommentRowState[];
   onRowsChange: (rows: PeerCommentRowState[]) => void;
   peerOptions: PeerOption[];
 }
 
-function PeerCommentRepeater({ kind, rows, onRowsChange, peerOptions }: PeerCommentRepeaterProps) {
-  const content = getPeerCommentContent(kind);
+function PeerCommentRepeater({ content, rows, onRowsChange, peerOptions }: PeerCommentRepeaterProps) {
 
   const updateRow = (index: number, next: PeerCommentRowState) => {
     onRowsChange(rows.map((r, i) => (i === index ? next : r)));

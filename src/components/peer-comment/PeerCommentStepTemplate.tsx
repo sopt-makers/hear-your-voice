@@ -14,21 +14,28 @@ import {
   isPeerRowValid,
 } from '../../utils/peerCommentUtils';
 import type { Comment } from '../../types/submission';
-import type { PeerCommentKind, PeerCommentRowState } from '../../types/peerComment';
+import type { PeerCommentRowState } from '../../types/peerComment';
 import * as styles from './PeerCommentStepTemplate.css';
 
 type CommentsKey = 'stop_comments' | 'continue_comments' | 'start_comments';
 
-export interface PeerCommentStepTemplateProps {
-  kind: PeerCommentKind;
-  commentsKey: CommentsKey;
+export interface PeerCommentStepContent {
   title: string;
   description: string;
+  /** 설명·예시 등 안내 이미지 2장 (순서대로 세로 배치). */
+  guideImages?: readonly [string, string];
+  /** 블록 상단 제목 (예: Stop Comment를 전달하고 싶은 동료) */
+  sectionTitle: string;
+  questionLabel: string;
+  textPlaceholder: string;
+}
+
+export interface PeerCommentStepTemplateProps {
+  content: PeerCommentStepContent;
+  commentsKey: CommentsKey;
   currentStep: number;
   totalSteps?: number;
   nextPath: string;
-  /** 설명·예시 등 안내 이미지 2장 (순서대로 세로 배치). */
-  guideImages?: readonly [string, string];
 }
 
 function submissionPatch(commentsKey: CommentsKey, comments: Comment[]) {
@@ -47,15 +54,13 @@ function submissionPatch(commentsKey: CommentsKey, comments: Comment[]) {
 }
 
 function PeerCommentStepTemplate({
-  kind,
+  content,
   commentsKey,
-  title,
-  description,
   currentStep,
   totalSteps = 7,
   nextPath,
-  guideImages,
 }: PeerCommentStepTemplateProps) {
+  const { title, description, guideImages } = content;
   const navigate = useNavigate();
   const { data, update } = useSubmission();
   const { handleError } = useErrorHandler();
@@ -109,7 +114,7 @@ function PeerCommentStepTemplate({
             <ImageSection.Image src={guideImages[1]} alt="" />
           </ImageSection>
         ) : null}
-        <PeerCommentRepeater kind={kind} rows={rows} onRowsChange={setRows} peerOptions={peerOptions} />
+        <PeerCommentRepeater content={content} rows={rows} onRowsChange={setRows} peerOptions={peerOptions} />
       </div>
     </StepLayout>
   );
