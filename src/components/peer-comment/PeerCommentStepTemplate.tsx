@@ -13,8 +13,8 @@ import {
   hasAtLeastOneCompletePeerRow,
   isPeerRowValid,
 } from '../../utils/peerCommentUtils';
-import type { Comment } from '../../types/submission';
-import type { PeerCommentRowState } from '../../types/peerComment';
+import type { Comment } from '../../types/comment';
+import type { PeerCommentRowState } from '../../types/comment';
 import * as styles from './PeerCommentStepTemplate.css';
 
 type CommentsKey = 'stop_comments' | 'continue_comments' | 'start_comments';
