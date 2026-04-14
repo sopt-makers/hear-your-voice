@@ -2,8 +2,8 @@ import type { ReactNode } from 'react';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
 import { IconChevronRight } from '@sopt-makers/icons';
-import headerImg from '../assets/header_img.png';
-import ProgressBar from './ProgressBar';
+import headerImg from '../../../assets/header_img.png';
+import ProgressBar from '../ui/ProgressBar';
 import PageLayout from './PageLayout';
 import * as styles from './StepLayout.css';
 

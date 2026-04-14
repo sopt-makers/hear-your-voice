@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CodeInput, { SPRINT_CODE_LENGTH } from '../components/CodeInput';
-import StepLayout from '../components/StepLayout';
-import { ContentHeading } from '../components';
+import { SprintCodeInput, SPRINT_CODE_LENGTH, StepLayout, ContentHeading } from '../components';
 import { getSprintInfoByCode } from '../lib/api/sprint';
 import { useSubmission } from '../context/SubmissionContext';
 import { useErrorHandler } from '../hooks/useErrorHandler';
@@ -45,7 +43,7 @@ function SprintCodePage() {
     >
       <ContentHeading title="스프린트 코드 입력" description="스프린트 확인을 위해 코드를 입력해주세요." />
 
-      <CodeInput
+      <SprintCodeInput
         value={code}
         onChange={(next) => {
           setCode(next);

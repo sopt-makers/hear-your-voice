@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import StepLayout from '../components/StepLayout';
-import { ContentHeading, SelectField } from '../components';
+import { StepLayout, ContentHeading, SelectField } from '../components';
 import * as styles from './UserInfoPage.css';
 import { TextField, useToast } from '@sopt-makers/ui';
 import { getChapterCodes, getTeamCodes } from '../lib/api/chapter';
@@ -44,7 +43,7 @@ function UserInfoPage() {
       }
 
       update({ user_name: name, user_team: teamCode, user_chapter: chapterCode });
-      navigate('/next'); // TODO: 다음 페이지 경로로 변경
+      navigate('/stop-comment');
     } catch (error) {
       handleError(error);
     }
