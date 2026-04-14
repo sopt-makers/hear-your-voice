@@ -1,0 +1,141 @@
+import { globalStyle, style } from '@vanilla-extract/css';
+import { colors } from '@sopt-makers/colors';
+import { fontsObject } from '@sopt-makers/fonts';
+
+globalStyle(`button:disabled`, {
+  opacity: 0.5,
+  cursor: 'not-allowed',
+  color: `${colors.gray400} !important`,
+});
+
+export const chipList = style({
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  gap: 8,
+  marginTop: 8,
+});
+
+export const pickerRoot = style({});
+
+export const pickerTriggerButton = style({
+  backgroundColor: `${colors.gray600} !important`,
+});
+
+export const sheetOverlay = style({
+  position: 'fixed',
+  inset: 0,
+  border: 'none',
+  background: 'rgba(0, 0, 0, 0.45)',
+  zIndex: 1200,
+  padding: 0,
+  cursor: 'pointer',
+});
+
+export const sheetContainer = style({
+  position: 'fixed',
+  left: '50%',
+  bottom: '46px',
+  transform: 'translateX(-50%)',
+  width: 'min(386px, calc(100vw - 44px))',
+  maxWidth: 386,
+  borderRadius: 16,
+  overflow: 'hidden',
+  backgroundColor: colors.gray900,
+  zIndex: 1201,
+  padding: '12px 0 12px',
+});
+
+export const sheetBody = style({
+  width: '100%',
+  padding: '0 16px',
+  maxHeight: '44vh',
+  overflowY: 'auto',
+});
+
+export const sheetMemberButton = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 10,
+  width: '100%',
+  padding: '12px 16px',
+  border: 'none',
+  background: 'transparent',
+  color: colors.white,
+  cursor: 'pointer',
+  textAlign: 'left',
+  ...fontsObject.BODY_2_16_M,
+  selectors: {
+    '&:hover': {
+      backgroundColor: colors.gray800,
+    },
+  },
+});
+
+export const memberName = style({
+  ...fontsObject.BODY_2_16_M,
+});
+
+export const memberAvatar = style({
+  width: 32,
+  height: 32,
+  borderRadius: '50%',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexShrink: 0,
+  backgroundColor: colors.gray800,
+  color: colors.gray200,
+});
+
+globalStyle(`${memberAvatar} svg`, {
+  width: 20,
+  height: 20,
+});
+
+export const sheetHeader = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 6,
+  padding: '14px 16px 12px',
+  color: colors.white,
+  ...fontsObject.TITLE_4_20_SB,
+});
+
+export const sheetBackButton = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  border: 'none',
+  background: 'transparent',
+  color: colors.white,
+  padding: 0,
+  cursor: 'pointer',
+});
+
+export const sheetEmpty = style({
+  padding: 24,
+  color: colors.gray400,
+  textAlign: 'center',
+  ...fontsObject.BODY_2_16_M,
+});
+
+export const sheetConfirmArea = style({
+  padding: '16px 16px 8px',
+});
+
+export const sheetConfirmButton = style({
+  width: '100%',
+});
+
+export const memberCheckSelected = style({
+  marginLeft: 'auto',
+  width: 24,
+  height: 24,
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '50%',
+  color: colors.success,
+  ...fontsObject.LABEL_3_14_SB,
+});
