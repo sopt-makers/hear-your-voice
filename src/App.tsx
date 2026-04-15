@@ -11,6 +11,7 @@ import { hasActiveSprint } from '@lib/api/sprint';
 import { callApi } from '@lib/apiClient';
 import UserInfoPage from '@pages/UserInfoPage';
 import StopCommentPage from '@pages/StopCommentPage';
+import StartCommentPage from '@pages/StartCommentPage';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
   { path: '/sprint-intro', element: <SprintIntroPage /> },
   { path: '/user-info', element: <UserInfoPage /> },
   { path: '/stop-comment', element: <StopCommentPage /> },
+  { path: '/start-comment', element: <StartCommentPage /> },
 ]);
 
 function App() {
