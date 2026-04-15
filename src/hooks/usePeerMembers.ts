@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import type { PeerMember } from '../types';
-import { useCommentForm } from '../context/CommentFormContext';
-import { callApi } from '../lib/apiClient';
-import { getUsersBySprint } from '../lib/api/sprintPeers';
+import type { PeerMember } from '@types';
+import { useCommentForm } from './useCommentForm';
+import { callApi } from '@lib/apiClient';
+import { getUsersBySprint } from '@lib/api/sprintPeers';
 import { useErrorHandler } from './useErrorHandler';
 
 export function usePeerMembers(): PeerMember[] {

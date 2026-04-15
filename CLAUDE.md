@@ -98,7 +98,7 @@ src/
 │   ├── peer-comment/            → 피어 코멘트 도메인
 │   │   ├── PeerCommentStepTemplate  ← index.ts 외부 노출
 │   │   ├── PeerCommentRepeater      ← index.ts 외부 노출
-│   │   ├── PeerCommentRow
+│   │   ├── PeerCommentBlock
 │   │   ├── PeerCommentRecipientBlock
 │   │   └── PeerMemberPicker
 │   └── index.ts                 → barrel export
@@ -112,17 +112,20 @@ src/
 │   ├── ClosingPage
 │   └── ErrorPage
 ├── types/                       → 도메인 타입 정의
-│   ├── comment.ts               (Comment, Mvp, SubmissionData, SubmissionPayload, PeerCommentKind, PeerCommentRowState, CommentSubmitResult)
+│   ├── comment.ts               (Comment, Mvp, CommentFormState, CommentSubmissionPayload, CommentsKey, PeerCommentKind, PeerCommentRowState, CommentSubmitResult)
+│   ├── peer.ts                  (PeerMember)
 │   ├── chapter.ts
 │   └── sprint.ts
 ├── utils/                       → 순수 비즈니스 로직 유틸
 │   └── peerCommentUtils
-├── context/                     → React Context
-│   └── CommentFormContext
+├── context/                     → React Context (Provider 컴포넌트만)
+│   └── CommentFormContext        (CommentFormProvider, CommentFormContext)
 ├── hooks/                       → 커스텀 훅
+│   ├── useCommentForm           (CommentFormContext 접근)
+│   ├── usePeerMembers
 │   └── useErrorHandler
 └── lib/                         → 외부 서비스 연동 (Supabase, API)
-    ├── api/
+    ├── api/                     (comment, sprint, sprintPeers, chapter, user)
     ├── apiClient.ts
     ├── errors.ts
     └── supabase.ts
@@ -142,13 +145,32 @@ src/
 | `Repeater` | 동일한 입력 블록을 반복·관리 | `PeerCommentRepeater` |
 | `Block` / `Section` | 여러 요소를 묶은 영역 단위 | `PeerCommentRecipientBlock` |
 
+## 🗂️ Import Aliases
+
+| Alias | 실제 경로 |
+|---|---|
+| `@components` | `src/components` |
+| `@pages` | `src/pages` |
+| `@hooks` | `src/hooks` |
+| `@context` | `src/context` |
+| `@types` | `src/types` |
+| `@utils` | `src/utils` |
+| `@lib` | `src/lib` |
+| `@assets` | `src/assets` |
+
+- 도메인 경계를 넘는 참조는 alias 사용 (예: `@hooks`, `@lib`, `@types`)
+- `src/components/` 내부 간 참조는 상대 경로 유지 (순환참조 방지)
+- 같은 폴더 내 참조는 `./`, 상위·형제 폴더 참조는 `../` 사용
+
 ## 📌 구조 원칙
 
 - 최상위 기준: `common/` (범용) vs 도메인 폴더 (특화)
 - 범용 컴포넌트는 역할에 따라 `common/layout/` · `common/form/` · `common/ui/` 에 추가
 - 도메인 특화 컴포넌트는 도메인명 폴더로 분리 (예: `peer-comment/`)
-- 외부에서는 항상 `components/index.ts` barrel을 통해 import
+- 외부에서는 항상 `@components` (= `components/index.ts` barrel) 를 통해 import
 - `Page`는 `pages/`에, 나머지는 `components/` 하위에 위치
+- `context/`는 Provider 컴포넌트와 Context 객체만 export — 훅은 반드시 `hooks/`에 분리, 타입은 반드시 `types/`에 분리
+- 타입은 항상 `@types`에서 import — `@context` 등 다른 경로에서 타입을 re-export하지 않음
 
 ## 스타일링 규칙
 

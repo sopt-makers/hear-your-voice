@@ -1,12 +1,12 @@
 import { IconTrash } from '@sopt-makers/icons';
-import type { PeerCommentRowState } from '../../types';
-import type { PeerCommentStepContent } from '../peer-comment/PeerCommentStepTemplate';
-import type { PeerMember } from '../../types';
+import type { PeerCommentRowState } from '@types';
+import type { PeerCommentStepContent } from './PeerCommentStepTemplate';
+import type { PeerMember } from '@types';
 import PeerCommentRecipientBlock from './PeerCommentRecipientBlock';
 import InputField from '../common/form/InputField';
-import * as styles from './PeerCommentRow.css';
+import * as styles from './PeerCommentBlock.css';
 
-interface PeerCommentRowProps {
+interface PeerCommentBlockProps {
   row: PeerCommentRowState;
   content: PeerCommentStepContent;
   peerMembers: PeerMember[];
@@ -16,7 +16,14 @@ interface PeerCommentRowProps {
   onRemoveRow: () => void;
 }
 
-function PeerCommentRow({ row, content, peerMembers, onChange, isOnlySection, onRemoveRow }: PeerCommentRowProps) {
+function PeerCommentBlock({
+  row,
+  content,
+  peerMembers,
+  onChange,
+  isOnlySection,
+  onRemoveRow,
+}: PeerCommentBlockProps) {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
@@ -34,7 +41,10 @@ function PeerCommentRow({ row, content, peerMembers, onChange, isOnlySection, on
           sectionTitle={content.sectionTitle}
           memberIds={row.memberIds}
           peerMembers={peerMembers}
-          onAddMember={(userId) => onChange({ ...row, memberIds: [...row.memberIds, userId] })}
+          onAddMember={(userId) => {
+            if (row.memberIds.includes(userId)) return;
+            onChange({ ...row, memberIds: [...row.memberIds, userId] });
+          }}
           onRemoveMember={(userId) => {
             onChange({
               ...row,
@@ -54,4 +64,4 @@ function PeerCommentRow({ row, content, peerMembers, onChange, isOnlySection, on
   );
 }
 
-export default PeerCommentRow;
+export default PeerCommentBlock;

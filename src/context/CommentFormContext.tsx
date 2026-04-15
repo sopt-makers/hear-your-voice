@@ -1,17 +1,15 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import type { ReactNode } from 'react';
-import type { SubmissionData } from '../types';
-
-export type { SubmissionData };
+import type { CommentFormState } from '@types';
 
 interface CommentFormContextType {
-  data: SubmissionData;
-  update: (partial: Partial<SubmissionData>) => void;
+  data: CommentFormState;
+  update: (partial: Partial<CommentFormState>) => void;
 }
 
 const CommentFormContext = createContext<CommentFormContextType | null>(null);
 
-const initialData: SubmissionData = {
+const initialData: CommentFormState = {
   p_sprint_auth_code: '',
   user_name: '',
   user_team: '',
@@ -23,17 +21,13 @@ const initialData: SubmissionData = {
 };
 
 export function CommentFormProvider({ children }: { children: ReactNode }) {
-  const [data, setData] = useState<SubmissionData>(initialData);
+  const [data, setData] = useState<CommentFormState>(initialData);
 
-  const update = (partial: Partial<SubmissionData>) => {
+  const update = (partial: Partial<CommentFormState>) => {
     setData((prev) => ({ ...prev, ...partial }));
   };
 
   return <CommentFormContext.Provider value={{ data, update }}>{children}</CommentFormContext.Provider>;
 }
 
-export function useCommentForm() {
-  const ctx = useContext(CommentFormContext);
-  if (!ctx) throw new Error('useCommentForm must be used within CommentFormProvider');
-  return ctx;
-}
+export { CommentFormContext };

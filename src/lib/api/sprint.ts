@@ -1,5 +1,5 @@
-import { supabase } from '../supabase';
-import type { SprintInfo, SprintType } from '../../types';
+import { supabase } from '@lib/supabase';
+import type { SprintInfo, SprintType } from '@types';
 export type { SprintType };
 
 export async function hasActiveSprint(): Promise<boolean> {
