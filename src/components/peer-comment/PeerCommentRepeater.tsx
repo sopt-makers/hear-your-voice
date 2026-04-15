@@ -1,10 +1,10 @@
 import { Button } from '@sopt-makers/ui';
 import { IconPlus } from '@sopt-makers/icons';
-import type { PeerCommentRowState } from '../../types';
+import type { PeerCommentRowState } from '@types';
 import type { PeerCommentStepContent } from './PeerCommentStepTemplate';
-import { createEmptyPeerCommentRow } from '../../utils/peerCommentUtils';
+import { createEmptyPeerCommentRow } from '@utils/peerCommentUtils';
 import PeerCommentBlock from './PeerCommentBlock';
-import type { PeerMember } from '../../types';
+import type { PeerMember } from '@types';
 import * as styles from './PeerCommentRepeater.css';
 
 interface PeerCommentRepeaterProps {

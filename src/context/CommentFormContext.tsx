@@ -1,6 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import type { ReactNode } from 'react';
-import type { CommentFormState } from '../types';
+import type { CommentFormState } from '@types';
 
 export type { CommentFormState };
 
@@ -32,8 +32,4 @@ export function CommentFormProvider({ children }: { children: ReactNode }) {
   return <CommentFormContext.Provider value={{ data, update }}>{children}</CommentFormContext.Provider>;
 }
 
-export function useCommentForm() {
-  const ctx = useContext(CommentFormContext);
-  if (!ctx) throw new Error('useCommentForm must be used within CommentFormProvider');
-  return ctx;
-}
+export { CommentFormContext };

@@ -1,9 +1,9 @@
 import { IconTrash } from '@sopt-makers/icons';
-import type { PeerCommentRowState } from '../../types';
-import type { PeerCommentStepContent } from '../peer-comment/PeerCommentStepTemplate';
-import type { PeerMember } from '../../types';
+import type { PeerCommentRowState } from '@types';
+import type { PeerCommentStepContent } from './PeerCommentStepTemplate';
+import type { PeerMember } from '@types';
 import PeerCommentRecipientBlock from './PeerCommentRecipientBlock';
-import InputField from '../common/form/InputField';
+import InputField from '@components/common/form/InputField';
 import * as styles from './PeerCommentBlock.css';
 
 interface PeerCommentBlockProps {

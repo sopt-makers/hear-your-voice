@@ -1,10 +1,9 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SprintCodeInput, SPRINT_CODE_LENGTH, StepLayout, ContentHeading } from '../components';
-import { getSprintInfoByCode } from '../lib/api/sprint';
-import { useCommentForm } from '../context/CommentFormContext';
-import { useErrorHandler } from '../hooks';
-import { callApi } from '../lib/apiClient';
+import { SprintCodeInput, SPRINT_CODE_LENGTH, StepLayout, ContentHeading } from '@components';
+import { getSprintInfoByCode } from '@lib/api/sprint';
+import { useCommentForm, useErrorHandler } from '@hooks';
+import { callApi } from '@lib/apiClient';
 
 function SprintCodePage() {
   const [code, setCode] = useState('');

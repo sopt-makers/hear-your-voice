@@ -1,5 +1,5 @@
-import { supabase } from '../supabase';
-import type { ChapterCode } from '../../types';
+import { supabase } from '@lib/supabase';
+import type { ChapterCode } from '@types';
 
 export async function getChapterCodes(): Promise<ChapterCode[]> {
   const { data, error } = await supabase.rpc('get_chapter_codes');
