@@ -2,8 +2,6 @@ import { createContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { CommentFormState } from '@types';
 
-export type { CommentFormState };
-
 interface CommentFormContextType {
   data: CommentFormState;
   update: (partial: Partial<CommentFormState>) => void;
