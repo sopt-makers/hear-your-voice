@@ -35,6 +35,8 @@ function PeerMemberPicker({
     'aria-labelledby': titleId,
   } as const;
 
+  const isConfirmDisabled = memberIds.length === 0;
+
   return (
     <div className={styles.pickerRoot}>
       <Button
@@ -106,6 +108,7 @@ function PeerMemberPicker({
               size="md"
               rounded="md"
               className={styles.sheetConfirmButton}
+              disabled={isConfirmDisabled}
               onClick={() => setOpen(false)}
             >
               선택 완료
