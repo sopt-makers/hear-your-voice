@@ -68,10 +68,13 @@ function PeerCommentStepTemplate({
   const isNextEnabled = rows.every(isPeerRowValid) && hasAtLeastOneCompletePeerRow(rows);
 
   const handleNext = useCallback(() => {
+    if (!isNextEnabled) {
+      return;
+    }
     const comments = expandPeerRowsToComments(rows);
     update(submissionPatch(commentsKey, comments));
     navigate(nextPath);
-  }, [rows, update, navigate, nextPath, commentsKey]);
+  }, [isNextEnabled, rows, update, navigate, nextPath, commentsKey]);
 
   return (
     <StepLayout
