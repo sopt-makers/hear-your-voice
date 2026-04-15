@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
 import { IconChevronRight } from '@sopt-makers/icons';
-import headerImg from '../../../assets/header_img.png';
+import headerTitle from '@assets/header_title.svg';
 import ProgressBar from '../ui/ProgressBar';
 import PageLayout from './PageLayout';
 import * as styles from './StepLayout.css';
@@ -36,7 +36,7 @@ function StepLayout({
   return (
     <PageLayout className={styles.container}>
       <div className={styles.headerSection}>
-        <img src={headerImg} alt="" className={styles.headerImage} />
+        <img src={headerTitle} alt="" className={styles.headerImage} />
       </div>
 
       {showProgressBar && currentStep !== undefined && totalSteps !== undefined && (

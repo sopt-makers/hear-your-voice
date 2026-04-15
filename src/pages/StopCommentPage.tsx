@@ -1,5 +1,5 @@
-import stopCommentExampleImg from '@assets/stop_comment_example.png';
-import stopCommentExplanationImg from '@assets/stop_comment_explanation.png';
+import stopCommentExampleImg from '@assets/stop_comment_example.svg';
+import stopCommentExplanationImg from '@assets/stop_comment_explanation.svg';
 import { PeerCommentStepTemplate } from '@components';
 
 function StopCommentPage() {
