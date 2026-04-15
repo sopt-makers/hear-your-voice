@@ -1,7 +1,6 @@
 import { Button } from '@sopt-makers/ui';
 import { IconPlus } from '@sopt-makers/icons';
-import type { PeerCommentRowState } from '@types';
-import type { PeerCommentStepContent } from './PeerCommentStepTemplate';
+import type { PeerCommentRowState, PeerCommentStepContent } from '@types';
 import { createEmptyPeerCommentRow } from '@utils/peerCommentUtils';
 import PeerCommentBlock from './PeerCommentBlock';
 import type { PeerMember } from '@types';

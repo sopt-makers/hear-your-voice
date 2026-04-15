@@ -11,41 +11,21 @@ import {
   hasAtLeastOneCompletePeerRow,
   isPeerRowValid,
 } from '@utils/peerCommentUtils';
-import type { Comment, PeerCommentRowState, CommentsKey } from '@types';
+import type { Comment, PeerCommentRowState, CommentsKey, PeerCommentStepContent } from '@types';
 import * as styles from './PeerCommentStepTemplate.css';
 
-export interface PeerCommentStepContent {
-  commentKey: CommentsKey;
-  title: string;
-  description: string;
-  /** 설명·예시 등 안내 이미지 2장 (순서대로 세로 배치). */
-  guideImages?: readonly [string, string];
-  /** 블록 상단 제목 (예: Stop Comment를 전달하고 싶은 동료) */
-  sectionTitle: string;
-  questionLabel: string;
-  textPlaceholder: string;
-}
-
-export interface PeerCommentStepTemplateProps {
+interface PeerCommentStepTemplateProps {
   content: PeerCommentStepContent;
   currentStep: number;
   totalSteps?: number;
   nextPath: string;
 }
 
-function submissionPatch(commentsKey: CommentsKey, comments: Comment[]) {
-  switch (commentsKey) {
-    case 'stop_comments':
-      return { stop_comments: comments };
-    case 'continue_comments':
-      return { continue_comments: comments };
-    case 'start_comments':
-      return { start_comments: comments };
-    default: {
-      const _exhaustive: never = commentsKey;
-      return _exhaustive;
-    }
-  }
+function submissionPatch<K extends CommentsKey>(
+  commentsKey: K,
+  comments: Comment[],
+): Record<K, Comment[]> {
+  return { [commentsKey]: comments } as Record<K, Comment[]>;
 }
 
 function PeerCommentStepTemplate({

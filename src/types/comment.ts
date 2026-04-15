@@ -22,7 +22,6 @@ export type CommentSubmissionPayload = Omit<CommentFormState, 'mvp'> & { mvp: Mv
 
 export type CommentsKey = Extract<keyof CommentFormState, `${string}_comments`>;
 
-
 export interface CommentSubmitResult {
   success: boolean;
   code: 'SUCCESS' | 'INVALID_SPRINT' | 'USER_NOT_FOUND' | 'UNKNOWN_ERROR';
@@ -30,6 +29,18 @@ export interface CommentSubmitResult {
 }
 
 export type PeerCommentKind = 'stop' | 'continue' | 'start';
+
+export interface PeerCommentStepContent {
+  commentKey: CommentsKey;
+  title: string;
+  description: string;
+  /** 설명·예시 등 안내 이미지 2장 (순서대로 세로 배치). */
+  guideImages?: readonly [string, string];
+  /** 블록 상단 제목 (예: Stop Comment를 전달하고 싶은 동료) */
+  sectionTitle: string;
+  questionLabel: string;
+  textPlaceholder: string;
+}
 
 export interface PeerCommentRowState {
   id: string;
