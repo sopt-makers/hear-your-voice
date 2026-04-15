@@ -1,17 +1,17 @@
 import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
-import type { SubmissionData } from '../types';
+import type { CommentFormState } from '../types';
 
-export type { SubmissionData };
+export type { CommentFormState };
 
 interface CommentFormContextType {
-  data: SubmissionData;
-  update: (partial: Partial<SubmissionData>) => void;
+  data: CommentFormState;
+  update: (partial: Partial<CommentFormState>) => void;
 }
 
 const CommentFormContext = createContext<CommentFormContextType | null>(null);
 
-const initialData: SubmissionData = {
+const initialData: CommentFormState = {
   p_sprint_auth_code: '',
   user_name: '',
   user_team: '',
@@ -23,9 +23,9 @@ const initialData: SubmissionData = {
 };
 
 export function CommentFormProvider({ children }: { children: ReactNode }) {
-  const [data, setData] = useState<SubmissionData>(initialData);
+  const [data, setData] = useState<CommentFormState>(initialData);
 
-  const update = (partial: Partial<SubmissionData>) => {
+  const update = (partial: Partial<CommentFormState>) => {
     setData((prev) => ({ ...prev, ...partial }));
   };
 

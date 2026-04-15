@@ -5,7 +5,7 @@ export interface Comment {
 
 export type Mvp = Comment;
 
-export interface SubmissionData {
+export interface CommentFormState {
   p_sprint_auth_code: string;
   user_name: string;
   user_team: string;
@@ -18,7 +18,7 @@ export interface SubmissionData {
 }
 
 /** `submit_comments` RPC 등 최종 제출용 — `mvp` 필수. */
-export type SubmissionPayload = Omit<SubmissionData, 'mvp'> & { mvp: Mvp };
+export type CommentSubmissionPayload = Omit<CommentFormState, 'mvp'> & { mvp: Mvp };
 
 
 export interface CommentSubmitResult {

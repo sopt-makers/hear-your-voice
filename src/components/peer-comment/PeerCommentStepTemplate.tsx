@@ -12,10 +12,12 @@ import {
   hasAtLeastOneCompletePeerRow,
   isPeerRowValid,
 } from '../../utils/peerCommentUtils';
-import type { Comment, PeerCommentRowState } from '../../types';
+import type { Comment, PeerCommentRowState, CommentFormState } from '../../types';
 import * as styles from './PeerCommentStepTemplate.css';
 
-type CommentsKey = 'stop_comments' | 'continue_comments' | 'start_comments';
+type CommentsKey = {
+  [K in keyof CommentFormState]: CommentFormState[K] extends Comment[] ? K : never;
+}[keyof CommentFormState];
 
 export interface PeerCommentStepContent {
   commentKey: CommentsKey;
