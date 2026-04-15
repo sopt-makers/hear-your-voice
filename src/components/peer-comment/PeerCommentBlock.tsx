@@ -3,7 +3,7 @@ import type { PeerCommentRowState } from '@types';
 import type { PeerCommentStepContent } from './PeerCommentStepTemplate';
 import type { PeerMember } from '@types';
 import PeerCommentRecipientBlock from './PeerCommentRecipientBlock';
-import InputField from '@components/common/form/InputField';
+import InputField from '../common/form/InputField';
 import * as styles from './PeerCommentBlock.css';
 
 interface PeerCommentBlockProps {
@@ -16,7 +16,14 @@ interface PeerCommentBlockProps {
   onRemoveRow: () => void;
 }
 
-function PeerCommentBlock({ row, content, peerMembers, onChange, isOnlySection, onRemoveRow }: PeerCommentBlockProps) {
+function PeerCommentBlock({
+  row,
+  content,
+  peerMembers,
+  onChange,
+  isOnlySection,
+  onRemoveRow,
+}: PeerCommentBlockProps) {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
@@ -35,9 +42,9 @@ function PeerCommentBlock({ row, content, peerMembers, onChange, isOnlySection, 
           memberIds={row.memberIds}
           peerMembers={peerMembers}
           onAddMember={(userId) => {
-              if (row.memberIds.includes(userId)) return;
-              onChange({ ...row, memberIds: [...row.memberIds, userId] });
-            }}
+            if (row.memberIds.includes(userId)) return;
+            onChange({ ...row, memberIds: [...row.memberIds, userId] });
+          }}
           onRemoveMember={(userId) => {
             onChange({
               ...row,

@@ -2,7 +2,7 @@ import { useId, useState } from 'react';
 import { Button, Dialog } from '@sopt-makers/ui';
 import { IconCheck, IconChevronLeft, IconUser } from '@sopt-makers/icons';
 import * as styles from './PeerMemberPicker.css';
-import MemberChip from '@components/common/ui/MemberChip';
+import MemberChip from '../common/ui/MemberChip';
 import type { PeerMember } from '@types';
 
 interface PeerOption {
