@@ -3,8 +3,8 @@ import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
 import { PageLayout } from '@components';
 import * as styles from './StartPage.css';
-import backgroundImg from '@assets/background.png';
-import titleImg from '@assets/title.png';
+import backgroundImg from '@assets/background.svg';
+import titleImg from '@assets/header_title.svg';
 
 function StartPage() {
   const navigate = useNavigate();
