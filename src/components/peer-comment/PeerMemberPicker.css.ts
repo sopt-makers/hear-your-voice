@@ -23,18 +23,18 @@ export const pickerTriggerButton = style({
 });
 
 export const sheetDialogSurface = style({
-  margin: 0,
-  minWidth: 0,
+  width: '100%',
+  overflow: 'hidden',
+});
+
+globalStyle(`body > div:has(.${sheetDialogSurface})`, {
   width: 'min(386px, calc(100vw - 44px))',
   maxWidth: 'min(386px, calc(100vw - 44px))',
-  position: 'fixed',
-  left: '50%',
-  bottom: 46,
-  top: 'auto',
-  transform: 'translateX(-50%)',
+  margin: '0 auto',
   padding: '12px 0 12px',
   borderRadius: 16,
-  overflow: 'hidden',
+  left: '50%',
+  transform: 'translateX(-50%)',
   backgroundColor: colors.gray900,
 });
 
