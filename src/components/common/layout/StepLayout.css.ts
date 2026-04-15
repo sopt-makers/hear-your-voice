@@ -28,6 +28,8 @@ export const contentSection = style({
   display: 'flex',
   flexDirection: 'column',
   overflowY: 'auto',
+  msOverflowStyle: 'none',
+  scrollbarWidth: 'none',
   padding: '0 20px',
 });
 
@@ -45,4 +47,8 @@ export const buttonSection = style({
 
 globalStyle(`${buttonSection} button`, {
   width: '100%',
+});
+
+globalStyle(`${contentSection}::-webkit-scrollbar`, {
+  display: 'none',
 });

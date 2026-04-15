@@ -43,6 +43,8 @@ export const sheetBody = style({
   padding: '0 16px',
   maxHeight: '44vh',
   overflowY: 'auto',
+  msOverflowStyle: 'none',
+  scrollbarWidth: 'none',
 });
 
 export const sheetMemberButton = style({
@@ -130,4 +132,8 @@ export const memberCheckSelected = style({
   borderRadius: '50%',
   color: colors.success,
   ...fontsObject.LABEL_3_14_SB,
+});
+
+globalStyle(`${sheetBody}::-webkit-scrollbar`, {
+  display: 'none',
 });
