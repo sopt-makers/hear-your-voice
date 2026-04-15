@@ -4,6 +4,7 @@ export type {
   Mvp,
   CommentFormState,
   CommentSubmissionPayload,
+  CommentsKey,
   CommentSubmitResult,
   PeerCommentKind,
   PeerCommentRowState,

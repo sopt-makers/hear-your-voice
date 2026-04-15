@@ -20,6 +20,8 @@ export interface CommentFormState {
 /** `submit_comments` RPC 등 최종 제출용 — `mvp` 필수. */
 export type CommentSubmissionPayload = Omit<CommentFormState, 'mvp'> & { mvp: Mvp };
 
+export type CommentsKey = Extract<keyof CommentFormState, `${string}_comments`>;
+
 
 export interface CommentSubmitResult {
   success: boolean;
