@@ -2,7 +2,9 @@ import { globalStyle, style } from '@vanilla-extract/css';
 import { colors } from '@sopt-makers/colors';
 import { fontsObject } from '@sopt-makers/fonts';
 
-globalStyle(`button:disabled`, {
+export const pickerRoot = style({});
+
+globalStyle(`${pickerRoot} button:disabled`, {
   opacity: 0.5,
   cursor: 'not-allowed',
   color: `${colors.gray400} !important`,
@@ -15,8 +17,6 @@ export const chipList = style({
   gap: 8,
   marginTop: 8,
 });
-
-export const pickerRoot = style({});
 
 export const pickerTriggerButton = style({
   backgroundColor: `${colors.gray600} !important`,
