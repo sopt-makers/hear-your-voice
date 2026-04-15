@@ -6,6 +6,7 @@ function StopCommentPage() {
   return (
     <PeerCommentStepTemplate
       content={{
+        commentKey: 'stop_comments',
         title: 'Stop 코멘트 작성',
         description: '이번 스프린트에서 협업하며 그만했으면 하는 점에 대해 전달해요.',
         guideImages: [stopCommentExplanationImg, stopCommentExampleImg],
@@ -13,7 +14,6 @@ function StopCommentPage() {
         questionLabel: '해당 동료가 그만했으면 하는 점은 무엇인가요?',
         textPlaceholder: '그만했으면 하는 점',
       }}
-      commentsKey="stop_comments"
       currentStep={2}
       nextPath="/next"
     />

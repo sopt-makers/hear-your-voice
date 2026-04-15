@@ -19,6 +19,7 @@ import * as styles from './PeerCommentStepTemplate.css';
 type CommentsKey = 'stop_comments' | 'continue_comments' | 'start_comments';
 
 export interface PeerCommentStepContent {
+  commentKey: CommentsKey;
   title: string;
   description: string;
   /** 설명·예시 등 안내 이미지 2장 (순서대로 세로 배치). */
@@ -31,7 +32,6 @@ export interface PeerCommentStepContent {
 
 export interface PeerCommentStepTemplateProps {
   content: PeerCommentStepContent;
-  commentsKey: CommentsKey;
   currentStep: number;
   totalSteps?: number;
   nextPath: string;
@@ -54,7 +54,6 @@ function submissionPatch(commentsKey: CommentsKey, comments: Comment[]) {
 
 function PeerCommentStepTemplate({
   content,
-  commentsKey,
   currentStep,
   totalSteps = 7,
   nextPath,
@@ -72,9 +71,9 @@ function PeerCommentStepTemplate({
       return;
     }
     const comments = expandPeerRowsToComments(rows);
-    update(submissionPatch(commentsKey, comments));
+    update(submissionPatch(content.commentKey, comments));
     navigate(nextPath);
-  }, [isNextEnabled, rows, update, navigate, nextPath, commentsKey]);
+  }, [isNextEnabled, rows, update, navigate, nextPath, content.commentKey]);
 
   return (
     <StepLayout
@@ -91,8 +90,8 @@ function PeerCommentStepTemplate({
         </div>
         {guideImages ? (
           <ImageSection>
-            <ImageSection.Image src={guideImages[0]} alt="" />
-            <ImageSection.Image src={guideImages[1]} alt="" />
+            <ImageSection.Image src={guideImages[0]} alt="comment 작성 설명 이미지"/>
+            <ImageSection.Image src={guideImages[1]} alt="comment 작성 예시 이미지"/>
           </ImageSection>
         ) : null}
         <PeerCommentRepeater content={content} rows={rows} onRowsChange={setRows} peerOptions={peerOptions} />
