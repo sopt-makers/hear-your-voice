@@ -14,8 +14,12 @@ interface PeerCommentRepeaterProps {
   peerMembers: PeerMember[];
 }
 
-function PeerCommentRepeater({ content, rows, onRowsChange, peerMembers }: PeerCommentRepeaterProps) {
-
+function PeerCommentRepeater({
+  content,
+  rows,
+  onRowsChange,
+  peerMembers,
+}: PeerCommentRepeaterProps) {
   const updateRow = (index: number, next: PeerCommentRowState) => {
     onRowsChange(rows.map((r, i) => (i === index ? next : r)));
   };
@@ -30,7 +34,9 @@ function PeerCommentRepeater({ content, rows, onRowsChange, peerMembers }: PeerC
     onRowsChange([{ id: only.id, memberIds: [], text: '' }]);
   };
 
-  const isAddDisabled = rows.some((row) => row.memberIds.length === 0 || row.text.length === 0);
+  const isAddDisabled = rows.some(
+    (row) => row.memberIds.length === 0 || row.text.trim().length === 0,
+  );
 
   return (
     <div className={styles.repeaterRoot}>

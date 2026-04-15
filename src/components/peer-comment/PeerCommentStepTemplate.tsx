@@ -4,8 +4,7 @@ import ContentHeading from '../common/ui/ContentHeading';
 import ImageSection from '../common/ui/ImageSection';
 import StepLayout from '../common/layout/StepLayout';
 import PeerCommentRepeater from './PeerCommentRepeater';
-import { useCommentForm } from '@hooks';
-import { usePeerMembers } from '@hooks';
+import { useCommentForm, usePeerMembers } from '@hooks';
 import {
   createEmptyPeerCommentRow,
   expandPeerRowsToComments,
@@ -87,11 +86,16 @@ function PeerCommentStepTemplate({
         </div>
         {guideImages ? (
           <ImageSection>
-            <ImageSection.Image src={guideImages[0]} alt="comment 작성 설명 이미지"/>
-            <ImageSection.Image src={guideImages[1]} alt="comment 작성 예시 이미지"/>
+            <ImageSection.Image src={guideImages[0]} alt="comment 작성 설명 이미지" />
+            <ImageSection.Image src={guideImages[1]} alt="comment 작성 예시 이미지" />
           </ImageSection>
         ) : null}
-        <PeerCommentRepeater content={content} rows={rows} onRowsChange={setRows} peerMembers={peerMembers} />
+        <PeerCommentRepeater
+          content={content}
+          rows={rows}
+          onRowsChange={setRows}
+          peerMembers={peerMembers}
+        />
       </div>
     </StepLayout>
   );
