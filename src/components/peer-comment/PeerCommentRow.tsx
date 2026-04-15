@@ -1,7 +1,7 @@
 import { IconTrash } from '@sopt-makers/icons';
-import type { PeerCommentRowState } from '../../types/comment';
+import type { PeerCommentRowState } from '../../types';
 import type { PeerCommentStepContent } from '../peer-comment/PeerCommentStepTemplate';
-import { type PeerOption } from './PeerMemberPicker';
+import type { PeerMember } from '../../types';
 import PeerCommentRecipientBlock from './PeerCommentRecipientBlock';
 import InputField from '../common/form/InputField';
 import * as styles from './PeerCommentRow.css';
@@ -9,14 +9,14 @@ import * as styles from './PeerCommentRow.css';
 interface PeerCommentRowProps {
   row: PeerCommentRowState;
   content: PeerCommentStepContent;
-  peerOptions: PeerOption[];
+  peerMembers: PeerMember[];
   onChange: (next: PeerCommentRowState) => void;
   /** 코멘트 블록이 하나뿐일 때 — 휴지통은 행 삭제 대신 입력 초기화 */
   isOnlySection: boolean;
   onRemoveRow: () => void;
 }
 
-function PeerCommentRow({ row, content, peerOptions, onChange, isOnlySection, onRemoveRow }: PeerCommentRowProps) {
+function PeerCommentRow({ row, content, peerMembers, onChange, isOnlySection, onRemoveRow }: PeerCommentRowProps) {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
@@ -33,7 +33,7 @@ function PeerCommentRow({ row, content, peerOptions, onChange, isOnlySection, on
         <PeerCommentRecipientBlock
           sectionTitle={content.sectionTitle}
           memberIds={row.memberIds}
-          peerOptions={peerOptions}
+          peerMembers={peerMembers}
           onAddMember={(userId) => onChange({ ...row, memberIds: [...row.memberIds, userId] })}
           onRemoveMember={(userId) => {
             onChange({

@@ -1,20 +1,20 @@
 import { Button } from '@sopt-makers/ui';
 import { IconPlus } from '@sopt-makers/icons';
-import type { PeerCommentRowState } from '../../types/comment';
+import type { PeerCommentRowState } from '../../types';
 import type { PeerCommentStepContent } from './PeerCommentStepTemplate';
 import { createEmptyPeerCommentRow } from '../../utils/peerCommentUtils';
 import PeerCommentRow from './PeerCommentRow';
-import type { PeerOption } from './PeerMemberPicker';
+import type { PeerMember } from '../../types';
 import * as styles from './PeerCommentRepeater.css';
 
 interface PeerCommentRepeaterProps {
   content: PeerCommentStepContent;
   rows: PeerCommentRowState[];
   onRowsChange: (rows: PeerCommentRowState[]) => void;
-  peerOptions: PeerOption[];
+  peerMembers: PeerMember[];
 }
 
-function PeerCommentRepeater({ content, rows, onRowsChange, peerOptions }: PeerCommentRepeaterProps) {
+function PeerCommentRepeater({ content, rows, onRowsChange, peerMembers }: PeerCommentRepeaterProps) {
 
   const updateRow = (index: number, next: PeerCommentRowState) => {
     onRowsChange(rows.map((r, i) => (i === index ? next : r)));
@@ -38,7 +38,7 @@ function PeerCommentRepeater({ content, rows, onRowsChange, peerOptions }: PeerC
             key={row.id}
             row={row}
             content={content}
-            peerOptions={peerOptions}
+            peerMembers={peerMembers}
             onChange={(next) => updateRow(index, next)}
             isOnlySection={rows.length === 1}
             onRemoveRow={() => removeOrResetRow(index)}

@@ -1,10 +1,11 @@
-import PeerMemberPicker, { type PeerOption } from './PeerMemberPicker';
+import PeerMemberPicker from './PeerMemberPicker';
+import type { PeerMember } from '../../types';
 import * as styles from './PeerCommentRecipientBlock.css';
 
 interface PeerCommentRecipientBlockProps {
   sectionTitle: string;
   memberIds: string[];
-  peerOptions: PeerOption[];
+  peerMembers: PeerMember[];
   onAddMember: (userId: string) => void;
   onRemoveMember: (userId: string) => void;
 }
@@ -12,7 +13,7 @@ interface PeerCommentRecipientBlockProps {
 function PeerCommentRecipientBlock({
   sectionTitle,
   memberIds,
-  peerOptions,
+  peerMembers,
   onAddMember,
   onRemoveMember,
 }: PeerCommentRecipientBlockProps) {
@@ -21,7 +22,7 @@ function PeerCommentRecipientBlock({
       <p className={styles.sectionTitle}>{sectionTitle}</p>
       <PeerMemberPicker
         memberIds={memberIds}
-        peerOptions={peerOptions}
+        peerMembers={peerMembers}
         onAddMember={onAddMember}
         onRemoveMember={onRemoveMember}
       />

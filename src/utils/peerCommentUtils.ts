@@ -1,5 +1,4 @@
-import type { Comment } from '../types/comment';
-import type { PeerCommentRowState } from '../types/comment';
+import type { Comment, PeerCommentRowState } from '../types';
 
 function newRowId(): string {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {

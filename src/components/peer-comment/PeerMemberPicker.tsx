@@ -3,15 +3,16 @@ import { Button, Dialog } from '@sopt-makers/ui';
 import { IconCheck, IconChevronLeft, IconUser } from '@sopt-makers/icons';
 import * as styles from './PeerMemberPicker.css';
 import MemberChip from '../common/ui/MemberChip';
+import type { PeerMember } from '../../types';
 
-export interface PeerOption {
+interface PeerOption {
   label: string;
   value: string;
 }
 
 interface PeerMemberPickerProps {
   memberIds: string[];
-  peerOptions: PeerOption[];
+  peerMembers: PeerMember[];
   onAddMember: (userId: string) => void;
   onRemoveMember: (userId: string) => void;
   showRemoveButton?: boolean;
@@ -19,7 +20,7 @@ interface PeerMemberPickerProps {
 
 function PeerMemberPicker({
   memberIds,
-  peerOptions,
+  peerMembers,
   onAddMember,
   onRemoveMember,
   showRemoveButton = true,
@@ -27,6 +28,7 @@ function PeerMemberPicker({
   const [open, setOpen] = useState(false);
   const titleId = useId();
   const selectedSet = new Set(memberIds);
+  const peerOptions: PeerOption[] = peerMembers.map((m) => ({ label: m.name, value: m.userId }));
   const labelById = new Map(peerOptions.map((o) => [o.value, o.label]));
 
   const dialogLabelProps = {

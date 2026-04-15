@@ -1,21 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
-import type { PeerOption } from '../components/peer-comment/PeerMemberPicker';
+import type { PeerMember } from '../types';
 import { useCommentForm } from '../context/CommentFormContext';
 import { callApi } from '../lib/apiClient';
 import { getUsersBySprint } from '../lib/api/sprintPeers';
 import { useErrorHandler } from './useErrorHandler';
 
-export function usePeerOptions(): PeerOption[] {
+export function usePeerMembers(): PeerMember[] {
   const { data } = useCommentForm();
   const { handleError } = useErrorHandler();
-  const [peerOptions, setPeerOptions] = useState<PeerOption[]>([]);
+  const [peerMembers, setPeerMembers] = useState<PeerMember[]>([]);
   const requestSeqRef = useRef(0);
 
   const { p_sprint_auth_code, user_name, user_team, user_chapter } = data;
 
   useEffect(() => {
     if (!p_sprint_auth_code || !user_name || !user_team || !user_chapter) {
-      setPeerOptions([]);
+      setPeerMembers([]);
       return;
     }
 
@@ -31,7 +31,7 @@ export function usePeerOptions(): PeerOption[] {
     )
       .then((peers) => {
         if (disposed || requestSeqRef.current !== requestSeq) return;
-        setPeerOptions(peers.map((p) => ({ label: p.name, value: p.user_id })));
+        setPeerMembers(peers.map((p) => ({ name: p.name, userId: p.user_id })));
       })
       .catch((error) => {
         if (disposed || requestSeqRef.current !== requestSeq) return;
@@ -43,5 +43,6 @@ export function usePeerOptions(): PeerOption[] {
     };
   }, [p_sprint_auth_code, user_name, user_team, user_chapter, handleError]);
 
-  return peerOptions;
+  return peerMembers;
 }
+

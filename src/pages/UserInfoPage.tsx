@@ -6,7 +6,7 @@ import { TextField, useToast } from '@sopt-makers/ui';
 import { getChapterCodes, getTeamCodes } from '../lib/api/chapter';
 import { isValidUser } from '../lib/api/user';
 import { useCommentForm } from '../context/CommentFormContext';
-import { useErrorHandler } from '../hooks/useErrorHandler';
+import { useErrorHandler } from '../hooks';
 import { callApi } from '../lib/apiClient';
 
 function UserInfoPage() {

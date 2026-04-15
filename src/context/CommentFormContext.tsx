@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
-import type { SubmissionData } from '../types/comment';
+import type { SubmissionData } from '../types';
 
 export type { SubmissionData };
 

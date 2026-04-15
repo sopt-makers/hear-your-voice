@@ -5,15 +5,14 @@ import ImageSection from '../common/ui/ImageSection';
 import StepLayout from '../common/layout/StepLayout';
 import PeerCommentRepeater from './PeerCommentRepeater';
 import { useCommentForm } from '../../context/CommentFormContext';
-import { usePeerOptions } from '../../hooks/usePeerOptions';
+import { usePeerMembers } from '../../hooks';
 import {
   createEmptyPeerCommentRow,
   expandPeerRowsToComments,
   hasAtLeastOneCompletePeerRow,
   isPeerRowValid,
 } from '../../utils/peerCommentUtils';
-import type { Comment } from '../../types/comment';
-import type { PeerCommentRowState } from '../../types/comment';
+import type { Comment, PeerCommentRowState } from '../../types';
 import * as styles from './PeerCommentStepTemplate.css';
 
 type CommentsKey = 'stop_comments' | 'continue_comments' | 'start_comments';
@@ -61,7 +60,7 @@ function PeerCommentStepTemplate({
   const { title, description, guideImages } = content;
   const navigate = useNavigate();
   const { update } = useCommentForm();
-  const peerOptions = usePeerOptions();
+  const peerMembers = usePeerMembers();
   const [rows, setRows] = useState<PeerCommentRowState[]>(() => [createEmptyPeerCommentRow()]);
 
   const isNextEnabled = rows.every(isPeerRowValid) && hasAtLeastOneCompletePeerRow(rows);
@@ -94,7 +93,7 @@ function PeerCommentStepTemplate({
             <ImageSection.Image src={guideImages[1]} alt="comment 작성 예시 이미지"/>
           </ImageSection>
         ) : null}
-        <PeerCommentRepeater content={content} rows={rows} onRowsChange={setRows} peerOptions={peerOptions} />
+        <PeerCommentRepeater content={content} rows={rows} onRowsChange={setRows} peerMembers={peerMembers} />
       </div>
     </StepLayout>
   );
