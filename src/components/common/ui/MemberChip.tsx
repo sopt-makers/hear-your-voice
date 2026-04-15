@@ -14,7 +14,7 @@ function MemberChip({ label, showRemoveButton = true, onRemove }: MemberChipProp
         <IconUser style={{ width: 24, height: 24 }} />
       </span>
       <span className={styles.chipName}>{label}</span>
-      {showRemoveButton ? (
+      {showRemoveButton && onRemove ? (
         <button
           type="button"
           className={styles.removeMember}
