@@ -15,7 +15,7 @@ function StartCommentPage() {
         textPlaceholder: '시작했으면 하는 점',
       }}
       currentStep={3}
-      nextPath="/next"
+      nextPath="/continue-comment"
     />
   );
 }

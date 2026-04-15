@@ -12,6 +12,7 @@ import { callApi } from '@lib/apiClient';
 import UserInfoPage from '@pages/UserInfoPage';
 import StopCommentPage from '@pages/StopCommentPage';
 import StartCommentPage from '@pages/StartCommentPage';
+import ContinueCommentPage from '@pages/ContinueCommentPage';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
   { path: '/user-info', element: <UserInfoPage /> },
   { path: '/stop-comment', element: <StopCommentPage /> },
   { path: '/start-comment', element: <StartCommentPage /> },
+  { path: '/continue-comment', element: <ContinueCommentPage /> }
 ]);
 
 function App() {
