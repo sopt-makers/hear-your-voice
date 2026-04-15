@@ -1,4 +1,4 @@
-import { supabase } from '../supabase';
+import { supabase } from '@lib/supabase';
 
 export async function isValidUser(name: string, teamCode: string, chapterCode: string): Promise<boolean> {
   const { data, error } = await supabase.rpc('is_valid_user', {

@@ -1,5 +1,5 @@
 import PeerMemberPicker from './PeerMemberPicker';
-import type { PeerMember } from '../../types';
+import type { PeerMember } from '@types';
 import * as styles from './PeerCommentRecipientBlock.css';
 
 interface PeerCommentRecipientBlockProps {

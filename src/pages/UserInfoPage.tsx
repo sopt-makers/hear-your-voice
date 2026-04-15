@@ -1,13 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StepLayout, ContentHeading, SelectField } from '../components';
+import { StepLayout, ContentHeading, SelectField } from '@components';
 import * as styles from './UserInfoPage.css';
 import { TextField, useToast } from '@sopt-makers/ui';
-import { getChapterCodes, getTeamCodes } from '../lib/api/chapter';
-import { isValidUser } from '../lib/api/user';
-import { useCommentForm } from '../context/CommentFormContext';
-import { useErrorHandler } from '../hooks';
-import { callApi } from '../lib/apiClient';
+import { getChapterCodes, getTeamCodes } from '@lib/api/chapter';
+import { isValidUser } from '@lib/api/user';
+import { useCommentForm, useErrorHandler } from '@hooks';
+import { callApi } from '@lib/apiClient';
 
 function UserInfoPage() {
   const [name, setName] = useState('');

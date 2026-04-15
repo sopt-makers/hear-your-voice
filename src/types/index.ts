@@ -2,8 +2,9 @@ export type { ChapterCode } from './chapter';
 export type {
   Comment,
   Mvp,
-  SubmissionData,
-  SubmissionPayload,
+  CommentFormState,
+  CommentSubmissionPayload,
+  CommentsKey,
   CommentSubmitResult,
   PeerCommentKind,
   PeerCommentRowState,

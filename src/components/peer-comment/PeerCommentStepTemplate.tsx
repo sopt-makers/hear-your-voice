@@ -4,18 +4,16 @@ import ContentHeading from '../common/ui/ContentHeading';
 import ImageSection from '../common/ui/ImageSection';
 import StepLayout from '../common/layout/StepLayout';
 import PeerCommentRepeater from './PeerCommentRepeater';
-import { useCommentForm } from '../../context/CommentFormContext';
-import { usePeerMembers } from '../../hooks';
+import { useCommentForm } from '@hooks';
+import { usePeerMembers } from '@hooks';
 import {
   createEmptyPeerCommentRow,
   expandPeerRowsToComments,
   hasAtLeastOneCompletePeerRow,
   isPeerRowValid,
-} from '../../utils/peerCommentUtils';
-import type { Comment, PeerCommentRowState } from '../../types';
+} from '@utils/peerCommentUtils';
+import type { Comment, PeerCommentRowState, CommentsKey } from '@types';
 import * as styles from './PeerCommentStepTemplate.css';
-
-type CommentsKey = 'stop_comments' | 'continue_comments' | 'start_comments';
 
 export interface PeerCommentStepContent {
   commentKey: CommentsKey;

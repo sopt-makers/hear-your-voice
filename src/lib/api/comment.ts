@@ -1,7 +1,7 @@
-import { supabase } from '../supabase';
-import type { SubmissionPayload, CommentSubmitResult } from '../../types';
+import { supabase } from '@lib/supabase';
+import type { CommentSubmissionPayload, CommentSubmitResult } from '@types';
 
-export async function submitComment(data: SubmissionPayload): Promise<CommentSubmitResult> {
+export async function submitComment(data: CommentSubmissionPayload): Promise<CommentSubmitResult> {
   const { data: result, error } = await supabase.rpc('submit_comments', { p_payload: data });
 
   if (error) throw error;

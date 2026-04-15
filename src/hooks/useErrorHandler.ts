@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@sopt-makers/ui';
-import { NetworkError, ServiceError } from '../lib/errors';
+import { NetworkError, ServiceError } from '@lib/errors';
 
 export function useErrorHandler() {
   const navigate = useNavigate();
