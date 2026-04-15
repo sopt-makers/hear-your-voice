@@ -34,7 +34,10 @@ function PeerCommentBlock({ row, content, peerMembers, onChange, isOnlySection, 
           sectionTitle={content.sectionTitle}
           memberIds={row.memberIds}
           peerMembers={peerMembers}
-          onAddMember={(userId) => onChange({ ...row, memberIds: [...row.memberIds, userId] })}
+          onAddMember={(userId) => {
+              if (row.memberIds.includes(userId)) return;
+              onChange({ ...row, memberIds: [...row.memberIds, userId] });
+            }}
           onRemoveMember={(userId) => {
             onChange({
               ...row,
