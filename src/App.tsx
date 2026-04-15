@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ToastProvider } from '@sopt-makers/ui';
-import { SubmissionProvider } from './context/SubmissionContext';
+import { CommentFormProvider } from './context/CommentFormContext';
 import './App.css';
 import StartPage from './pages/StartPage';
 import NoticePage from './pages/NoticePage';
@@ -11,6 +11,7 @@ import { hasActiveSprint } from './lib/api/sprint';
 import { callApi } from './lib/apiClient';
 import UserInfoPage from './pages/UserInfoPage';
 import ClosingPage from './pages/ClosingPage';
+import StopCommentPage from './pages/StopCommentPage';
 
 const router = createBrowserRouter([
   {
@@ -24,15 +25,16 @@ const router = createBrowserRouter([
   { path: '/sprint-intro', element: <SprintIntroPage /> },
   { path: '/user-info', element: <UserInfoPage /> },
   { path: '/closing', element: <ClosingPage /> },
+  { path: '/stop-comment', element: <StopCommentPage /> },
 ]);
 
 function App() {
   return (
-    <SubmissionProvider>
+    <CommentFormProvider>
       <ToastProvider>
         <RouterProvider router={router} />
       </ToastProvider>
-    </SubmissionProvider>
+    </CommentFormProvider>
   );
 }
 

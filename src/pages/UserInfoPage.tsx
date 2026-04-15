@@ -1,13 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import StepLayout from '../components/StepLayout';
-import { ContentHeading, SelectField } from '../components';
+import { StepLayout, ContentHeading, SelectField } from '../components';
 import * as styles from './UserInfoPage.css';
 import { TextField, useToast } from '@sopt-makers/ui';
 import { getChapterCodes, getTeamCodes } from '../lib/api/chapter';
 import { isValidUser } from '../lib/api/user';
-import { useSubmission } from '../context/SubmissionContext';
-import { useErrorHandler } from '../hooks/useErrorHandler';
+import { useCommentForm } from '../context/CommentFormContext';
+import { useErrorHandler } from '../hooks';
 import { callApi } from '../lib/apiClient';
 
 function UserInfoPage() {
@@ -19,7 +18,7 @@ function UserInfoPage() {
   const [teamOptions, setTeamOptions] = useState<{ label: string; value: string }[]>([]);
   const navigate = useNavigate();
   const toast = useToast();
-  const { update } = useSubmission();
+  const { update } = useCommentForm();
   const { handleError } = useErrorHandler();
 
   useEffect(() => {
@@ -44,7 +43,7 @@ function UserInfoPage() {
       }
 
       update({ user_name: name, user_team: teamCode, user_chapter: chapterCode });
-      navigate('/next'); // TODO: 다음 페이지 경로로 변경
+      navigate('/stop-comment');
     } catch (error) {
       handleError(error);
     }

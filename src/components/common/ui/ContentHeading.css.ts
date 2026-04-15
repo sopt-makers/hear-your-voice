@@ -3,7 +3,7 @@ import { colors } from '@sopt-makers/colors';
 import { fontsObject } from '@sopt-makers/fonts';
 
 export const container = style({
-  padding: '20px 0 0',
+  padding: '0',
   display: 'flex',
   flexDirection: 'column',
   gap: 6,

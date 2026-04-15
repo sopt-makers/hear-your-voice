@@ -1,5 +1,5 @@
 import { useId, useRef, useState } from 'react';
-import * as styles from './CodeInput.css';
+import * as styles from './SprintCodeInput.css';
 
 export const SPRINT_CODE_LENGTH = 6;
 
