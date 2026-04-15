@@ -30,6 +30,8 @@ function PeerCommentRepeater({ content, rows, onRowsChange, peerMembers }: PeerC
     onRowsChange([{ id: only.id, memberIds: [], text: '' }]);
   };
 
+  const isAddDisabled = rows.some((row) => row.memberIds.length === 0 || row.text.length === 0);
+
   return (
     <div className={styles.repeaterRoot}>
       <div className={styles.list}>
@@ -53,6 +55,7 @@ function PeerCommentRepeater({ content, rows, onRowsChange, peerMembers }: PeerC
           size="md"
           theme="white"
           LeftIcon={IconPlus}
+          disabled={isAddDisabled}
           onClick={() => onRowsChange([...rows, createEmptyPeerCommentRow()])}
         >
           추가
