@@ -22,28 +22,20 @@ export const pickerTriggerButton = style({
   backgroundColor: `${colors.gray600} !important`,
 });
 
-export const sheetOverlay = style({
-  position: 'fixed',
-  inset: 0,
-  border: 'none',
-  background: colors.grayAlpha800,
-  zIndex: 1200,
-  padding: 0,
-  cursor: 'pointer',
-});
-
-export const sheetContainer = style({
+export const sheetDialogSurface = style({
+  margin: 0,
+  minWidth: 0,
+  width: 'min(386px, calc(100vw - 44px))',
+  maxWidth: 'min(386px, calc(100vw - 44px))',
   position: 'fixed',
   left: '50%',
-  bottom: '46px',
+  bottom: 46,
+  top: 'auto',
   transform: 'translateX(-50%)',
-  width: 'min(386px, calc(100vw - 44px))',
-  maxWidth: 386,
+  padding: '12px 0 12px',
   borderRadius: 16,
   overflow: 'hidden',
   backgroundColor: colors.gray900,
-  zIndex: 1201,
-  padding: '12px 0 12px',
 });
 
 export const sheetBody = style({
