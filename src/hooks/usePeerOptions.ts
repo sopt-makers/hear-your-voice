@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { PeerOption } from '../components/peer-comment/PeerMemberPicker';
 import { useCommentForm } from '../context/CommentFormContext';
 import { callApi } from '../lib/apiClient';
@@ -9,13 +9,18 @@ export function usePeerOptions(): PeerOption[] {
   const { data } = useCommentForm();
   const { handleError } = useErrorHandler();
   const [peerOptions, setPeerOptions] = useState<PeerOption[]>([]);
+  const requestSeqRef = useRef(0);
 
   const { p_sprint_auth_code, user_name, user_team, user_chapter } = data;
 
   useEffect(() => {
     if (!p_sprint_auth_code || !user_name || !user_team || !user_chapter) {
+      setPeerOptions([]);
       return;
     }
+
+    const requestSeq = (requestSeqRef.current += 1);
+    let disposed = false;
     callApi(() =>
       getUsersBySprint({
         p_auth_code: p_sprint_auth_code,
@@ -25,9 +30,17 @@ export function usePeerOptions(): PeerOption[] {
       }),
     )
       .then((peers) => {
+        if (disposed || requestSeqRef.current !== requestSeq) return;
         setPeerOptions(peers.map((p) => ({ label: p.name, value: p.user_id })));
       })
-      .catch(handleError);
+      .catch((error) => {
+        if (disposed || requestSeqRef.current !== requestSeq) return;
+        handleError(error);
+      });
+
+    return () => {
+      disposed = true;
+    };
   }, [p_sprint_auth_code, user_name, user_team, user_chapter, handleError]);
 
   return peerOptions;
