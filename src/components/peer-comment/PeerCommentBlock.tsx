@@ -4,9 +4,9 @@ import type { PeerCommentStepContent } from '../peer-comment/PeerCommentStepTemp
 import type { PeerMember } from '../../types';
 import PeerCommentRecipientBlock from './PeerCommentRecipientBlock';
 import InputField from '../common/form/InputField';
-import * as styles from './PeerCommentRow.css';
+import * as styles from './PeerCommentBlock.css';
 
-interface PeerCommentRowProps {
+interface PeerCommentBlockProps {
   row: PeerCommentRowState;
   content: PeerCommentStepContent;
   peerMembers: PeerMember[];
@@ -16,7 +16,7 @@ interface PeerCommentRowProps {
   onRemoveRow: () => void;
 }
 
-function PeerCommentRow({ row, content, peerMembers, onChange, isOnlySection, onRemoveRow }: PeerCommentRowProps) {
+function PeerCommentBlock({ row, content, peerMembers, onChange, isOnlySection, onRemoveRow }: PeerCommentBlockProps) {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
@@ -54,4 +54,4 @@ function PeerCommentRow({ row, content, peerMembers, onChange, isOnlySection, on
   );
 }
 
-export default PeerCommentRow;
+export default PeerCommentBlock;

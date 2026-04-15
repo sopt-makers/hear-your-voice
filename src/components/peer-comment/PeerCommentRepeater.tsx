@@ -3,7 +3,7 @@ import { IconPlus } from '@sopt-makers/icons';
 import type { PeerCommentRowState } from '../../types';
 import type { PeerCommentStepContent } from './PeerCommentStepTemplate';
 import { createEmptyPeerCommentRow } from '../../utils/peerCommentUtils';
-import PeerCommentRow from './PeerCommentRow';
+import PeerCommentBlock from './PeerCommentBlock';
 import type { PeerMember } from '../../types';
 import * as styles from './PeerCommentRepeater.css';
 
@@ -34,7 +34,7 @@ function PeerCommentRepeater({ content, rows, onRowsChange, peerMembers }: PeerC
     <div className={styles.repeaterRoot}>
       <div className={styles.list}>
         {rows.map((row, index) => (
-          <PeerCommentRow
+          <PeerCommentBlock
             key={row.id}
             row={row}
             content={content}
