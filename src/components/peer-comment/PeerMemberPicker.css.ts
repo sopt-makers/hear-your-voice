@@ -26,7 +26,7 @@ export const sheetOverlay = style({
   position: 'fixed',
   inset: 0,
   border: 'none',
-  background: 'rgba(0, 0, 0, 0.45)',
+  background: colors.grayAlpha800,
   zIndex: 1200,
   padding: 0,
   cursor: 'pointer',
