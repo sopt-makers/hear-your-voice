@@ -1,6 +1,6 @@
 import { supabase } from '../supabase';
-import type { SprintInfo } from '../../types/sprint';
-export type { SprintType } from '../../types/sprint';
+import type { SprintInfo, SprintType } from '../../types';
+export type { SprintType };
 
 export async function hasActiveSprint(): Promise<boolean> {
   const { data, error } = await supabase.rpc('has_active_sprint');

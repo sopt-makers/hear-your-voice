@@ -3,7 +3,7 @@ import { colors } from '@sopt-makers/colors';
 
 export const container = style({
   width: '100%',
-  padding: '10px 20px',
+  padding: '10px 20px 36px',
 });
 
 export const track = style({

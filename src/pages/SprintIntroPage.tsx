@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { StepLayout } from '../components';
 import * as styles from './SprintIntroPage.css';
 import sprintCodeVerifiedImg from '../assets/sprint_code_verified.png';
-import type { SprintType } from '../types/sprint';
+import type { SprintType } from '../types';
 
 function SprintIntroPage() {
   const location = useLocation();

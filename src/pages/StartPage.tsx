@@ -1,7 +1,7 @@
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
-import PageLayout from '../components/PageLayout';
+import { PageLayout } from '../components';
 import * as styles from './StartPage.css';
 import backgroundImg from '../assets/background.png';
 import titleImg from '../assets/title.png';

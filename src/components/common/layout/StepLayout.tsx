@@ -2,8 +2,8 @@ import type { ReactNode } from 'react';
 import { Button } from '@sopt-makers/ui';
 import { fontsObject } from '@sopt-makers/fonts';
 import { IconChevronRight } from '@sopt-makers/icons';
-import headerImg from '../assets/header_img.png';
-import ProgressBar from './ProgressBar';
+import headerImg from '../../../assets/header_img.png';
+import ProgressBar from '../ui/ProgressBar';
 import PageLayout from './PageLayout';
 import * as styles from './StepLayout.css';
 
@@ -29,17 +29,23 @@ function StepLayout({
   currentStep,
   totalSteps,
 }: StepLayoutProps) {
+  const contentSectionClassName = showProgressBar
+    ? `${styles.contentSection} ${styles.contentSectionWithProgress}`
+    : `${styles.contentSection} ${styles.contentSectionWithoutProgress}`;
+
   return (
     <PageLayout className={styles.container}>
       <div className={styles.headerSection}>
-        <img src={headerImg} alt="안내사항" className={styles.headerImage} />
+        <img src={headerImg} alt="" className={styles.headerImage} />
       </div>
 
       {showProgressBar && currentStep !== undefined && totalSteps !== undefined && (
         <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
       )}
 
-      <div className={styles.contentSection}>{children}</div>
+      <div className={contentSectionClassName}>
+        {children}
+      </div>
 
       <div className={styles.buttonSection}>
         <Button
