@@ -8,7 +8,6 @@ import { useCommentForm, usePeerMembers } from '@hooks';
 import {
   createEmptyPeerCommentRow,
   expandPeerRowsToComments,
-  hasAtLeastOneCompletePeerRow,
   isPeerRowValid,
 } from '@utils/peerCommentUtils';
 import type { Comment, PeerCommentRowState, CommentsKey, PeerCommentStepContent } from '@types';
@@ -40,7 +39,7 @@ function PeerCommentStepTemplate({
   const peerMembers = usePeerMembers();
   const [rows, setRows] = useState<PeerCommentRowState[]>(() => [createEmptyPeerCommentRow()]);
 
-  const isNextEnabled = rows.every(isPeerRowValid) && hasAtLeastOneCompletePeerRow(rows);
+  const isNextEnabled = rows.every(isPeerRowValid);
 
   const handleNext = useCallback(() => {
     if (!isNextEnabled) {
