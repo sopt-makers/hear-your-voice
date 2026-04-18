@@ -22,10 +22,6 @@ export function isPeerRowValid(row: PeerCommentRowState): boolean {
   return row.memberIds.length > 0 && row.text.trim() !== '';
 }
 
-export function hasAtLeastOneCompletePeerRow(rows: PeerCommentRowState[]): boolean {
-  return rows.some((row) => row.memberIds.length > 0 && row.text.trim() !== '');
-}
-
 /** 한 행의 동일한 본문을 각 memberId마다 `Comment` 한 건으로 펼칩니다. */
 export function expandPeerRowsToComments(rows: PeerCommentRowState[]): Comment[] {
   const result: Comment[] = [];
