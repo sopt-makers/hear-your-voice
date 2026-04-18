@@ -47,7 +47,7 @@ function PeerMemberPicker({
       </Button>
       <BottomSheetRoot open={open} onOpenChange={setOpen}>
         <BottomSheetContent>
-          <div className={styles.sheetDialogSurface}>
+          <div data-peer-sheet className={styles.sheetDialogSurface}>
             <div className={styles.sheetHeader}>
               <button
                 type="button"

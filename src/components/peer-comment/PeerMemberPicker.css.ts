@@ -27,7 +27,7 @@ export const sheetDialogSurface = style({
   overflow: 'hidden',
 });
 
-globalStyle(`body > div:has(.${sheetDialogSurface})`, {
+globalStyle(`body > div:has([data-peer-sheet])`, {
   width: 'min(386px, calc(100vw - 44px))',
   maxWidth: 'min(386px, calc(100vw - 44px))',
   margin: '0 auto',
