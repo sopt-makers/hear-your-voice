@@ -1,7 +1,6 @@
 import { Button } from '@sopt-makers/ui';
 import { IconPlus } from '@sopt-makers/icons';
-import type { PeerCommentRowState } from '@types';
-import type { PeerCommentStepContent } from './PeerCommentStepTemplate';
+import type { PeerCommentRowState, PeerCommentStepContent } from '@types';
 import { createEmptyPeerCommentRow } from '@utils/peerCommentUtils';
 import PeerCommentBlock from './PeerCommentBlock';
 import type { PeerMember } from '@types';
@@ -14,8 +13,12 @@ interface PeerCommentRepeaterProps {
   peerMembers: PeerMember[];
 }
 
-function PeerCommentRepeater({ content, rows, onRowsChange, peerMembers }: PeerCommentRepeaterProps) {
-
+function PeerCommentRepeater({
+  content,
+  rows,
+  onRowsChange,
+  peerMembers,
+}: PeerCommentRepeaterProps) {
   const updateRow = (index: number, next: PeerCommentRowState) => {
     onRowsChange(rows.map((r, i) => (i === index ? next : r)));
   };
@@ -29,6 +32,10 @@ function PeerCommentRepeater({ content, rows, onRowsChange, peerMembers }: PeerC
     const only = rows[0];
     onRowsChange([{ id: only.id, memberIds: [], text: '' }]);
   };
+
+  const isAddDisabled = rows.some(
+    (row) => row.memberIds.length === 0 || row.text.trim().length === 0,
+  );
 
   return (
     <div className={styles.repeaterRoot}>
@@ -53,6 +60,7 @@ function PeerCommentRepeater({ content, rows, onRowsChange, peerMembers }: PeerC
           size="md"
           theme="white"
           LeftIcon={IconPlus}
+          disabled={isAddDisabled}
           onClick={() => onRowsChange([...rows, createEmptyPeerCommentRow()])}
         >
           추가

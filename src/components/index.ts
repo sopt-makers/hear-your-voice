@@ -9,4 +9,4 @@ export { default as InputField } from './common/form/InputField';
 export { default as SprintCodeInput, SPRINT_CODE_LENGTH } from './sprint-code/SprintCodeInput';
 export { default as PeerCommentRepeater } from './peer-comment/PeerCommentRepeater';
 export { default as PeerCommentStepTemplate } from './peer-comment/PeerCommentStepTemplate';
-export type { PeerCommentStepTemplateProps, PeerCommentStepContent } from './peer-comment/PeerCommentStepTemplate';
+export type { PeerCommentStepContent } from '@types';
