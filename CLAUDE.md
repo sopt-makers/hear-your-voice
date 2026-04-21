@@ -12,8 +12,12 @@ StartPage (활성 스프린트 여부 분기)
   └─ NoticePage (안내)
        └─ SprintCodePage (인증 코드 입력)
             └─ SprintIntroPage (스프린트 소개)
-                 └─ UserInfoPage (사용자 정보 입력)
-                      └─ (회고 설문 스텝들 — 추후 구현 예정)
+                 └─ UserInfoPage (사용자 정보 입력, step 1/7)
+                      └─ StopCommentPage (step 2/7)
+                           └─ StartCommentPage (step 3/7)
+                                └─ ContinueCommentPage (step 4/7)
+                                     └─ MvpPage (step 6/7)
+                                          └─ ClosingPage (step 7/7)
 ```
 
 ---
@@ -23,29 +27,18 @@ StartPage (활성 스프린트 여부 분기)
 ```
 src/
 ├── assets/          # 정적 이미지 리소스
-├── components/      # 공통 재사용 컴포넌트
-│   ├── CodeInput       # 인증 코드 입력 필드
-│   ├── ContentHeading  # 페이지 제목 영역
-│   ├── ImageSection    # 이미지 섹션
-│   ├── PageLayout      # 전체 페이지 래퍼
-│   ├── ProgressBar     # 스텝 진행 바
-│   ├── SelectField     # 셀렉트 폼 필드
-│   └── StepLayout      # 스텝 기반 레이아웃 (하단 버튼 포함)
+├── components/      # 공통 재사용 컴포넌트 (상세 구조는 📦 패키지 구조 참고)
 ├── context/
-│   └── SubmissionContext.tsx  # 설문 제출 데이터 전역 상태
-├── hooks/
-│   └── useErrorHandler.ts     # 에러 핸들링 커스텀 훅
+│   └── CommentFormContext.tsx  # 설문 폼 전역 상태 (CommentFormProvider)
+├── hooks/           # 커스텀 훅 (useCommentForm, usePeerMembers, useErrorHandler)
 ├── lib/
-│   ├── api/
-│   │   ├── chapter.ts   # 챕터 API
-│   │   ├── comment.ts   # 댓글(회고) API
-│   │   ├── sprint.ts    # 스프린트 API
-│   │   └── user.ts      # 유저 API
-│   ├── apiClient.ts     # Supabase 호출 래퍼 (에러 분류)
-│   ├── errors.ts        # 커스텀 에러 클래스
-│   └── supabase.ts      # Supabase 클라이언트 초기화
+│   ├── api/         # 도메인별 API (comment, sprint, sprintPeers, chapter, user)
+│   ├── apiClient.ts # Supabase 호출 래퍼 (에러 분류)
+│   ├── errors.ts    # 커스텀 에러 클래스
+│   └── supabase.ts  # Supabase 클라이언트 초기화
 ├── pages/           # 라우트 단위 페이지 컴포넌트
 ├── types/           # TypeScript 타입 정의
+├── utils/           # 순수 비즈니스 로직 유틸
 ├── App.tsx          # 라우터 설정 진입점
 └── main.tsx         # 앱 마운트
 ```
@@ -59,7 +52,7 @@ src/
 | 프레임워크 | React 18 + TypeScript |
 | 빌드 | Vite |
 | 라우팅 | React Router v7 |
-| 상태 관리 | React Context (`SubmissionContext`) + Zustand (필요 시) |
+| 상태 관리 | React Context (`CommentFormContext`) + Zustand (필요 시) |
 | 백엔드/DB | Supabase (RPC 기반 쿼리) |
 | 스타일링 | vanilla-extract (`*.css.ts`) |
 | 디자인 시스템 | `@sopt-makers/ui`, `@sopt-makers/colors`, `@sopt-makers/fonts`, `@sopt-makers/icons` |
@@ -195,9 +188,9 @@ src/
 
 ## 상태 관리 규칙
 
-- 설문 제출 데이터는 `SubmissionContext` (`src/context/SubmissionContext.tsx`)를 통해 관리
-- 페이지 간 데이터 전달은 `location.state` 또는 `SubmissionContext` 사용
-- Zustand는 SubmissionContext로 처리하기 어려운 전역 상태에만 도입
+- 설문 폼 데이터는 `CommentFormContext` (`src/context/CommentFormContext.tsx`)를 통해 관리
+- 페이지 간 데이터 전달은 `location.state` 또는 `CommentFormContext` 사용
+- Zustand는 CommentFormContext로 처리하기 어려운 전역 상태에만 도입
 
 ---
 
@@ -218,7 +211,7 @@ src/
 
 1. `src/pages/` 아래 `XxxPage.tsx` + `XxxPage.css.ts` 생성
 2. `src/App.tsx` 라우터에 경로 등록
-3. 필요한 경우 `SubmissionContext` 타입 확장
+3. 필요한 경우 `src/types/comment.ts`의 `CommentFormState` 타입 확장
 
 ### 에러 처리
 
