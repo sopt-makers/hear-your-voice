@@ -3,6 +3,7 @@ export { default as StepLayout } from './common/layout/StepLayout';
 export { default as ProgressBar } from './common/ui/ProgressBar';
 export { default as MemberChip } from './common/ui/MemberChip';
 export { default as ContentHeading } from './common/ui/ContentHeading';
+export { default as FieldSection } from './common/ui/FieldSection';
 export { default as ImageSection } from './common/ui/ImageSection';
 export { default as SelectField } from './common/form/SelectField';
 export { default as InputField } from './common/form/InputField';
