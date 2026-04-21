@@ -13,6 +13,7 @@ import UserInfoPage from '@pages/UserInfoPage';
 import StopCommentPage from '@pages/StopCommentPage';
 import StartCommentPage from '@pages/StartCommentPage';
 import ContinueCommentPage from '@pages/ContinueCommentPage';
+import MvpPage from '@pages/MvpPage';
 import ClosingPage from '@pages/ClosingPage';
 
 const router = createBrowserRouter([
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
   { path: '/stop-comment', element: <StopCommentPage /> },
   { path: '/start-comment', element: <StartCommentPage /> },
   { path: '/continue-comment', element: <ContinueCommentPage /> },
+  { path: '/mvp', element: <MvpPage /> },
   { path: '/closing', element: <ClosingPage /> },
 ]);
 

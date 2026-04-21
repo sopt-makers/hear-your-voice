@@ -111,6 +111,7 @@ src/
 │   ├── StopCommentPage
 │   ├── StartCommentPage
 │   ├── ContinueCommentPage
+│   ├── MvpPage
 │   ├── ClosingPage
 │   └── ErrorPage
 ├── types/                       → 도메인 타입 정의
