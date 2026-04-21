@@ -17,6 +17,8 @@ interface StepLayoutProps {
   showProgressBar?: boolean;
   currentStep?: number;
   totalSteps?: number;
+  /** 헤더 배너에 표시할 이미지 경로. 미지정 시 기본 header_title.svg 사용 */
+  bannerImage?: string;
 }
 
 function StepLayout({
@@ -28,6 +30,7 @@ function StepLayout({
   showProgressBar = false,
   currentStep,
   totalSteps,
+  bannerImage,
 }: StepLayoutProps) {
   const contentSectionClassName = showProgressBar
     ? `${styles.contentSection} ${styles.contentSectionWithProgress}`
@@ -36,7 +39,7 @@ function StepLayout({
   return (
     <PageLayout className={styles.container}>
       <div className={styles.headerSection}>
-        <img src={headerTitle} alt="" className={styles.headerImage} />
+        <img src={bannerImage ?? headerTitle} alt="" className={styles.headerImage} />
       </div>
 
       {showProgressBar && currentStep !== undefined && totalSteps !== undefined && (
