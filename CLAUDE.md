@@ -12,12 +12,12 @@ StartPage (활성 스프린트 여부 분기)
   └─ NoticePage (안내)
        └─ SprintCodePage (인증 코드 입력)
             └─ SprintIntroPage (스프린트 소개)
-                 └─ UserInfoPage (사용자 정보 입력, step 1/7)
-                      └─ StopCommentPage (step 2/7)
-                           └─ StartCommentPage (step 3/7)
-                                └─ ContinueCommentPage (step 4/7)
-                                     └─ MvpPage (step 6/7)
-                                          └─ ClosingPage (step 7/7)
+                 └─ UserInfoPage (사용자 정보 입력, step 1/6)
+                      └─ StopCommentPage (step 2/6)
+                           └─ StartCommentPage (step 3/6)
+                                └─ ContinueCommentPage (step 4/6)
+                                     └─ MvpPage (step 5/6)
+                                          └─ ClosingPage (step 6/6)
 ```
 
 ---
@@ -85,7 +85,7 @@ src/
 │   ├── common/                  → 도메인 무관한 범용 컴포넌트
 │   │   ├── layout/              (PageLayout, StepLayout)
 │   │   ├── form/                (SelectField, InputField)
-│   │   └── ui/                  (ContentHeading, ImageSection, ProgressBar, MemberChip)
+│   │   └── ui/                  (ContentHeading, ImageSection, ProgressBar, MemberChip, FieldSection)
 │   ├── sprint-code/             → 스프린트 코드 도메인
 │   │   └── SprintCodeInput
 │   ├── peer-comment/            → 피어 코멘트 도메인
@@ -139,7 +139,7 @@ src/
 | `Picker` | 목록에서 항목을 선택하는 UI | `PeerMemberPicker` |
 | `Chip` | 선택된 항목을 표시하는 태그 UI | `MemberChip` |
 | `Repeater` | 동일한 입력 블록을 반복·관리 | `PeerCommentRepeater` |
-| `Block` / `Section` | 여러 요소를 묶은 영역 단위 | `PeerCommentRecipientBlock` |
+| `Block` / `Section` | 여러 요소를 묶은 영역 단위 | `PeerCommentRecipientBlock`, `FieldSection` |
 
 ## 🗂️ Import Aliases
 
@@ -174,6 +174,13 @@ src/
 - 스타일은 반드시 **vanilla-extract** (`*.css.ts`) 파일로 분리
 - 인라인 스타일 또는 CSS 모듈(`.module.css`) 혼용 금지
 - 새 컴포넌트/페이지 추가 시 같은 경로에 `*.css.ts` 파일 함께 생성
+
+### 레이아웃 기준선
+
+- `StepLayout` 콘텐츠 영역 좌우 padding: `0 28px` (모든 페이지 공통 기준)
+- `FieldSection`: 논리 블록 하나를 감싸는 padding wrapper (`paddingTop: 24, paddingBottom: 12`)
+  - **하나의 FieldSection = 하나의 논리 블록** (ContentHeading, 개별 폼 필드 등)
+  - `gap` 없음 — 여러 요소의 간격은 각 FieldSection이 담당
 
 ---
 
@@ -218,6 +225,10 @@ src/
 - 네트워크 오류 → `NetworkError` (toast 표시)
 - 서비스 오류 → `ServiceError` → `/error` 페이지로 이동
 - `useErrorHandler` 훅 활용
+
+### push 전 체크리스트
+
+- CLAUDE.md가 현재 코드 상태를 반영하고 있는지 확인 후 업데이트
 
 ### 하지 말아야 할 것
 

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StepLayout, ContentHeading, SelectField } from '@components';
+import { StepLayout, ContentHeading, FieldSection, SelectField } from '@components';
 import * as styles from './UserInfoPage.css';
 import { TextField, useToast } from '@sopt-makers/ui';
 import { getChapterCodes, getTeamCodes } from '@lib/api/chapter';
@@ -56,54 +56,60 @@ function UserInfoPage() {
       currentStep={1}
       totalSteps={6}
     >
-      <ContentHeading title="작성자 정보" description="피드백을 작성하는 본인은 누구신가요?" />
-      <div className={styles.body}>
-        <p>
+      <FieldSection>
+        <ContentHeading title="작성자 정보" description="피드백을 작성하는 본인은 누구신가요?" />
+        <p className={styles.noticeText}>
           본인의 이름은 너목들의 관리자만 확인할 수 있으며,
           <br />
           모든 코멘트는 무기명으로 전달되어요.
         </p>
+      </FieldSection>
 
-        <div className={styles.inputWrapper}>
-          <TextField
-            labelText="이름"
-            descriptionText="본명을 입력하세요."
-            placeholder="본인의 이름"
-            required
-            value={name}
-            isError={isError}
-            className={styles.nameWidth}
-            onChange={(e) => {
-              setName(e.target.value);
-              setIsError(false);
-            }}
-          />
-          <SelectField
-            labelText="챕터"
-            descriptionText="본인의 챕터를 선택하세요."
-            placeholder="챕터를 선택하세요."
-            options={chapterOptions}
-            required
-            isError={isError}
-            onChange={(value) => {
-              setChapterCode(value);
-              setIsError(false);
-            }}
-          />
-          <SelectField
-            labelText="팀"
-            descriptionText="본인의 팀을 선택하세요."
-            placeholder="팀을 선택하세요."
-            options={teamOptions}
-            required
-            isError={isError}
-            onChange={(value) => {
-              setTeamCode(value);
-              setIsError(false);
-            }}
-          />
-        </div>
-      </div>
+      <FieldSection>
+        <TextField
+          labelText="이름"
+          descriptionText="본명을 입력하세요."
+          placeholder="본인의 이름"
+          required
+          value={name}
+          isError={isError}
+          className={styles.nameWidth}
+          onChange={(e) => {
+            setName(e.target.value);
+            setIsError(false);
+          }}
+        />
+      </FieldSection>
+
+      <FieldSection>
+        <SelectField
+          labelText="챕터"
+          descriptionText="본인의 챕터를 선택하세요."
+          placeholder="챕터를 선택하세요."
+          options={chapterOptions}
+          required
+          isError={isError}
+          onChange={(value) => {
+            setChapterCode(value);
+            setIsError(false);
+          }}
+        />
+      </FieldSection>
+
+      <FieldSection>
+        <SelectField
+          labelText="팀"
+          descriptionText="본인의 팀을 선택하세요."
+          placeholder="팀을 선택하세요."
+          options={teamOptions}
+          required
+          isError={isError}
+          onChange={(value) => {
+            setTeamCode(value);
+            setIsError(false);
+          }}
+        />
+      </FieldSection>
     </StepLayout>
   );
 }

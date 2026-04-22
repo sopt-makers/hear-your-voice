@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FieldBox } from '@sopt-makers/ui';
 import { IconUser, IconXCircle } from '@sopt-makers/icons';
-import { StepLayout, ContentHeading, MemberChip, InputField } from '@components';
+import { StepLayout, ContentHeading, FieldSection, MemberChip, InputField } from '@components';
 import { usePeerMembers, useCommentForm } from '@hooks';
 import type { PeerMember } from '@types';
 import * as styles from './MvpPage.css';
@@ -44,7 +44,7 @@ function MvpPage() {
       onNext={handleSubmit}
       isNextDisabled={!isAllFilled}
     >
-      <div className={styles.body}>
+      <FieldSection>
         <ContentHeading
           title="MVP 선정"
           description={
@@ -57,71 +57,75 @@ function MvpPage() {
             </>
           }
         />
+      </FieldSection>
 
-        <div className={styles.fields}>
-          <div className={styles.fieldGroup}>
-            <FieldBox.Label
-              label="MVP로 선정하고 싶은 동료"
-              description="MVP는 한 명만 선택할 수 있어요."
-              required
-            />
+      <FieldSection>
+        <div className={styles.fieldGroup}>
+          <FieldBox.Label
+            label="MVP로 선정하고 싶은 동료"
+            description="MVP는 한 명만 선택할 수 있어요."
+            required
+          />
 
-            <div className={styles.searchContainer}>
-              <div className={styles.inputWrapper}>
-                <input
-                  className={styles.searchInput}
-                  placeholder="멤버 검색"
-                  value={searchQuery}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
-                />
-                {searchQuery && (
-                  <button
-                    type="button"
-                    className={styles.clearButton}
-                    onClick={() => setSearchQuery('')}
-                    aria-label="검색어 지우기"
-                  >
-                    <IconXCircle className={styles.clearIcon} />
-                  </button>
-                )}
-              </div>
-
-              {searchQuery && filteredMembers.length > 0 && (
-                <ul className={styles.dropdown}>
-                  {filteredMembers.map((member) => (
-                    <li key={member.userId}>
-                      <button
-                        type="button"
-                        className={styles.dropdownItem}
-                        onClick={() => handleSelectMember(member)}
-                      >
-                        <span className={styles.avatarIcon} aria-hidden>
-                          <IconUser className={styles.avatarIconSvg} />
-                        </span>
-                        <span>{member.name}</span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+          <div className={styles.searchContainer}>
+            <div className={styles.inputWrapper}>
+              <input
+                className={styles.searchInput}
+                placeholder="멤버 검색"
+                value={searchQuery}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setSearchQuery(e.target.value)
+                }
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  className={styles.clearButton}
+                  onClick={() => setSearchQuery('')}
+                  aria-label="검색어 지우기"
+                >
+                  <IconXCircle className={styles.clearIcon} />
+                </button>
               )}
             </div>
 
-            {selectedMember && (
-              <div className={styles.chipWrapper}>
-                <MemberChip label={selectedMember.name} showRemoveButton={false} />
-              </div>
+            {searchQuery && filteredMembers.length > 0 && (
+              <ul className={styles.dropdown}>
+                {filteredMembers.map((member) => (
+                  <li key={member.userId}>
+                    <button
+                      type="button"
+                      className={styles.dropdownItem}
+                      onClick={() => handleSelectMember(member)}
+                    >
+                      <span className={styles.avatarIcon} aria-hidden>
+                        <IconUser className={styles.avatarIconSvg} />
+                      </span>
+                      <span>{member.name}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
 
-          <InputField
-            labelText="MVP 선정 이유를 작성해주세요."
-            required
-            placeholder="선정하는 이유"
-            value={reason}
-            onChange={setReason}
-          />
+          {selectedMember && (
+            <div className={styles.chipWrapper}>
+              <MemberChip label={selectedMember.name} showRemoveButton={false} />
+            </div>
+          )}
         </div>
-      </div>
+      </FieldSection>
+
+      <FieldSection>
+        <InputField
+          labelText="MVP 선정 이유를 작성해주세요."
+          required
+          placeholder="선정하는 이유"
+          value={reason}
+          onChange={setReason}
+        />
+      </FieldSection>
     </StepLayout>
   );
 }
