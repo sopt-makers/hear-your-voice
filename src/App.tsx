@@ -32,6 +32,7 @@ const router = createBrowserRouter([
   { path: '/continue-comment', element: <ContinueCommentPage /> },
   { path: '/mvp', element: <MvpPage /> },
   { path: '/closing', element: <ClosingPage /> },
+  { path: '/error', element: <ErrorPage /> },
 ]);
 
 function App() {
