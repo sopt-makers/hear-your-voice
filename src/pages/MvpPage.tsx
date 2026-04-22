@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FieldBox, useToast } from '@sopt-makers/ui';
@@ -20,6 +20,7 @@ function MvpPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMember, setSelectedMember] = useState<PeerMember | null>(null);
   const [reason, setReason] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const filteredMembers = searchQuery
     ? peerMembers.filter((m) => m.name.includes(searchQuery))
@@ -32,9 +33,10 @@ function MvpPage() {
     setSearchQuery('');
   };
 
-  const handleSubmit = useCallback(async () => {
-    if (!selectedMember) return;
+  const handleSubmit = async () => {
+    if (!selectedMember || isSubmitting) return;
 
+    setIsSubmitting(true);
     const mvp = { target_user_id: selectedMember.userId, comment_text: reason };
     const payload = { ...data, mvp };
 
@@ -55,8 +57,10 @@ function MvpPage() {
       navigate('/error');
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsSubmitting(false);
     }
-  }, [selectedMember, reason, data, update, navigate, toast, handleError]);
+  };
 
   return (
     <StepLayout
@@ -66,7 +70,7 @@ function MvpPage() {
       nextLabel="제출하기"
       showNextRightIcon={false}
       onNext={() => { void handleSubmit(); }}
-      isNextDisabled={!isAllFilled}
+      isNextDisabled={!isAllFilled || isSubmitting}
     >
       <FieldSection>
         <ContentHeading
