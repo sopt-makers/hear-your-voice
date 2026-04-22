@@ -28,9 +28,7 @@ function CodeInput({
     onChange(sanitized);
   };
 
-  const activeBoxIndex = isInputFocused
-    ? Math.min(value.length, SPRINT_CODE_LENGTH - 1)
-    : -1;
+  const activeBoxIndex = isInputFocused ? Math.min(value.length, SPRINT_CODE_LENGTH - 1) : -1;
 
   return (
     <div className={styles.root}>
@@ -75,9 +73,7 @@ function CodeInput({
                 data-filled={isFilled}
                 data-error={showError}
               >
-                <span className={styles.codeDigit}>
-                  {digit ?? ''}
-                </span>
+                <span className={styles.codeDigit}>{digit ?? ''}</span>
               </div>
             );
           })}
@@ -85,11 +81,7 @@ function CodeInput({
       </div>
 
       {showError && (
-        <p
-          id={errorId}
-          className={styles.errorText}
-          role="alert"
-        >
+        <p id={errorId} className={styles.errorText} role="alert">
           {errorMessage}
         </p>
       )}

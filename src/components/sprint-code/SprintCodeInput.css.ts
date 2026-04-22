@@ -6,7 +6,6 @@ export const root = style({
   display: 'flex',
   flexDirection: 'column',
   gap: 12,
-  padding: '24px 0 12px',
   maxWidth: 320,
   textAlign: 'left',
 });

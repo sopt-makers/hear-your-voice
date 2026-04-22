@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ContentHeading from '../common/ui/ContentHeading';
+import FieldSection from '../common/ui/FieldSection';
 import ImageSection from '../common/ui/ImageSection';
 import StepLayout from '../common/layout/StepLayout';
 import PeerCommentRepeater from './PeerCommentRepeater';
@@ -59,10 +60,10 @@ function PeerCommentStepTemplate({
       totalSteps={totalSteps}
     >
       <div className={styles.stepContent}>
-        <div className={styles.headingBlock}>
+        <FieldSection>
           <ContentHeading title={title} description={description} />
-          <p>해당 코멘트는 무기명으로 전달되어요.</p>
-        </div>
+          <p className={styles.noticeText}>해당 코멘트는 무기명으로 전달되어요.</p>
+        </FieldSection>
         {guideImages ? (
           <ImageSection>
             <ImageSection.Image src={guideImages[0]} alt="comment 작성 설명 이미지" />

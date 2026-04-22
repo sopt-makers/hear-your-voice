@@ -2,19 +2,6 @@ import { style } from '@vanilla-extract/css';
 import { colors } from '@sopt-makers/colors';
 import { fontsObject } from '@sopt-makers/fonts';
 
-export const body = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 32,
-  color: colors.white,
-});
-
-export const fields = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 28,
-});
-
 export const fieldGroup = style({
   display: 'flex',
   flexDirection: 'column',

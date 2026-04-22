@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FieldBox } from '@sopt-makers/ui';
 import { IconUser, IconXCircle } from '@sopt-makers/icons';
-import { StepLayout, ContentHeading, MemberChip, InputField } from '@components';
+import { StepLayout, ContentHeading, FieldSection, MemberChip, InputField } from '@components';
 import { usePeerMembers, useCommentForm } from '@hooks';
 import type { PeerMember } from '@types';
 import * as styles from './MvpPage.css';
@@ -44,7 +44,7 @@ function MvpPage() {
       onNext={handleSubmit}
       isNextDisabled={!isAllFilled}
     >
-      <div className={styles.body}>
+      <FieldSection>
         <ContentHeading
           title="MVP 선정"
           description={
@@ -57,14 +57,15 @@ function MvpPage() {
             </>
           }
         />
+      </FieldSection>
 
-        <div className={styles.fields}>
-          <div className={styles.fieldGroup}>
-            <FieldBox.Label
-              label="MVP로 선정하고 싶은 동료"
-              description="MVP는 한 명만 선택할 수 있어요."
-              required
-            />
+      <FieldSection>
+        <div className={styles.fieldGroup}>
+          <FieldBox.Label
+            label="MVP로 선정하고 싶은 동료"
+            description="MVP는 한 명만 선택할 수 있어요."
+            required
+          />
 
             <div className={styles.searchContainer}>
               <div className={styles.inputWrapper}>
@@ -113,15 +114,23 @@ function MvpPage() {
             )}
           </div>
 
-          <InputField
-            labelText="MVP 선정 이유를 작성해주세요."
-            required
-            placeholder="선정하는 이유"
-            value={reason}
-            onChange={setReason}
-          />
+          {selectedMember && (
+            <ul className={styles.chipList}>
+              <MemberChip label={selectedMember.name} showRemoveButton={false} />
+            </ul>
+          )}
         </div>
-      </div>
+      </FieldSection>
+
+      <FieldSection>
+        <InputField
+          labelText="MVP 선정 이유를 작성해주세요."
+          required
+          placeholder="선정하는 이유"
+          value={reason}
+          onChange={setReason}
+        />
+      </FieldSection>
     </StepLayout>
   );
 }

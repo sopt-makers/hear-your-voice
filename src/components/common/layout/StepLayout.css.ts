@@ -30,7 +30,8 @@ export const contentSection = style({
   overflowY: 'auto',
   msOverflowStyle: 'none',
   scrollbarWidth: 'none',
-  padding: '0 20px',
+  padding: '0 28px',
+  textAlign: 'left',
 });
 
 export const contentSectionWithProgress = style({
