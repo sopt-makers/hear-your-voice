@@ -10,8 +10,8 @@
 ```
 StartPage (활성 스프린트 여부 분기)
   └─ NoticePage (안내)
-       └─ SprintCodePage (인증 코드 입력)
-            └─ SprintIntroPage (스프린트 소개)
+       └─ SprintCodePage (인증 코드 입력, step 0/6 - 빈 프로그레스바)
+            └─ SprintIntroPage (스프린트 소개, step 0/6 - 빈 프로그레스바)
                  └─ UserInfoPage (사용자 정보 입력, step 1/6)
                       └─ StopCommentPage (step 2/6)
                            └─ StartCommentPage (step 3/6)
@@ -225,6 +225,12 @@ src/
 - 네트워크 오류 → `NetworkError` (toast 표시)
 - 서비스 오류 → `ServiceError` → `/error` 페이지로 이동
 - `useErrorHandler` 훅 활용
+
+### useEffect 의존성 주의
+
+- `useToast()`는 렌더링마다 새 객체를 반환하므로 `useCallback` deps에 직접 넣으면 무한 루프 발생
+- `useErrorHandler` 내부에서 `useRef`로 최신 참조를 유지하는 방식으로 해결되어 있음
+- `handleError`를 `useEffect` deps에 넣는 것은 안전하나, `useToast()` 반환값 등 불안정한 참조는 deps에 넣지 않을 것
 
 ### push 전 체크리스트
 
