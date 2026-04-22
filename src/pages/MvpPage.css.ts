@@ -60,7 +60,6 @@ export const clearButton = style({
   flexShrink: 0,
 });
 
-
 export const dropdown = style({
   position: 'absolute',
   top: '100%',
@@ -73,7 +72,6 @@ export const dropdown = style({
   overflow: 'hidden',
   listStyle: 'none',
   padding: 0,
-  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
 });
 
 export const dropdownItem = style({
@@ -107,11 +105,20 @@ export const avatarIcon = style({
   color: colors.gray500,
 });
 
-export const chipList = style({
-  listStyle: 'none',
-  margin: '4px 0 0',
-  padding: 0,
+export const chipWrapper = style({
+  marginTop: 4,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
+});
+
+export const clearIcon = style({
+  width: 20,
+  height: 20,
+  color: colors.gray50,
+});
+
+export const avatarIconSvg = style({
+  width: 20,
+  height: 20,
 });

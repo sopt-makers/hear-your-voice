@@ -22,7 +22,7 @@ function SprintIntroPage() {
       onNext={handleStart}
       showProgressBar={true}
       currentStep={0}
-      totalSteps={7}
+      totalSteps={6}
     >
       <div className={styles.content}>
         <img src={sprintCodeVerifiedImg} alt="" className={styles.characterImage} />

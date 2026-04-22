@@ -14,8 +14,8 @@ function ClosingPage() {
   return (
     <StepLayout
       showProgressBar
-      currentStep={7}
-      totalSteps={7}
+      currentStep={6}
+      totalSteps={6}
       nextLabel="종료하기"
       showNextRightIcon={false}
       onNext={handleClose}

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FieldBox } from '@sopt-makers/ui';
-import { colors } from '@sopt-makers/colors';
 import { IconUser, IconXCircle } from '@sopt-makers/icons';
 import { StepLayout, ContentHeading, MemberChip, InputField } from '@components';
 import { usePeerMembers, useCommentForm } from '@hooks';
@@ -38,8 +37,8 @@ function MvpPage() {
   return (
     <StepLayout
       showProgressBar
-      currentStep={6}
-      totalSteps={7}
+      currentStep={5}
+      totalSteps={6}
       nextLabel="제출하기"
       showNextRightIcon={false}
       onNext={handleSubmit}
@@ -73,9 +72,7 @@ function MvpPage() {
                   className={styles.searchInput}
                   placeholder="멤버 검색"
                   value={searchQuery}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setSearchQuery(e.target.value)
-                  }
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
                 />
                 {searchQuery && (
                   <button
@@ -84,7 +81,7 @@ function MvpPage() {
                     onClick={() => setSearchQuery('')}
                     aria-label="검색어 지우기"
                   >
-                    <IconXCircle style={{ width: 20, height: 20, color: colors.gray50 }} />
+                    <IconXCircle className={styles.clearIcon} />
                   </button>
                 )}
               </div>
@@ -99,7 +96,7 @@ function MvpPage() {
                         onClick={() => handleSelectMember(member)}
                       >
                         <span className={styles.avatarIcon} aria-hidden>
-                          <IconUser style={{ width: 20, height: 20 }} />
+                          <IconUser className={styles.avatarIconSvg} />
                         </span>
                         <span>{member.name}</span>
                       </button>
@@ -110,9 +107,9 @@ function MvpPage() {
             </div>
 
             {selectedMember && (
-              <ul className={styles.chipList}>
+              <div className={styles.chipWrapper}>
                 <MemberChip label={selectedMember.name} showRemoveButton={false} />
-              </ul>
+              </div>
             )}
           </div>
 

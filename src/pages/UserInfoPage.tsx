@@ -54,7 +54,7 @@ function UserInfoPage() {
       isNextDisabled={!isAllFilled}
       showProgressBar={true}
       currentStep={1}
-      totalSteps={7}
+      totalSteps={6}
     >
       <ContentHeading title="작성자 정보" description="피드백을 작성하는 본인은 누구신가요?" />
       <div className={styles.body}>
