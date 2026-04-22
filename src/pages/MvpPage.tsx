@@ -1,21 +1,26 @@
 import { useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FieldBox } from '@sopt-makers/ui';
+import { FieldBox, useToast } from '@sopt-makers/ui';
 import { IconUser, IconXCircle } from '@sopt-makers/icons';
 import { StepLayout, ContentHeading, FieldSection, MemberChip, InputField } from '@components';
-import { usePeerMembers, useCommentForm } from '@hooks';
+import { usePeerMembers, useCommentForm, useErrorHandler } from '@hooks';
+import { submitComment } from '@lib/api/comment';
+import { callApi } from '@lib/apiClient';
 import type { PeerMember } from '@types';
 import * as styles from './MvpPage.css';
 
 function MvpPage() {
   const navigate = useNavigate();
-  const { update } = useCommentForm();
+  const { data, update } = useCommentForm();
   const peerMembers = usePeerMembers();
+  const toast = useToast();
+  const { handleError } = useErrorHandler();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMember, setSelectedMember] = useState<PeerMember | null>(null);
   const [reason, setReason] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const filteredMembers = searchQuery
     ? peerMembers.filter((m) => m.name.includes(searchQuery))
@@ -28,10 +33,33 @@ function MvpPage() {
     setSearchQuery('');
   };
 
-  const handleSubmit = () => {
-    if (!selectedMember) return;
-    update({ mvp: { target_user_id: selectedMember.userId, comment_text: reason } });
-    navigate('/closing');
+  const handleSubmit = async () => {
+    if (!selectedMember || isSubmitting) return;
+
+    setIsSubmitting(true);
+    const mvp = { target_user_id: selectedMember.userId, comment_text: reason };
+    const payload = { ...data, mvp };
+
+    try {
+      const result = await callApi(() => submitComment(payload));
+
+      if (result.code === 'SUCCESS') {
+        update({ mvp });
+        navigate('/closing');
+        return;
+      }
+
+      if (result.code === 'USER_NOT_FOUND' || result.code === 'INVALID_SPRINT') {
+        toast.open({ icon: 'error', content: result.message });
+        return;
+      }
+
+      navigate('/error');
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -41,8 +69,8 @@ function MvpPage() {
       totalSteps={6}
       nextLabel="제출하기"
       showNextRightIcon={false}
-      onNext={handleSubmit}
-      isNextDisabled={!isAllFilled}
+      onNext={() => { void handleSubmit(); }}
+      isNextDisabled={!isAllFilled || isSubmitting}
     >
       <FieldSection>
         <ContentHeading
