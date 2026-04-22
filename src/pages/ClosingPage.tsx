@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StepLayout } from '../components';
-import headerImg from '../assets/header_img.png';
 import endingImg from '../assets/ending.svg';
 import * as styles from './ClosingPage.css';
 
@@ -14,10 +13,9 @@ function ClosingPage() {
 
   return (
     <StepLayout
-      bannerImage={headerImg}
       showProgressBar
-      currentStep={7}
-      totalSteps={7}
+      currentStep={6}
+      totalSteps={6}
       nextLabel="종료하기"
       showNextRightIcon={false}
       onNext={handleClose}

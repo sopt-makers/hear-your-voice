@@ -30,7 +30,7 @@ function submissionPatch<K extends CommentsKey>(
 function PeerCommentStepTemplate({
   content,
   currentStep,
-  totalSteps = 7,
+  totalSteps = 6,
   nextPath,
 }: PeerCommentStepTemplateProps) {
   const { title, description, guideImages } = content;

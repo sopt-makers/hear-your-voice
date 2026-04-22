@@ -38,7 +38,7 @@ function SprintCodePage() {
       isNextDisabled={code.length !== SPRINT_CODE_LENGTH || showError}
       showProgressBar={true}
       currentStep={0}
-      totalSteps={7}
+      totalSteps={6}
     >
       <ContentHeading title="스프린트 코드 입력" description="스프린트 확인을 위해 코드를 입력해주세요." />
 

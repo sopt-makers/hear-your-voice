@@ -6,7 +6,7 @@ function ContinueCommentPage() {
     <PeerCommentStepTemplate
       content={CONTINUE_COMMENT_STEP_CONTENT}
       currentStep={4}
-      nextPath="/next"
+      nextPath="/mvp"
     />
   );
 }
