@@ -85,7 +85,7 @@ src/
 │   ├── common/                  → 도메인 무관한 범용 컴포넌트
 │   │   ├── layout/              (PageLayout, StepLayout)
 │   │   ├── form/                (SelectField, InputField)
-│   │   └── ui/                  (ContentHeading, ImageSection, ProgressBar, MemberChip)
+│   │   └── ui/                  (ContentHeading, ImageSection, ProgressBar, MemberChip, FieldSection)
 │   ├── sprint-code/             → 스프린트 코드 도메인
 │   │   └── SprintCodeInput
 │   ├── peer-comment/            → 피어 코멘트 도메인
@@ -139,7 +139,7 @@ src/
 | `Picker` | 목록에서 항목을 선택하는 UI | `PeerMemberPicker` |
 | `Chip` | 선택된 항목을 표시하는 태그 UI | `MemberChip` |
 | `Repeater` | 동일한 입력 블록을 반복·관리 | `PeerCommentRepeater` |
-| `Block` / `Section` | 여러 요소를 묶은 영역 단위 | `PeerCommentRecipientBlock` |
+| `Block` / `Section` | 여러 요소를 묶은 영역 단위 | `PeerCommentRecipientBlock`, `FieldSection` |
 
 ## 🗂️ Import Aliases
 
