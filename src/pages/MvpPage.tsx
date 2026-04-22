@@ -67,57 +67,52 @@ function MvpPage() {
             required
           />
 
-            <div className={styles.searchContainer}>
-              <div className={styles.inputWrapper}>
-                <input
-                  className={styles.searchInput}
-                  placeholder="멤버 검색"
-                  value={searchQuery}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
-                />
-                {searchQuery && (
-                  <button
-                    type="button"
-                    className={styles.clearButton}
-                    onClick={() => setSearchQuery('')}
-                    aria-label="검색어 지우기"
-                  >
-                    <IconXCircle className={styles.clearIcon} />
-                  </button>
-                )}
-              </div>
-
-              {searchQuery && filteredMembers.length > 0 && (
-                <ul className={styles.dropdown}>
-                  {filteredMembers.map((member) => (
-                    <li key={member.userId}>
-                      <button
-                        type="button"
-                        className={styles.dropdownItem}
-                        onClick={() => handleSelectMember(member)}
-                      >
-                        <span className={styles.avatarIcon} aria-hidden>
-                          <IconUser className={styles.avatarIconSvg} />
-                        </span>
-                        <span>{member.name}</span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+          <div className={styles.searchContainer}>
+            <div className={styles.inputWrapper}>
+              <input
+                className={styles.searchInput}
+                placeholder="멤버 검색"
+                value={searchQuery}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setSearchQuery(e.target.value)
+                }
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  className={styles.clearButton}
+                  onClick={() => setSearchQuery('')}
+                  aria-label="검색어 지우기"
+                >
+                  <IconXCircle className={styles.clearIcon} />
+                </button>
               )}
             </div>
 
-            {selectedMember && (
-              <div className={styles.chipWrapper}>
-                <MemberChip label={selectedMember.name} showRemoveButton={false} />
-              </div>
+            {searchQuery && filteredMembers.length > 0 && (
+              <ul className={styles.dropdown}>
+                {filteredMembers.map((member) => (
+                  <li key={member.userId}>
+                    <button
+                      type="button"
+                      className={styles.dropdownItem}
+                      onClick={() => handleSelectMember(member)}
+                    >
+                      <span className={styles.avatarIcon} aria-hidden>
+                        <IconUser className={styles.avatarIconSvg} />
+                      </span>
+                      <span>{member.name}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
 
           {selectedMember && (
-            <ul className={styles.chipList}>
+            <div className={styles.chipWrapper}>
               <MemberChip label={selectedMember.name} showRemoveButton={false} />
-            </ul>
+            </div>
           )}
         </div>
       </FieldSection>
