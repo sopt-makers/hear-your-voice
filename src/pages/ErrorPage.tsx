@@ -1,12 +1,19 @@
 import { StepLayout } from '@components';
+import ErrorImg from '@assets/error.svg';
+import * as styles from './ErrorPage.css';
 
 function ErrorPage() {
   return (
     <StepLayout showProgressBar={false}>
-      <div style={{ textAlign: 'center', padding: '2rem' }}>
-        <h1>오류가 발생했습니다.</h1>
-        <p>죄송합니다. 페이지를 불러오는 중에 문제가 발생했습니다.</p>
-        <p>잠시 후 다시 시도해 주세요.</p>
+      <div className={styles.content}>
+        <img src={ErrorImg} alt="" className={styles.characterImage} />
+        <div className={styles.body}>
+          <p className={styles.title}>일시적으로 서비스를 이용할 수 없어요.</p>
+          <p className={styles.description}>
+            이용에 불편을 드려 죄송합니다. <br />
+            메이커분들의 너른 양해 부탁드려요 🐮
+          </p>
+        </div>
       </div>
     </StepLayout>
   );
