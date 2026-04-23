@@ -6,7 +6,8 @@ export const content = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  paddingTop: 215,
+  flex: 1,
+  justifyContent: 'center',
   textAlign: 'center',
 });
 
@@ -19,24 +20,24 @@ export const characterImage = style({
 export const body = style({
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
   marginTop: 24,
 });
 
-export const title = style({
+const textBase = {
   margin: 0,
-  padding: '0 28px 0',
   maxWidth: 390,
-  whiteSpace: 'pre-line',
+  whiteSpace: 'pre-line' as const,
+  color: colors.white,
+};
+
+export const title = style({
+  ...textBase,
   color: colors.white,
   ...fontsObject.HEADING_5_20_B,
 });
 
 export const description = style({
-  margin: 0,
-  padding: '0 28px 0',
-  maxWidth: 390,
-  whiteSpace: 'pre-line',
+  ...textBase,
   color: colors.white,
   ...fontsObject.BODY_2_16_R,
 });
