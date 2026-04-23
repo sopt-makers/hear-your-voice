@@ -41,6 +41,13 @@ src/
 ├── utils/           # 순수 비즈니스 로직 유틸
 ├── App.tsx          # 라우터 설정 진입점
 └── main.tsx         # 앱 마운트
+supabase/
+└── functions/
+    └── notify-sprint/  # 스프린트 종료 후 Notion 동기화 Edge Function
+        └── index.ts
+.github/
+└── workflows/
+    └── notify-after-sprint.yml  # 매일 자정 KST 실행, Edge Function 트리거
 ```
 
 ---
