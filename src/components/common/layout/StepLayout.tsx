@@ -50,20 +50,22 @@ function StepLayout({
         {children}
       </div>
 
-      <div className={styles.buttonSection}>
-        <Button
-          rounded="md"
-          size="lg"
-          theme="white"
-          variant="fill"
-          style={fontsObject.LABEL_1_18_SB}
-          {...(showNextRightIcon ? { RightIcon: IconChevronRight } : {})}
-          onClick={onNext}
-          disabled={isNextDisabled}
-        >
-          {nextLabel}
-        </Button>
-      </div>
+      {onNext !== undefined && (
+        <div className={styles.buttonSection}>
+          <Button
+            rounded="md"
+            size="lg"
+            theme="white"
+            variant="fill"
+            style={fontsObject.LABEL_1_18_SB}
+            {...(showNextRightIcon ? { RightIcon: IconChevronRight } : {})}
+            onClick={onNext}
+            disabled={isNextDisabled}
+          >
+            {nextLabel}
+          </Button>
+        </div>
+      )}
     </PageLayout>
   );
 }
