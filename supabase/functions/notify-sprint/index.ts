@@ -3,11 +3,17 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 const NOTION_API = 'https://api.notion.com/v1';
 const NOTION_VERSION = '2022-06-28';
 
+interface SprintRow {
+  id: number;
+  name: string;
+}
+
 interface CommentRow {
-  type: 'start' | 'stop' | 'continue' | 'mvp';
+  type: string;
   content: string;
-  sender: { id: number; name: string };
-  target: { id: number; name: string };
+  sender_id: number;
+  sender_name: string;
+  target_name: string;
 }
 
 async function notionPost(token: string, path: string, body: unknown) {
@@ -48,25 +54,16 @@ Deno.serve(async () => {
     const yesterdayStr = yesterday.toISOString().split('T')[0];
 
     const { data: sprints, error: sprintError } = await supabase
-      .from('sprints')
-      .select('id, name')
-      .eq('end_date', yesterdayStr)
-      .is('notion_synced_at', null);
+      .rpc('get_sprints_for_notion_sync', { target_date: yesterdayStr });
 
     if (sprintError) throw sprintError;
-    if (!sprints?.length) {
+    if (!(sprints as SprintRow[])?.length) {
       return new Response(JSON.stringify({ message: 'No sprints to process' }), { status: 200 });
     }
 
-    for (const sprint of sprints) {
+    for (const sprint of sprints as SprintRow[]) {
       const { data: comments, error: commentError } = await supabase
-        .from('comments')
-        .select(`
-          type, content,
-          sender:users!fk_comments_sender(id, name),
-          target:users!fk_comments_target(id, name)
-        `)
-        .eq('sprint_id', sprint.id);
+        .rpc('get_comments_for_sprint', { p_sprint_id: sprint.id });
 
       if (commentError) throw commentError;
 
@@ -77,11 +74,11 @@ Deno.serve(async () => {
       const groupMap = new Map<string, { type: string; content: string; targets: string[] }>();
       for (const c of rows) {
         if (c.type !== 'start' && c.type !== 'continue') continue;
-        const key = `${c.sender.id}__${c.type}__${c.content}`;
+        const key = `${c.sender_id}__${c.type}__${c.content}`;
         if (!groupMap.has(key)) {
           groupMap.set(key, { type: c.type, content: c.content, targets: [] });
         }
-        groupMap.get(key)!.targets.push(c.target.name);
+        groupMap.get(key)!.targets.push(c.target_name);
       }
 
       // Notion 코멘트 DB에 저장
@@ -108,7 +105,7 @@ Deno.serve(async () => {
         await notionPost(notion_token, '/pages', {
           parent: { database_id: notion_mvp_db_id },
           properties: {
-            이름: { title: [{ text: { content: mvp.target.name } }] },
+            이름: { title: [{ text: { content: mvp.target_name } }] },
             '자세한 내용': { rich_text: [{ text: { content: mvp.content } }] },
             '스프린트 종류': { select: { name: sprint.name } },
           },
@@ -117,9 +114,7 @@ Deno.serve(async () => {
 
       // 처리 완료 표시 — 코멘트 없는 sprint도 갱신해 재처리 방지
       const { error: updateError } = await supabase
-        .from('sprints')
-        .update({ notion_synced_at: new Date().toISOString() })
-        .eq('id', sprint.id);
+        .rpc('mark_sprint_notion_synced', { p_sprint_id: sprint.id });
       if (updateError) throw updateError;
     }
 
