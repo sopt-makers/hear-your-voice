@@ -6,13 +6,13 @@ export const content = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  paddingTop: 100,
+  paddingTop: 215,
   textAlign: 'center',
 });
 
 export const characterImage = style({
-  width: '430px',
-  height: '276px',
+  width: '148px',
+  height: '120px',
   display: 'block',
 });
 
@@ -20,12 +20,12 @@ export const body = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  marginTop: 20,
+  marginTop: 24,
 });
 
 export const title = style({
   margin: 0,
-  padding: '20px 28px 0',
+  padding: '0 28px 0',
   maxWidth: 390,
   whiteSpace: 'pre-line',
   color: colors.white,
@@ -34,9 +34,9 @@ export const title = style({
 
 export const description = style({
   margin: 0,
-  padding: '20px 28px 0',
+  padding: '0 28px 0',
   maxWidth: 390,
   whiteSpace: 'pre-line',
   color: colors.white,
-  ...fontsObject.BODY_2_16_M,
+  ...fontsObject.BODY_2_16_R,
 });
