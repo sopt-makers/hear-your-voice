@@ -21,17 +21,19 @@ async function notionPost(token: string, path: string, body: unknown) {
     body: JSON.stringify(body),
   });
   if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Notion API error: ${res.status} ${text}`);
+    throw new Error(`Notion API error: ${res.status}`);
   }
 }
 
-Deno.serve(async (req) => {
+Deno.serve(async () => {
   try {
-    const { notion_token, notion_comments_db_id, notion_mvp_db_id } = await req.json();
+    const notion_token = Deno.env.get('NOTION_TOKEN');
+    const notion_comments_db_id = Deno.env.get('NOTION_COMMENTS_DB_ID');
+    const notion_mvp_db_id = Deno.env.get('NOTION_MVP_DB_ID');
 
     if (!notion_token || !notion_comments_db_id || !notion_mvp_db_id) {
-      return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400 });
+      console.error('Missing Notion environment variables');
+      return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 });
     }
 
     const supabase = createClient(
@@ -67,9 +69,8 @@ Deno.serve(async (req) => {
         .eq('sprint_id', sprint.id);
 
       if (commentError) throw commentError;
-      if (!comments?.length) continue;
 
-      const rows = comments as CommentRow[];
+      const rows = (comments ?? []) as CommentRow[];
 
       // start/continue: (sender_id, type, content) 기준으로 그룹핑 → receiver 여러 명 가능
       // 발신자는 Notion에 저장하지 않음 (모든 타입 비공개)
@@ -114,15 +115,17 @@ Deno.serve(async (req) => {
         });
       }
 
-      // 처리 완료 표시
-      await supabase
+      // 처리 완료 표시 — 코멘트 없는 sprint도 갱신해 재처리 방지
+      const { error: updateError } = await supabase
         .from('sprints')
         .update({ notion_synced_at: new Date().toISOString() })
         .eq('id', sprint.id);
+      if (updateError) throw updateError;
     }
 
     return new Response(JSON.stringify({ message: 'Done' }), { status: 200 });
   } catch (err) {
-    return new Response(JSON.stringify({ error: String(err) }), { status: 500 });
+    console.error(err instanceof Error ? err.message : 'Unknown notify-sprint error');
+    return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 });
   }
 });

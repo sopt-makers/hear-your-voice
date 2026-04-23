@@ -13,14 +13,10 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_COMMENTS_DB_ID: ${{ secrets.NOTION_COMMENTS_DB_ID }}
-          NOTION_MVP_DB_ID: ${{ secrets.NOTION_MVP_DB_ID }}
         run: |
-          HTTP_STATUS=$(curl -s -o response.json -w "%{http_code}" \
+          HTTP_STATUS=$(curl -sS --connect-timeout 10 --max-time 60 -o response.json -w "%{http_code}" \
             -X POST "${SUPABASE_URL}/functions/v1/notify-sprint" \
             -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
-            -H "Content-Type: application/json" \
-            -d "{\"notion_token\":\"${NOTION_TOKEN}\",\"notion_comments_db_id\":\"${NOTION_COMMENTS_DB_ID}\",\"notion_mvp_db_id\":\"${NOTION_MVP_DB_ID}\"}")
+            -H "Content-Type: application/json")
           echo "Response: $(cat response.json)"
           [ "$HTTP_STATUS" = "200" ] || exit 1
