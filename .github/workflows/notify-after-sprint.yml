@@ -16,7 +16,6 @@ jobs:
         run: |
           HTTP_STATUS=$(curl -sS --connect-timeout 10 --max-time 60 -o response.json -w "%{http_code}" \
             -X POST "${SUPABASE_URL}/functions/v1/notify-sprint" \
-            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
-            -H "Content-Type: application/json")
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
           echo "Response: $(cat response.json)"
           [ "$HTTP_STATUS" = "200" ] || exit 1
