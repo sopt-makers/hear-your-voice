@@ -228,7 +228,8 @@ Deno.serve(async () => {
 
     return new Response(JSON.stringify({ message: 'Done' }), { status: 200 });
   } catch (err) {
-    console.error(err instanceof Error ? err.message : 'Unknown notify-sprint error');
-    return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 });
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(message);
+    return new Response(JSON.stringify({ error: message }), { status: 500 });
   }
 });

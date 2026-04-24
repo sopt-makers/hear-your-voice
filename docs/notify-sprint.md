@@ -41,6 +41,8 @@ GitHub Actions (매일 자정 KST)
 ALTER TABLE sprints ADD COLUMN notion_synced_at timestamptz;
 ```
 
+Notion·Slack 처리 완료 후 현재 시각으로 갱신됩니다. `IS NULL` 조건으로 미처리 스프린트만 선별하며, 중복 동기화를 방지하는 역할을 합니다.
+
 **`users` 테이블 — `slack_user_name` 컬럼**
 
 ```sql
@@ -49,51 +51,14 @@ ALTER TABLE users ADD COLUMN slack_user_name varchar;
 
 Slack Member ID (`U1234567` 형태)를 저장합니다. Slack 프로필 클릭 → `Copy member ID`로 확인 가능합니다. 값이 없는 유저는 DM 발송 대상에서 자동 제외됩니다.
 
-**RPC 함수 3개 (Supabase SQL Editor에서 실행)**
+**RPC 함수 (Supabase SQL Editor에서 등록, 실제 코드는 Supabase 대시보드에서 확인)**
 
-```sql
--- 어제 종료된 미동기화 스프린트 조회
-create or replace function get_sprints_for_notion_sync(target_date date)
-returns table(id int, name text)
-language sql security definer as $$
-  select id, name::text
-  from sprints
-  where end_date = target_date
-    and notion_synced_at is null;
-$$;
-
--- 스프린트 코멘트 조회 (Notion용)
-create or replace function get_comments_for_sprint(p_sprint_id int)
-returns table(type text, content text, sender_id int, sender_name text, target_name text)
-language sql security definer as $$
-  select c.type::text, c.content, s.id as sender_id,
-    s.name::text as sender_name, t.name::text as target_name
-  from comments c
-  join users s on s.id = c.sender_id
-  join users t on t.id = c.target_user_id
-  where c.sprint_id = p_sprint_id;
-$$;
-
--- 동기화 완료 표시
-create or replace function mark_sprint_notion_synced(p_sprint_id int)
-returns void
-language sql security definer as $$
-  update sprints set notion_synced_at = now() where id = p_sprint_id;
-$$;
-
--- Slack DM용 target user별 코멘트 조회
-create or replace function get_slack_dm_data(p_sprint_id int)
-returns table(target_user_id bigint, slack_member_id text, target_name text, type text, content text)
-language sql security definer as $$
-  select u.id as target_user_id, u.slack_user_name::text as slack_member_id,
-    u.name::text as target_name, c.type::text, c.content
-  from comments c
-  join users u on u.id = c.target_user_id
-  where c.sprint_id = p_sprint_id
-    and u.slack_user_name is not null
-    and u.slack_user_name != '';
-$$;
-```
+| 함수명 | 역할 |
+|--------|------|
+| `get_sprints_for_notion_sync(target_date)` | 어제 종료된 미동기화 스프린트 조회 |
+| `get_comments_for_sprint(p_sprint_id)` | 스프린트 코멘트 조회 (Notion 동기화용) |
+| `mark_sprint_notion_synced(p_sprint_id)` | 처리 완료 표시 — `notion_synced_at` 갱신 |
+| `get_slack_dm_data(p_sprint_id)` | Slack DM용 target user별 코멘트 조회 |
 
 ### 2. Notion 설정
 
