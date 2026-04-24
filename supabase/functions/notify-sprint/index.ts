@@ -40,18 +40,32 @@ async function notionPost(token: string, path: string, body: unknown) {
   }
 }
 
-async function slackPost(token: string, channel: string, text: string) {
-  const res = await fetch(`${SLACK_API}/chat.postMessage`, {
+async function slackSendDm(token: string, userId: string, text: string) {
+  const openRes = await fetch(`${SLACK_API}/conversations.open`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ channel, text }),
+    body: JSON.stringify({ users: userId }),
   });
-  const json = await res.json();
-  if (!json.ok) {
-    throw new Error(`Slack API error: ${json.error}`);
+  const openJson = await openRes.json();
+  if (!openJson.ok) {
+    throw new Error(`Slack API error: ${openJson.error}`);
+  }
+
+  const channelId = openJson.channel.id;
+  const postRes = await fetch(`${SLACK_API}/chat.postMessage`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ channel: channelId, text }),
+  });
+  const postJson = await postRes.json();
+  if (!postJson.ok) {
+    throw new Error(`Slack API error: ${postJson.error}`);
   }
 }
 
@@ -200,7 +214,7 @@ Deno.serve(async () => {
         for (const userRows of userMap.values()) {
           const { slack_member_id, target_name } = userRows[0];
           const message = buildSlackMessage(target_name, sprint.name, userRows);
-          await slackPost(slack_bot_token, slack_member_id, message);
+          await slackSendDm(slack_bot_token, slack_member_id, message);
         }
       } catch (err) {
         console.error(`Slack DM failed for sprint ${sprint.id}: ${err instanceof Error ? err.message : String(err)}`);
@@ -214,7 +228,7 @@ Deno.serve(async () => {
 
     return new Response(JSON.stringify({ message: 'Done' }), { status: 200 });
   } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
-    return new Response(JSON.stringify({ error: message }), { status: 500 });
+    console.error(err instanceof Error ? err.message : 'Unknown notify-sprint error');
+    return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 });
   }
 });
