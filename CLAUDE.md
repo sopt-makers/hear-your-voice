@@ -43,11 +43,13 @@ src/
 └── main.tsx         # 앱 마운트
 supabase/
 └── functions/
-    └── notify-sprint/  # 스프린트 종료 후 Notion 동기화 Edge Function
+    └── notify-sprint/  # 스프린트 종료 후 Notion 동기화 + Slack DM 발송 Edge Function
         └── index.ts
 .github/
 └── workflows/
     └── notify-after-sprint.yml  # 매일 자정 KST 실행, Edge Function 트리거
+docs/
+└── notify-sprint.md  # Notion/Slack 자동화 운영 문서
 ```
 
 ---
@@ -238,6 +240,12 @@ src/
 - `useToast()`는 렌더링마다 새 객체를 반환하므로 `useCallback` deps에 직접 넣으면 무한 루프 발생
 - `useErrorHandler` 내부에서 `useRef`로 최신 참조를 유지하는 방식으로 해결되어 있음
 - `handleError`를 `useEffect` deps에 넣는 것은 안전하나, `useToast()` 반환값 등 불안정한 참조는 deps에 넣지 않을 것
+
+### Edge Function 수정 시
+
+- 코드 수정 후 반드시 `supabase functions deploy notify-sprint` 재배포
+- git push만으로는 Edge Function에 반영되지 않음
+- 환경 변수 변경 시에도 재배포 필요
 
 ### push 전 체크리스트
 
