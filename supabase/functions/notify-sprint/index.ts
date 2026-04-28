@@ -1,4 +1,4 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from '@supabase/supabase-js';
 
 const NOTION_API = 'https://api.notion.com/v1';
 const NOTION_VERSION = '2022-06-28';
