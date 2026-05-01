@@ -132,7 +132,7 @@ Deno.serve(async (req) => {
 
         stats.sent++;
       } catch (err) {
-        const message = err instanceof Error ? err.message : String(err);
+        const message = (err as any)?.message ?? JSON.stringify(err);
         console.error(`DM failed for delivery ${delivery.id}: ${message}`);
         await supabase.rpc('mark_sprint_dm_failed', {
           p_delivery_id: delivery.id,
@@ -145,7 +145,7 @@ Deno.serve(async (req) => {
 
     return new Response(JSON.stringify(stats), { status: 200 });
   } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
+    const message = (err as any)?.message ?? JSON.stringify(err);
     console.error(message);
     return new Response(JSON.stringify({ error: message }), { status: 500 });
   }

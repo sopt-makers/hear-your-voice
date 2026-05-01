@@ -90,7 +90,7 @@ Deno.serve(async (req) => {
         await supabase.rpc('mark_sprint_notion_synced', { p_sprint_id: sprint.id });
         stats.synced++;
       } catch (err) {
-        const message = err instanceof Error ? err.message : String(err);
+        const message = (err as any)?.message ?? JSON.stringify(err);
         console.error(`Notion sync failed for sprint ${sprint.id}: ${message}`);
         await supabase.rpc('mark_sprint_notion_failed', {
           p_sprint_id: sprint.id,
@@ -103,7 +103,7 @@ Deno.serve(async (req) => {
 
     return new Response(JSON.stringify(stats), { status: 200 });
   } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
+    const message = (err as any)?.message ?? JSON.stringify(err);
     console.error(message);
     return new Response(JSON.stringify({ error: message }), { status: 500 });
   }
