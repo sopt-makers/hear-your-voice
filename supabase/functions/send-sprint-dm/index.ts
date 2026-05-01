@@ -72,7 +72,7 @@ Deno.serve(async (req) => {
 
       for (const [userId, userRows] of userMap) {
         const { target_name, slack_user_name } = userRows[0];
-        const messageText = JSON.stringify(buildSlackMessage(target_name, sprint.name, userRows));
+        const messageText = JSON.stringify(buildSlackMessage(target_name, sprint.name, userRows, slack_user_name));
 
         const { error: enqueueError } = await supabase.rpc('enqueue_sprint_dm_delivery', {
           p_sprint_id: sprint.id,
