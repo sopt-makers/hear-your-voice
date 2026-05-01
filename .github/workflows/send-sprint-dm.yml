@@ -20,10 +20,10 @@ jobs:
       - name: Trigger send-sprint-dm Edge Function
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
           HTTP_STATUS=$(curl -sS --connect-timeout 10 --max-time 60 -o response.json -w "%{http_code}" \
             -X POST "${SUPABASE_URL}/functions/v1/send-sprint-dm" \
-            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
+            -H "Authorization: Bearer ${CRON_SECRET}")
           echo "Response: $(cat response.json)"
           [ "$HTTP_STATUS" = "200" ] || exit 1

@@ -14,7 +14,13 @@ interface CommentRow {
   target_name: string;
 }
 
-Deno.serve(async () => {
+Deno.serve(async (req) => {
+  const cronSecret = Deno.env.get('CRON_SECRET');
+  const authHeader = req.headers.get('Authorization');
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
+  }
+
   try {
     const notion_token = Deno.env.get('NOTION_TOKEN');
     const notion_comments_db_id = Deno.env.get('NOTION_COMMENTS_DB_ID');
@@ -40,13 +46,12 @@ Deno.serve(async () => {
     for (const sprint of (sprints ?? []) as SprintRow[]) {
       stats.processed++;
 
-      const { data: comments, error: commentError } = await supabase
-        .rpc('get_comments_for_sprint', { p_sprint_id: sprint.id });
-      if (commentError) throw commentError;
-
-      const rows = (comments ?? []) as CommentRow[];
-
       try {
+        const { data: comments, error: commentError } = await supabase
+          .rpc('get_comments_for_sprint', { p_sprint_id: sprint.id });
+        if (commentError) throw commentError;
+
+        const rows = (comments ?? []) as CommentRow[];
         const groupMap = new Map<string, { type: string; content: string; targets: string[] }>();
         for (const c of rows) {
           if (c.type !== 'start' && c.type !== 'continue') continue;

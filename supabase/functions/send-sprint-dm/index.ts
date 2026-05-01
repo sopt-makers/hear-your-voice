@@ -18,7 +18,13 @@ interface DeliveryRow {
   message_text: string;
 }
 
-Deno.serve(async () => {
+Deno.serve(async (req) => {
+  const cronSecret = Deno.env.get('CRON_SECRET');
+  const authHeader = req.headers.get('Authorization');
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
+  }
+
   try {
     const slack_bot_token = Deno.env.get('SLACK_BOT_TOKEN');
     if (!slack_bot_token) {
