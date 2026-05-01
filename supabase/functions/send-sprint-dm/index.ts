@@ -109,8 +109,21 @@ Deno.serve(async () => {
       }
 
       try {
-        await slackSendDm(slack_bot_token, delivery.slack_user_name, JSON.parse(delivery.message_text));
-        await supabase.rpc('mark_sprint_dm_sent', { p_delivery_id: delivery.id });
+        const ts = await slackSendDm(slack_bot_token, delivery.slack_user_name, JSON.parse(delivery.message_text));
+
+        // ts를 DB에 저장 — 실패 시 최대 3회 재시도
+        let markError;
+        for (let attempt = 0; attempt < 3; attempt++) {
+          const { error } = await supabase.rpc('mark_sprint_dm_sent', {
+            p_delivery_id: delivery.id,
+            p_slack_message_ts: ts,
+          });
+          if (!error) { markError = undefined; break; }
+          markError = error;
+          await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
+        }
+        if (markError) console.error(`mark_sprint_dm_sent failed for delivery ${delivery.id}: ${markError.message}`);
+
         stats.sent++;
       } catch (err) {
         const message = err instanceof Error ? err.message : String(err);

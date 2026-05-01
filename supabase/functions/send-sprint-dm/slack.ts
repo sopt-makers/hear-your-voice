@@ -1,6 +1,6 @@
 const SLACK_API = 'https://slack.com/api';
 
-export async function slackSendDm(token: string, slackUserName: string, blocks: unknown[]) {
+export async function slackSendDm(token: string, slackUserName: string, blocks: unknown[]): Promise<string> {
   const openRes = await fetch(`${SLACK_API}/conversations.open`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -20,4 +20,6 @@ export async function slackSendDm(token: string, slackUserName: string, blocks: 
   });
   const postJson = await postRes.json();
   if (!postJson.ok) throw new Error(`Slack post error: ${postJson.error}`);
+
+  return postJson.ts as string;
 }
