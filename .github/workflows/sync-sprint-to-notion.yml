@@ -1,0 +1,29 @@
+name: Sync sprint to Notion
+
+on:
+  schedule:
+    - cron: '0 15 * * *' # 매일 00:00 KST (UTC 15:00)
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'prod'
+        type: choice
+        options: [prod, dev]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event_name == 'workflow_dispatch' && inputs.environment || 'prod' }}
+    steps:
+      - name: Trigger sync-sprint-to-notion Edge Function
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          HTTP_STATUS=$(curl -sS --connect-timeout 10 --max-time 60 -o response.json -w "%{http_code}" \
+            -X POST "${SUPABASE_URL}/functions/v1/sync-sprint-to-notion" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
+          echo "Response: $(cat response.json)"
+          [ "$HTTP_STATUS" = "200" ] || exit 1
