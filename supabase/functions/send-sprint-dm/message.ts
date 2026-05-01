@@ -12,12 +12,12 @@ export function buildSlackMessage(name: string, sprintName: string, rows: Commen
   const stops = rows.filter((r) => r.type === 'stop').map((r) => `• ${r.content}`);
   const mvps = rows.filter((r) => r.type === 'mvp');
 
-  const nameDisplay = slackUserName ? `*${name}* <@${slackUserName}>` : `*${name}*`;
+  const nameDisplay = slackUserName ? `<@${slackUserName}>` : `*${name}*`;
 
   const blocks: unknown[] = [];
 
   blocks.push({
-    type: 'section',
+    type: 'context',
     text: {
       type: 'mrkdwn',
       text: `무우~ 🐮 ${nameDisplay}님에게 *${sprintName}* 동료들의 메세지가 도착했어요!`,

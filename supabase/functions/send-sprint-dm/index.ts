@@ -38,18 +38,22 @@ Deno.serve(async (req) => {
 
     const runDate = getKstDateString();
     const tomorrow = addDays(runDate, 1);
+    const logs: string[] = [`runDate=${runDate}`];
 
     const { error: recoverError } = await supabase
       .rpc('recover_stale_processing_deliveries');
-    if (recoverError) console.error(`recover_stale_processing_deliveries failed: ${recoverError.message}`);
+    if (recoverError) logs.push(`recover_stale_processing_deliveries failed: ${recoverError.message}`);
 
     const { data: expiredCount, error: expireError } = await supabase
       .rpc('expire_sprint_dm_deliveries', { p_run_date: runDate });
-    if (expireError) console.error(`expire_sprint_dm_deliveries failed: ${expireError.message}`);
+    if (expireError) logs.push(`expire_sprint_dm_deliveries failed: ${expireError.message}`);
+    else logs.push(`expired deliveries: ${expiredCount ?? 0}`);
 
     const { data: sprints, error: sprintError } = await supabase
       .rpc('get_sprints_for_dm_enqueue', { p_run_date: runDate });
     if (sprintError) throw sprintError;
+
+    logs.push(`sprints to enqueue: ${(sprints ?? []).length} → ${JSON.stringify(sprints)}`);
 
     let enqueued = 0;
     let enqueueFailed = 0;
@@ -58,11 +62,12 @@ Deno.serve(async (req) => {
       const { data: commentRows, error: commentError } = await supabase
         .rpc('get_sprint_comment_rows', { p_sprint_id: sprint.id });
       if (commentError) {
-        console.error(`get_sprint_comment_rows failed for sprint ${sprint.id}: ${commentError.message}`);
+        logs.push(`get_sprint_comment_rows failed for sprint ${sprint.id}: ${commentError.message}`);
         continue;
       }
 
       const rows = (commentRows ?? []) as CommentRow[];
+      logs.push(`sprint ${sprint.id}: comment rows fetched=${rows.length}`);
 
       const userMap = new Map<number, CommentRow[]>();
       for (const row of rows) {
@@ -84,10 +89,11 @@ Deno.serve(async (req) => {
           p_retry_deadline_date: sprint.retry_deadline_date,
         });
         if (enqueueError) {
-          console.error(`enqueue failed for user ${userId} in sprint ${sprint.id}: ${enqueueError.message}`);
+          logs.push(`enqueue failed for user ${userId} (${target_name}) in sprint ${sprint.id}: ${enqueueError.message}`);
           enqueueFailed++;
           continue;
         }
+        logs.push(`enqueued user ${userId} (${target_name}) slack_user_name=${slack_user_name}`);
         enqueued++;
       }
     }
@@ -95,6 +101,8 @@ Deno.serve(async (req) => {
     const { data: deliveries, error: deliveryError } = await supabase
       .rpc('get_due_sprint_dm_deliveries', { p_run_date: runDate });
     if (deliveryError) throw deliveryError;
+
+    logs.push(`deliveries due today: ${(deliveries ?? []).length}`);
 
     const stats = {
       enqueued,
@@ -108,16 +116,18 @@ Deno.serve(async (req) => {
 
     for (const delivery of (deliveries ?? []) as DeliveryRow[]) {
       stats.processed++;
+      logs.push(`processing delivery id=${delivery.id} target=${delivery.target_name} slack_user_name=${delivery.slack_user_name}`);
 
       if (!delivery.slack_user_name) {
+        logs.push(`skipped: no slack_user_name`);
         stats.skipped++;
         continue;
       }
 
       try {
         const ts = await slackSendDm(slack_bot_token, delivery.slack_user_name, JSON.parse(delivery.message_text));
+        logs.push(`DM sent OK ts=${ts}`);
 
-        // ts를 DB에 저장 — 실패 시 최대 3회 재시도
         let markError;
         for (let attempt = 0; attempt < 3; attempt++) {
           const { error } = await supabase.rpc('mark_sprint_dm_sent', {
@@ -128,12 +138,12 @@ Deno.serve(async (req) => {
           markError = error;
           await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
         }
-        if (markError) console.error(`mark_sprint_dm_sent failed for delivery ${delivery.id}: ${markError.message}`);
+        if (markError) logs.push(`mark_sprint_dm_sent failed for delivery ${delivery.id}: ${markError.message}`);
 
         stats.sent++;
       } catch (err) {
         const message = (err as any)?.message ?? JSON.stringify(err);
-        console.error(`DM failed for delivery ${delivery.id}: ${message}`);
+        logs.push(`DM failed for delivery ${delivery.id}: ${message}`);
         await supabase.rpc('mark_sprint_dm_failed', {
           p_delivery_id: delivery.id,
           p_error: message,
@@ -143,7 +153,7 @@ Deno.serve(async (req) => {
       }
     }
 
-    return new Response(JSON.stringify(stats), { status: 200 });
+    return new Response(JSON.stringify({ ...stats, logs }), { status: 200 });
   } catch (err) {
     const message = (err as any)?.message ?? JSON.stringify(err);
     console.error(message);
