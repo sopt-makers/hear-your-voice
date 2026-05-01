@@ -27,6 +27,7 @@ jobs:
       - name: Sync Supabase secrets
         run: |
           supabase secrets set \
+            CRON_SECRET=${{ secrets.CRON_SECRET }} \
             NOTION_TOKEN=${{ secrets.NOTION_TOKEN }} \
             NOTION_COMMENTS_DB_ID=${{ secrets.NOTION_COMMENTS_DB_ID }} \
             NOTION_MVP_DB_ID=${{ secrets.NOTION_MVP_DB_ID }} \
