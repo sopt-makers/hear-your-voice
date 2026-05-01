@@ -33,19 +33,28 @@ Deno.serve(async () => {
     const runDate = getKstDateString();
     const tomorrow = addDays(runDate, 1);
 
-    const { data: expiredCount } = await supabase
+    const { error: recoverError } = await supabase
+      .rpc('recover_stale_processing_deliveries');
+    if (recoverError) console.error(`recover_stale_processing_deliveries failed: ${recoverError.message}`);
+
+    const { data: expiredCount, error: expireError } = await supabase
       .rpc('expire_sprint_dm_deliveries', { p_run_date: runDate });
+    if (expireError) console.error(`expire_sprint_dm_deliveries failed: ${expireError.message}`);
 
     const { data: sprints, error: sprintError } = await supabase
       .rpc('get_sprints_for_dm_enqueue', { p_run_date: runDate });
     if (sprintError) throw sprintError;
 
     let enqueued = 0;
+    let enqueueFailed = 0;
 
     for (const sprint of (sprints ?? []) as SprintForEnqueue[]) {
       const { data: commentRows, error: commentError } = await supabase
         .rpc('get_sprint_comment_rows', { p_sprint_id: sprint.id });
-      if (commentError) throw commentError;
+      if (commentError) {
+        console.error(`get_sprint_comment_rows failed for sprint ${sprint.id}: ${commentError.message}`);
+        continue;
+      }
 
       const rows = (commentRows ?? []) as CommentRow[];
 
@@ -59,7 +68,7 @@ Deno.serve(async () => {
         const { target_name, slack_user_name } = userRows[0];
         const messageText = JSON.stringify(buildSlackMessage(target_name, sprint.name, userRows));
 
-        await supabase.rpc('enqueue_sprint_dm_delivery', {
+        const { error: enqueueError } = await supabase.rpc('enqueue_sprint_dm_delivery', {
           p_sprint_id: sprint.id,
           p_target_user_id: userId,
           p_target_name: target_name,
@@ -68,6 +77,11 @@ Deno.serve(async () => {
           p_next_retry_date: runDate,
           p_retry_deadline_date: sprint.retry_deadline_date,
         });
+        if (enqueueError) {
+          console.error(`enqueue failed for user ${userId} in sprint ${sprint.id}: ${enqueueError.message}`);
+          enqueueFailed++;
+          continue;
+        }
         enqueued++;
       }
     }
@@ -78,6 +92,7 @@ Deno.serve(async () => {
 
     const stats = {
       enqueued,
+      enqueue_failed: enqueueFailed,
       processed: 0,
       sent: 0,
       failed: 0,
