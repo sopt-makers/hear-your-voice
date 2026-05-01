@@ -36,19 +36,18 @@ Deno.serve(async (req) => {
     );
 
     const runDate = getKstDateString();
-    const logs: string[] = [`runDate=${runDate}`];
+    console.log(`[notion-sync] runDate=${runDate}`);
 
     const { data: sprints, error: sprintError } = await supabase
       .rpc('get_sprints_for_notion_delivery', { p_run_date: runDate });
     if (sprintError) throw sprintError;
 
-    logs.push(`sprints found: ${(sprints ?? []).length} → ${JSON.stringify(sprints)}`);
+    console.log(`[notion-sync] sprints=${(sprints ?? []).length}`);
 
     const stats = { processed: 0, synced: 0, failed: 0 };
 
     for (const sprint of (sprints ?? []) as SprintRow[]) {
       stats.processed++;
-      logs.push(`processing sprint id=${sprint.id} name=${sprint.name}`);
 
       try {
         const { data: comments, error: commentError } = await supabase
@@ -56,7 +55,6 @@ Deno.serve(async (req) => {
         if (commentError) throw commentError;
 
         const rows = (comments ?? []) as CommentRow[];
-        logs.push(`sprint ${sprint.id}: comments fetched=${rows.length} → ${JSON.stringify(rows)}`);
 
         const groupMap = new Map<string, { type: string; content: string; targets: string[] }>();
         for (const c of rows) {
@@ -66,7 +64,8 @@ Deno.serve(async (req) => {
           groupMap.get(key)!.targets.push(c.target_name);
         }
 
-        logs.push(`sprint ${sprint.id}: comment groups=${groupMap.size}, mvps=${rows.filter((c) => c.type === 'mvp').length}`);
+        const mvpRows = rows.filter((c) => c.type === 'mvp');
+        console.log(`[notion-sync] sprint=${sprint.id} comments=${rows.length} groups=${groupMap.size} mvps=${mvpRows.length}`);
 
         for (const group of groupMap.values()) {
           const P = NOTION_PROPS.COMMENTS;
@@ -80,18 +79,15 @@ Deno.serve(async (req) => {
           } else {
             properties[P.CONTINUE] = { rich_text: [{ text: { content: group.content } }] };
           }
-          logs.push(`posting comment group: type=${group.type} targets=${group.targets}`);
-          const commentResult = await notionPost(notion_token, '/pages', {
+          await notionPost(notion_token, '/pages', {
             parent: { database_id: notion_comments_db_id },
             properties,
           });
-          logs.push(`comment group posted OK → id=${commentResult.id} url=${commentResult.url}`);
         }
 
-        for (const mvp of rows.filter((c) => c.type === 'mvp')) {
+        for (const mvp of mvpRows) {
           const P = NOTION_PROPS.MVP;
-          logs.push(`posting MVP: target=${mvp.target_name}`);
-          const mvpResult = await notionPost(notion_token, '/pages', {
+          await notionPost(notion_token, '/pages', {
             parent: { database_id: notion_mvp_db_id },
             properties: {
               [P.NAME]: { title: [{ text: { content: mvp.target_name } }] },
@@ -100,16 +96,14 @@ Deno.serve(async (req) => {
               [P.SPRINT_TYPE]: { select: { name: sprint.name } },
             },
           });
-          logs.push(`MVP posted OK → id=${mvpResult.id} url=${mvpResult.url}`);
         }
 
-        logs.push(`sprint ${sprint.id}: marking synced`);
         const { error: syncError } = await supabase.rpc('mark_sprint_notion_synced', { p_sprint_id: sprint.id });
         if (syncError) throw syncError;
         stats.synced++;
       } catch (err) {
         const message = (err as any)?.message ?? JSON.stringify(err);
-        logs.push(`ERROR for sprint ${sprint.id}: ${message}`);
+        console.error(`[notion-sync] sprint=${sprint.id} error: ${message}`);
         await supabase.rpc('mark_sprint_notion_failed', {
           p_sprint_id: sprint.id,
           p_error: message,
@@ -119,7 +113,8 @@ Deno.serve(async (req) => {
       }
     }
 
-    return new Response(JSON.stringify({ ...stats, logs }), { status: 200 });
+    console.log(`[notion-sync] done`, stats);
+    return new Response(JSON.stringify(stats), { status: 200 });
   } catch (err) {
     const message = (err as any)?.message ?? JSON.stringify(err);
     console.error(message);
