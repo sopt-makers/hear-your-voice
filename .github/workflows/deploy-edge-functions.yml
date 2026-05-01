@@ -5,11 +5,19 @@ on:
     branches: [main, develop]
     paths:
       - 'supabase/functions/**'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'dev'
+        type: choice
+        options: [prod, dev]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+    environment: ${{ github.event_name == 'workflow_dispatch' && inputs.environment || (github.ref == 'refs/heads/main' && 'prod' || 'dev') }}
     steps:
       - uses: actions/checkout@v4
       - uses: supabase/setup-cli@v1
