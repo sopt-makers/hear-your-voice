@@ -87,7 +87,8 @@ Deno.serve(async (req) => {
           });
         }
 
-        await supabase.rpc('mark_sprint_notion_synced', { p_sprint_id: sprint.id });
+        const { error: syncError } = await supabase.rpc('mark_sprint_notion_synced', { p_sprint_id: sprint.id });
+        if (syncError) throw syncError;
         stats.synced++;
       } catch (err) {
         const message = (err as any)?.message ?? JSON.stringify(err);
