@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { getKstDateString } from '../_shared/dates.ts';
-import { notionPost } from './notion.ts';
+import { notionPost, NOTION_PROPS, NOTION_GENERATION } from './notion.ts';
 
 interface SprintRow {
   id: number;
@@ -36,10 +36,13 @@ Deno.serve(async (req) => {
     );
 
     const runDate = getKstDateString();
+    console.log(`[notion-sync] runDate=${runDate}`);
 
     const { data: sprints, error: sprintError } = await supabase
       .rpc('get_sprints_for_notion_delivery', { p_run_date: runDate });
     if (sprintError) throw sprintError;
+
+    console.log(`[notion-sync] sprints=${(sprints ?? []).length}`);
 
     const stats = { processed: 0, synced: 0, failed: 0 };
 
@@ -52,6 +55,7 @@ Deno.serve(async (req) => {
         if (commentError) throw commentError;
 
         const rows = (comments ?? []) as CommentRow[];
+
         const groupMap = new Map<string, { type: string; content: string; targets: string[] }>();
         for (const c of rows) {
           if (c.type !== 'start' && c.type !== 'continue') continue;
@@ -60,15 +64,20 @@ Deno.serve(async (req) => {
           groupMap.get(key)!.targets.push(c.target_name);
         }
 
+        const mvpRows = rows.filter((c) => c.type === 'mvp');
+        console.log(`[notion-sync] sprint=${sprint.id} comments=${rows.length} groups=${groupMap.size} mvps=${mvpRows.length}`);
+
         for (const group of groupMap.values()) {
+          const P = NOTION_PROPS.COMMENTS;
           const properties: Record<string, unknown> = {
-            receiver: { multi_select: group.targets.map((name) => ({ name })) },
-            '스프린트 종류': { select: { name: sprint.name } },
+            [P.RECEIVER]: { multi_select: group.targets.map((name) => ({ name })) },
+            [P.GENERATION]: { select: { name: NOTION_GENERATION } },
+            [P.SPRINT_TYPE]: { select: { name: sprint.name } },
           };
           if (group.type === 'start') {
-            properties['start comment'] = { rich_text: [{ text: { content: group.content } }] };
+            properties[P.START] = { rich_text: [{ text: { content: group.content } }] };
           } else {
-            properties['continue comment'] = { rich_text: [{ text: { content: group.content } }] };
+            properties[P.CONTINUE] = { rich_text: [{ text: { content: group.content } }] };
           }
           await notionPost(notion_token, '/pages', {
             parent: { database_id: notion_comments_db_id },
@@ -76,13 +85,15 @@ Deno.serve(async (req) => {
           });
         }
 
-        for (const mvp of rows.filter((c) => c.type === 'mvp')) {
+        for (const mvp of mvpRows) {
+          const P = NOTION_PROPS.MVP;
           await notionPost(notion_token, '/pages', {
             parent: { database_id: notion_mvp_db_id },
             properties: {
-              이름: { title: [{ text: { content: mvp.target_name } }] },
-              '자세한 내용': { rich_text: [{ text: { content: mvp.content } }] },
-              '스프린트 종류': { select: { name: sprint.name } },
+              [P.NAME]: { title: [{ text: { content: mvp.target_name } }] },
+              [P.DETAIL]: { rich_text: [{ text: { content: mvp.content } }] },
+              [P.GENERATION]: { select: { name: NOTION_GENERATION } },
+              [P.SPRINT_TYPE]: { select: { name: sprint.name } },
             },
           });
         }
@@ -92,7 +103,7 @@ Deno.serve(async (req) => {
         stats.synced++;
       } catch (err) {
         const message = (err as any)?.message ?? JSON.stringify(err);
-        console.error(`Notion sync failed for sprint ${sprint.id}: ${message}`);
+        console.error(`[notion-sync] sprint=${sprint.id} error: ${message}`);
         await supabase.rpc('mark_sprint_notion_failed', {
           p_sprint_id: sprint.id,
           p_error: message,
@@ -102,6 +113,7 @@ Deno.serve(async (req) => {
       }
     }
 
+    console.log(`[notion-sync] done`, stats);
     return new Response(JSON.stringify(stats), { status: 200 });
   } catch (err) {
     const message = (err as any)?.message ?? JSON.stringify(err);

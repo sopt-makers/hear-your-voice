@@ -6,19 +6,21 @@ export interface CommentRow {
   content: string;
 }
 
-export function buildSlackMessage(name: string, sprintName: string, rows: CommentRow[]): unknown[] {
+export function buildSlackMessage(name: string, sprintName: string, rows: CommentRow[], slackUserName: string | null): unknown[] {
   const starts = rows.filter((r) => r.type === 'start').map((r) => `• ${r.content}`);
   const continues = rows.filter((r) => r.type === 'continue').map((r) => `• ${r.content}`);
   const stops = rows.filter((r) => r.type === 'stop').map((r) => `• ${r.content}`);
   const mvps = rows.filter((r) => r.type === 'mvp');
 
+  const nameDisplay = slackUserName ? `<@${slackUserName}>` : `*${name}*`;
+
   const blocks: unknown[] = [];
 
   blocks.push({
-    type: 'section',
+    type: 'context',
     text: {
       type: 'mrkdwn',
-      text: `무우~ 🐮 *${name}*님에게 *${sprintName}* 동료들의 메세지가 도착했어요!`,
+      text: `무우~ 🐮 ${nameDisplay}님에게 *${sprintName}* 동료들의 메세지가 도착했어요!`,
     },
   });
 
@@ -55,11 +57,12 @@ export function buildSlackMessage(name: string, sprintName: string, rows: Commen
   }
 
   if (mvps.length > 0) {
+    const mvpContents = mvps.map((r) => `• ${r.content}`).join('\n');
     blocks.push({
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `❤️ *동료 ${mvps.length}명이 ${name}님을 MVP로 선택했어요.*`,
+        text: `❤️ *동료 ${mvps.length}명이 ${name}님을 MVP로 선택했어요.*\n${mvpContents}`,
       },
     });
   }

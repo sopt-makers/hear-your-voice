@@ -8,9 +8,9 @@ on:
       environment:
         description: 'Target environment'
         required: true
-        default: 'prod'
+        default: 'dev'
         type: choice
-        options: [prod, dev]
+        options: [dev, prod]
 
 jobs:
   sync:
