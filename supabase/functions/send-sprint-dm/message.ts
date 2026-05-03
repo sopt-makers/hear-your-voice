@@ -14,10 +14,10 @@ export function buildSlackMessage(
   rows: CommentRow[],
   slackUserName: string | null,
 ): Block[] {
-  const starts = rows.filter((r) => r.type === 'start').map((r) => `• ${r.content}`);
-  const continues = rows.filter((r) => r.type === 'continue').map((r) => `• ${r.content}`);
-  const stops = rows.filter((r) => r.type === 'stop').map((r) => `• ${r.content}`);
-  const mvps = rows.filter((r) => r.type === 'mvp').map((r) => `• ${r.content}`);
+  const starts = rows.filter((r) => r.type === 'start').map((r) => r.content);
+  const continues = rows.filter((r) => r.type === 'continue').map((r) => r.content);
+  const stops = rows.filter((r) => r.type === 'stop').map((r) => r.content);
+  const mvps = rows.filter((r) => r.type === 'mvp').map((r) => r.content);
   const nameDisplay = slackUserName ? `<@${slackUserName}>` : `*${name}*`;
   const blocks: Block[] = [];
 
@@ -34,14 +34,17 @@ export function buildSlackMessage(
     elements: [
       {
         type: 'mrkdwn',
-        text: `<@${slackUserName}>님에게 *${sprintName}* 피드백이 도착했어요!`,
+        text: `${nameDisplay}님에게 *${sprintName}* 피드백이 도착했어요!`,
       },
     ],
   });
 
   blocks.push({ type: 'divider' });
 
-  const formatList = (arr: string[]) => arr.map((v) => `• ${v.replace(/^[-•]\s*/, '')}`).join('\n');
+  const formatList = (arr: string[]) =>
+    arr
+      .map((v) => v.split('\n').map((line) => `> ${line}`).join('\n'))
+      .join('\n\n');
 
   // 🐣 START
   if (starts.length > 0) {
