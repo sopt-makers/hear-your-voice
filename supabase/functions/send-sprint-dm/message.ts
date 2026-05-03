@@ -17,7 +17,7 @@ export function buildSlackMessage(
   const starts = rows.filter((r) => r.type === 'start').map((r) => `• ${r.content}`);
   const continues = rows.filter((r) => r.type === 'continue').map((r) => `• ${r.content}`);
   const stops = rows.filter((r) => r.type === 'stop').map((r) => `• ${r.content}`);
-  const mvps = rows.filter((r) => r.type === 'mvp');
+  const mvps = rows.filter((r) => r.type === 'mvp').map((r) => `• ${r.content}`);
   const nameDisplay = slackUserName ? `<@${slackUserName}>` : `*${name}*`;
   const blocks: Block[] = [];
 
@@ -49,7 +49,7 @@ export function buildSlackMessage(
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*${name}님의 성장을 위해 제안하고 싶어요.*\n\n${formatList(starts)}`,
+        text: `*👉 ${name}님의 성장을 위해 제안하고 싶어요.*\n\n${formatList(starts)}`,
       },
     });
   }
@@ -60,7 +60,7 @@ export function buildSlackMessage(
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*${name}님이 잘하고 있는 부분이에요. 앞으로도 이렇게만 해주세요!*\n\n${formatList(continues)}`,
+        text: `*👉 ${name}님이 잘하고 있는 부분이에요. 앞으로도 이렇게만 해주세요!*\n\n${formatList(continues)}`,
       },
     });
   }
@@ -71,7 +71,7 @@ export function buildSlackMessage(
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*${name}님! 충분히 잘하고 있지만, 이 부분은 더 노력해주시면 좋겠어요.*\n\n${formatList(stops)}`,
+        text: `*👉 ${name}님! 충분히 잘하고 있지만, 이 부분은 더 노력해주시면 좋겠어요.*\n\n${formatList(stops)}`,
       },
     });
   }
@@ -82,9 +82,7 @@ export function buildSlackMessage(
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*동료 ${mvps.length}명이 ${name}님을 MVP로 선택했어요.*\n\n${mvps
-          .map((v) => `• ${v.content.replace(/^[-•]\s*/, '')}`)
-          .join('\n')}`,
+        text: `*👉 동료 ${mvps.length}명이 ${name}님을 MVP로 선택했어요.*\n\n${formatList(mvps)}`,
       },
     });
   }
