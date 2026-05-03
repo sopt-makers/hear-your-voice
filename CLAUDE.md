@@ -144,7 +144,7 @@ src/
 | `Template` | 여러 Page가 공유하는 로직+구조 묶음 | `PeerCommentStepTemplate` |
 | `Layout` | 도메인 로직 없는 순수 레이아웃 껍데기 | `PageLayout`, `StepLayout` |
 | `Input` | 단일 값을 입력받는 폼 요소 | `SprintCodeInput` |
-| `Field` | 라벨·설명 포함한 폼 필드 묶음 | `SelectField`, `InputField` |
+| `Field` | 라벨·설명 포함한 폼 필드 묶음 | `SelectField`, `TextAreaField` |
 | `Picker` | 목록에서 항목을 선택하는 UI | `PeerMemberPicker` |
 | `Chip` | 선택된 항목을 표시하는 태그 UI | `MemberChip` |
 | `Repeater` | 동일한 입력 블록을 반복·관리 | `PeerCommentRepeater` |

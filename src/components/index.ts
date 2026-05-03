@@ -6,7 +6,7 @@ export { default as ContentHeading } from './common/ui/ContentHeading';
 export { default as FieldSection } from './common/ui/FieldSection';
 export { default as ImageSection } from './common/ui/ImageSection';
 export { default as SelectField } from './common/form/SelectField';
-export { default as InputField } from './common/form/InputField';
+export { default as TextAreaField } from './common/form/TextAreaField';
 export { default as SprintCodeInput, SPRINT_CODE_LENGTH } from './sprint-code/SprintCodeInput';
 export { default as PeerCommentRepeater } from './peer-comment/PeerCommentRepeater';
 export { default as PeerCommentStepTemplate } from './peer-comment/PeerCommentStepTemplate';

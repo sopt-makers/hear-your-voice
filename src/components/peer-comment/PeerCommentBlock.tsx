@@ -2,7 +2,7 @@ import { IconTrash } from '@sopt-makers/icons';
 import type { PeerCommentRowState, PeerCommentStepContent } from '@types';
 import type { PeerMember } from '@types';
 import PeerCommentRecipientBlock from './PeerCommentRecipientBlock';
-import InputField from '../common/form/InputField';
+import TextAreaField from '../common/form/TextAreaField';
 import * as styles from './PeerCommentBlock.css';
 
 interface PeerCommentBlockProps {
@@ -51,7 +51,7 @@ function PeerCommentBlock({
             });
           }}
         />
-        <InputField
+        <TextAreaField
           labelText={content.questionLabel}
           required={false}
           placeholder={content.textPlaceholder}

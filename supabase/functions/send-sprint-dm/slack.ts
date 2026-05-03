@@ -23,7 +23,7 @@ export async function slackSendDm(token: string, slackUserName: string, blocks: 
 
   const postRes = await slackFetch(`${SLACK_API}/chat.postMessage`, token, {
     channel: openJson.channel.id,
-    text: '스프린트 피드백이 도착했어요! 🐮',
+    text: '🐮 너목들 메시지가 도착했어요!',
     blocks,
   });
   const postJson = await postRes.json();
