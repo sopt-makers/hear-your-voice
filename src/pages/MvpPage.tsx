@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FieldBox, useToast } from '@sopt-makers/ui';
 import { IconUser, IconXCircle } from '@sopt-makers/icons';
-import { StepLayout, ContentHeading, FieldSection, MemberChip, InputField } from '@components';
+import { StepLayout, ContentHeading, FieldSection, MemberChip, TextAreaField } from '@components';
 import { usePeerMembers, useCommentForm, useErrorHandler } from '@hooks';
 import { submitComment } from '@lib/api/comment';
 import { callApi } from '@lib/apiClient';
@@ -146,7 +146,7 @@ function MvpPage() {
       </FieldSection>
 
       <FieldSection>
-        <InputField
+        <TextAreaField
           labelText="MVP 선정 이유를 작성해주세요."
           required
           placeholder="선정하는 이유"

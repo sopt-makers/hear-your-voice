@@ -1,7 +1,7 @@
 import type { ChangeEvent } from 'react';
-import { TextField } from '@sopt-makers/ui';
+import { TextArea, TopAddon, FieldBoxLabel } from '@sopt-makers/ui';
 
-interface InputFieldProps {
+interface TextAreaFieldProps {
   labelText: string;
   required?: boolean;
   placeholder?: string;
@@ -9,21 +9,20 @@ interface InputFieldProps {
   onChange: (value: string) => void;
 }
 
-function InputField({
+function TextAreaField({
   labelText,
   required = false,
   placeholder,
   value,
   onChange,
-}: InputFieldProps) {
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+}: TextAreaFieldProps) {
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(event.target.value);
   };
 
   return (
-    <TextField
-      labelText={labelText}
-      required={required}
+    <TextArea
+      topAddon={<TopAddon leftAddon={<FieldBoxLabel label={labelText} required={required} />} />}
       placeholder={placeholder}
       value={value}
       onChange={handleChange}
@@ -31,4 +30,4 @@ function InputField({
   );
 }
 
-export default InputField;
+export default TextAreaField;
