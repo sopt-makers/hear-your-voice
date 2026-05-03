@@ -26,6 +26,7 @@ function TextAreaField({
       placeholder={placeholder}
       value={value}
       onChange={handleChange}
+      disableEnterSubmit
     />
   );
 }
