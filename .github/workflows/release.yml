@@ -21,10 +21,8 @@ jobs:
       # 2️⃣ main → develop fast-forward sync
       - name: Sync main → develop (fast-forward only)
         run: |
-          git fetch origin
-
-          git checkout develop
-          git pull origin develop
+          git fetch origin main develop
+          git checkout -B develop origin/develop
 
           git merge --ff-only origin/main
 
