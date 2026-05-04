@@ -1,0 +1,56 @@
+name: Release & Sync
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ 코드 + 태그 가져오기
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2️⃣ 날짜 기반 태그 생성
+      - name: Generate tag
+        id: tag
+        run: |
+          DATE=$(date +%Y%m%d-%H%M)
+          TAG="release-$DATE"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      # 3️⃣ 태그 push
+      - name: Create Git Tag
+        run: |
+          git tag ${{ steps.tag.outputs.tag }}
+          git push origin ${{ steps.tag.outputs.tag }}
+
+      # 4️⃣ release-drafter로 릴리즈 생성 + publish
+      - name: Create GitHub Release
+        uses: release-drafter/release-drafter@v6
+        with:
+          publish: true
+          tag: ${{ steps.tag.outputs.tag }}
+          name: ${{ steps.tag.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 5️⃣ main → develop fast-forward sync
+      - name: Sync main → develop (fast-forward only)
+        run: |
+          git fetch origin
+
+          git checkout develop
+          git pull origin develop
+
+          git merge --ff-only origin/main || {
+            echo "⚠️ Fast-forward 불가 - 수동 sync 필요"
+            exit 0
+          }
+
+          git push origin develop
