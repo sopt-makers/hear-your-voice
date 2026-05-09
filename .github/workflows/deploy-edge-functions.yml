@@ -1,0 +1,36 @@
+name: Deploy Edge Functions
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'supabase/functions/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event_name == 'workflow_dispatch' && inputs.environment || (github.ref == 'refs/heads/main' && 'prod' || 'dev') }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Sync Supabase secrets
+        run: |
+          supabase secrets set \
+            CRON_SECRET=${{ secrets.CRON_SECRET }} \
+            NOTION_TOKEN=${{ secrets.NOTION_TOKEN }} \
+            NOTION_COMMENTS_DB_ID=${{ secrets.NOTION_COMMENTS_DB_ID }} \
+            NOTION_MVP_DB_ID=${{ secrets.NOTION_MVP_DB_ID }} \
+            SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }} \
+            --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+      - name: Deploy Edge Functions
+        run: |
+          supabase functions deploy sync-sprint-to-notion --project-ref ${{ secrets.SUPABASE_PROJECT_ID }} --no-verify-jwt
+          supabase functions deploy send-sprint-dm --project-ref ${{ secrets.SUPABASE_PROJECT_ID }} --no-verify-jwt
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}

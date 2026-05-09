@@ -1,0 +1,27 @@
+import { useCallback, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '@sopt-makers/ui';
+import { NetworkError, ServiceError } from '@lib/errors';
+
+export function useErrorHandler() {
+  const navigate = useNavigate();
+  const toast = useToast();
+  const toastRef = useRef(toast);
+  toastRef.current = toast;
+
+  const handleError = useCallback((error: unknown) => {
+    if (error instanceof NetworkError) {
+      toastRef.current.open({ icon: 'error', content: error.message });
+      return;
+    }
+
+    if (error instanceof ServiceError) {
+      navigate('/error');
+      return;
+    }
+
+    throw error;
+  }, [navigate]);
+
+  return { handleError };
+}
