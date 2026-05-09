@@ -285,6 +285,9 @@ RPC는 크게 프론트엔드 실시간 입력 플로우와 운영 자동화 배
 - 동작:
   - `sprints` 테이블에서 `current_date between start_date and end_date` 조건을 만족하는 row 존재 여부를 반환한다.
 
+<details>
+<summary>SQL 보기</summary>
+
 ```sql
 CREATE OR REPLACE FUNCTION public.has_active_sprint()
  RETURNS boolean
@@ -306,6 +309,8 @@ end;
 $function$
 ```
 
+</details>
+
 #### `get_sprint_info_by_code(p_auth_code text)`
 
 - 목적: 사용자가 입력한 인증 코드가 현재 작성 가능한 스프린트인지 검증한다.
@@ -316,6 +321,9 @@ $function$
 - 동작:
   - `auth_code`가 일치하고 현재 날짜가 작성 기간 안에 있는 `sprints`를 조회한다.
   - 없으면 `(false, null)` 형태 결과를 반환한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.get_sprint_info_by_code(p_auth_code text)
@@ -345,12 +353,17 @@ end;
 $function$
 ```
 
+</details>
+
 #### `get_chapter_codes()`
 
 - 목적: 챕터 선택지 목록을 제공한다.
 - 반환: `table(code, name)`
 - 동작:
   - `codes`에서 `code_group = 'chapter'`만 조회해 `code` 순으로 정렬한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.get_chapter_codes()
@@ -368,12 +381,17 @@ end;
 $function$
 ```
 
+</details>
+
 #### `get_team_codes()`
 
 - 목적: 팀 선택지 목록을 제공한다.
 - 반환: `table(code, name)`
 - 동작:
   - `codes`에서 `code_group = 'team'`만 조회해 `code` 순으로 정렬한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.get_team_codes()
@@ -391,12 +409,17 @@ end;
 $function$
 ```
 
+</details>
+
 #### `is_valid_user(p_name text, p_team_code text, p_chapter_code text)`
 
 - 목적: 설문 작성자가 실제 등록된 사용자 조합인지 검증한다.
 - 반환: `boolean`
 - 동작:
   - `users` 테이블에서 `name`, `team_code`, `chapter_code`가 모두 일치하는 row 존재 여부를 반환한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.is_valid_user(p_name text, p_team_code text, p_chapter_code text)
@@ -421,6 +444,8 @@ end;
 $function$
 ```
 
+</details>
+
 #### `get_users_by_sprint(p_auth_code text, p_name text, p_team_code text, p_chapter_code text)`
 
 - 목적: 현재 작성자가 피드백을 보낼 수 있는 동료 목록을 조회한다.
@@ -429,6 +454,9 @@ $function$
   - `auth_code`로 스프린트를 찾고 현재 작성 기간인지 확인한다.
   - 스프린트 타입이 `team`이면 같은 `team_code`, `chapter`면 같은 `chapter_code` 사용자를 조회한다.
   - 작성자 본인 이름은 제외한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.get_users_by_sprint(
@@ -454,6 +482,8 @@ AS $function$
 $function$
 ```
 
+</details>
+
 #### `search_users_by_name_prefix(p_name text)`
 
 - 목적: 이름 prefix 기반 사용자 검색을 수행한다.
@@ -462,6 +492,9 @@ $function$
   - `users.name ilike p_name || '%'` 조건으로 조회하고 이름순 정렬한다.
 - 참고:
   - 현재 프론트 코드에서는 직접 사용 흔적이 보이지 않지만, 관리 기능이나 향후 검색 UX에 활용할 수 있다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.search_users_by_name_prefix(p_name text)
@@ -475,6 +508,8 @@ AS $function$
     order by name;
 $function$
 ```
+
+</details>
 
 #### `submit_comments(p_payload jsonb)`
 
@@ -494,6 +529,9 @@ $function$
 - 특징:
   - 프론트는 한 번의 RPC 호출만 수행하고, DB 내부에서 여러 row insert가 일괄 처리된다.
   - 작성자 미존재와 유효하지 않은 스프린트를 명시적 에러 코드로 구분한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.submit_comments(p_payload jsonb)
@@ -592,6 +630,8 @@ end;
 $function$
 ```
 
+</details>
+
 ### 운영 자동화용 RPC 개요
 
 | RPC | 목적 |
@@ -624,6 +664,9 @@ $function$
   - `p_run_date <= notion_retry_deadline`
   - 같은 날짜에 이미 시도하지 않은 건만 반환한다.
 
+<details>
+<summary>SQL 보기</summary>
+
 ```sql
 CREATE OR REPLACE FUNCTION public.get_sprints_for_notion_delivery(p_run_date date)
  RETURNS TABLE(id bigint, name text)
@@ -642,6 +685,8 @@ AS $function$
 $function$
 ```
 
+</details>
+
 ##### `get_comments_for_sprint(p_sprint_id integer)`
 
 - 목적: Notion 적재용 코멘트 원본을 가져온다.
@@ -650,6 +695,9 @@ $function$
   - `comments`, `users`를 조인해 발신자와 수신자 이름까지 함께 반환한다.
 - 특징:
   - Notion 동기화 시 발신자/본문 기준 그룹핑을 위해 필요한 최소 정보만 노출한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.get_comments_for_sprint(p_sprint_id integer)
@@ -670,6 +718,8 @@ AS $function$
 $function$
 ```
 
+</details>
+
 ##### `mark_sprint_notion_synced(p_sprint_id bigint)`
 
 - 목적: Notion 동기화 성공 상태를 기록한다.
@@ -679,6 +729,9 @@ $function$
   - `notion_last_error = NULL`
   - `notion_sync_attempt_count += 1`
   - `notion_last_attempted_at = now()`
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.mark_sprint_notion_synced(p_sprint_id bigint)
@@ -696,6 +749,8 @@ AS $function$
 $function$
 ```
 
+</details>
+
 ##### `mark_sprint_notion_failed(p_sprint_id bigint, p_error text, p_run_date date)`
 
 - 목적: Notion 동기화 실패와 재시도 상태를 기록한다.
@@ -703,6 +758,9 @@ $function$
   - 시도 횟수를 증가시킨다.
   - 3회 이상 시도했거나 재시도 마감일을 넘기면 `expired`, 아니면 `failed`로 전환한다.
   - 마지막 시도 시각과 에러 메시지를 저장한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.mark_sprint_notion_failed(
@@ -740,6 +798,8 @@ END;
 $function$
 ```
 
+</details>
+
 #### Slack DM 큐 생성/조회 관련
 
 ##### `get_sprints_for_dm_enqueue(p_run_date date)`
@@ -749,6 +809,9 @@ $function$
 - 동작:
   - `end_date = p_run_date - 1 day` 인 스프린트를 조회한다.
   - 재시도 마감일은 `end_date + 3 days`로 계산한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.get_sprints_for_dm_enqueue(p_run_date date)
@@ -764,12 +827,17 @@ AS $function$
 $function$
 ```
 
+</details>
+
 ##### `get_sprint_comment_rows(p_sprint_id bigint)`
 
 - 목적: 유저별 DM 메시지 구성을 위한 코멘트 row를 조회한다.
 - 반환: `table(target_user_id, slack_user_name, target_name, type, content)`
 - 동작:
   - `comments`와 `users`를 조인해 수신자 단위 메시지 구성에 필요한 값을 모두 반환한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.get_sprint_comment_rows(p_sprint_id bigint)
@@ -788,6 +856,8 @@ AS $function$
 $function$
 ```
 
+</details>
+
 ##### `enqueue_sprint_dm_delivery(...)`
 
 - 목적: 수신자별 DM 발송 큐 row를 생성한다.
@@ -796,6 +866,9 @@ $function$
   - `(sprint_id, target_user_id)` 충돌 시 `DO NOTHING` 처리한다.
 - 특징:
   - 같은 스프린트와 같은 수신자 조합에 대해 중복 큐 적재를 방지한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.enqueue_sprint_dm_delivery(
@@ -831,6 +904,8 @@ AS $function$
 $function$
 ```
 
+</details>
+
 ##### `get_due_sprint_dm_deliveries(p_run_date date)`
 
 - 목적: 현재 발송해야 할 delivery를 잠그고 가져온다.
@@ -844,6 +919,9 @@ $function$
   - 조건을 만족하는 row를 `FOR UPDATE SKIP LOCKED`로 잡은 뒤 `status = 'processing'`으로 변경하면서 반환한다.
 - 특징:
   - 동시에 여러 워커가 돌아도 중복 발송 가능성을 낮춘다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.get_due_sprint_dm_deliveries(p_run_date date)
@@ -877,6 +955,8 @@ END;
 $function$
 ```
 
+</details>
+
 ##### `recover_stale_processing_deliveries()`
 
 - 목적: 오래된 `processing` 상태를 복구한다.
@@ -884,6 +964,9 @@ $function$
 - 동작:
   - `slack_message_ts`가 있으면 실제 발송 후 DB 갱신만 실패한 것으로 보고 `sent`로 복구한다.
   - `slack_message_ts`가 없으면 발송 불확실 상태로 보고 `failed`로 되돌린다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.recover_stale_processing_deliveries()
@@ -916,12 +999,17 @@ END;
 $function$
 ```
 
+</details>
+
 ##### `expire_sprint_dm_deliveries(p_run_date date)`
 
 - 목적: 재시도 기한이 지난 delivery를 만료 처리한다.
 - 반환: `integer`
 - 동작:
   - `status in ('pending', 'failed')` 이고 `retry_deadline_date < p_run_date` 인 row를 `expired`로 바꾼다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.expire_sprint_dm_deliveries(p_run_date date)
@@ -944,6 +1032,8 @@ END;
 $function$
 ```
 
+</details>
+
 ##### `mark_sprint_dm_sent(p_delivery_id bigint, p_slack_message_ts text)`
 
 - 목적: Slack DM 발송 성공 상태를 기록한다.
@@ -953,6 +1043,9 @@ $function$
   - `last_error = NULL`
   - `slack_message_ts` 저장
   - 시도 횟수와 시도 시각 갱신
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.mark_sprint_dm_sent(p_delivery_id bigint, p_slack_message_ts text)
@@ -973,6 +1066,8 @@ AS $function$
 $function$
 ```
 
+</details>
+
 ##### `mark_sprint_dm_failed(p_delivery_id bigint, p_error text, p_next_retry_date date)`
 
 - 목적: Slack DM 발송 실패와 재시도 정보를 기록한다.
@@ -980,6 +1075,9 @@ $function$
   - 시도 횟수를 증가시킨다.
   - 다음 재시도일이 마감일을 넘기거나 3회 이상이면 `expired`, 아니면 `failed`로 저장한다.
   - 마지막 에러, 시도 시각, 다음 재시도일을 함께 기록한다.
+
+<details>
+<summary>SQL 보기</summary>
 
 ```sql
 CREATE OR REPLACE FUNCTION public.mark_sprint_dm_failed(
@@ -1019,6 +1117,8 @@ BEGIN
 END;
 $function$
 ```
+
+</details>
 
 ## 데이터 흐름 관점 요약
 

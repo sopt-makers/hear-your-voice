@@ -7,7 +7,11 @@
 - Vite
 - React Router v7
 - vanilla-extract
-- `@sopt-makers/ui`
+
+## MDS 사용
+- @sopt-makers/ui
+- @sopt-makers/colors
+- @sopt-makers/fonts
 
 ## View 목록
 

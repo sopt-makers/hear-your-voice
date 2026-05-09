@@ -317,8 +317,3 @@ Edge Function은 아래 형태의 집계 결과를 반환한다.
 
 - `.github/workflows/sync-sprint-to-notion.yml`
 - `.github/workflows/send-sprint-dm.yml`
-
-### 참고 문서
-
-- [`docs/notify-sprint.md`](./notify-sprint.md)
-- [`docs/notify-sprint-v2.md`](./notify-sprint-v2.md)
