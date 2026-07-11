@@ -12,7 +12,7 @@ import * as styles from './MvpPage.css';
 
 function MvpPage() {
   const navigate = useNavigate();
-  const { data, update, mvpDraft, updateMvpDraft } = useCommentForm();
+  const { data, mvpDraft, updateMvpDraft, reset } = useCommentForm();
   const peerMembers = usePeerMembers();
   const toast = useToast();
   const { handleError } = useErrorHandler();
@@ -45,7 +45,7 @@ function MvpPage() {
       const result = await callApi(() => submitComment(payload));
 
       if (result.code === 'SUCCESS') {
-        update({ mvp });
+        reset();
         navigate('/closing');
         return;
       }
