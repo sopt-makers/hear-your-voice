@@ -1,6 +1,12 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SprintCodeInput, SPRINT_CODE_LENGTH, StepLayout, ContentHeading, FieldSection } from '@components';
+import {
+  SprintCodeInput,
+  SPRINT_CODE_LENGTH,
+  StepLayout,
+  ContentHeading,
+  FieldSection,
+} from '@components';
 import { getSprintInfoByCode } from '@lib/api/sprint';
 import { useCommentForm, useErrorHandler } from '@hooks';
 import { callApi } from '@lib/apiClient';
@@ -31,7 +37,9 @@ function SprintCodePage() {
         resetCommentDrafts();
       }
       update({ p_sprint_auth_code: code });
-      navigate('/sprint-intro', { state: { sprintName: data.sprint_name, sprintType: data.sprint_type } });
+      navigate('/sprint-intro', {
+        state: { sprintName: data.sprint_name, sprintType: data.sprint_type },
+      });
     } catch (error) {
       handleError(error);
     }
@@ -46,7 +54,10 @@ function SprintCodePage() {
       totalSteps={6}
     >
       <FieldSection>
-        <ContentHeading title="스프린트 코드 입력" description="스프린트 확인을 위해 코드를 입력해주세요." />
+        <ContentHeading
+          title="스프린트 코드 입력"
+          description="스프린트 확인을 위해 코드를 입력해주세요."
+        />
       </FieldSection>
 
       <FieldSection>

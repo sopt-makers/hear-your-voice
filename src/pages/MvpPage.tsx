@@ -70,7 +70,9 @@ function MvpPage() {
       totalSteps={6}
       nextLabel="제출하기"
       showNextRightIcon={false}
-      onNext={() => { void handleSubmit(); }}
+      onNext={() => {
+        void handleSubmit();
+      }}
       isNextDisabled={!isAllFilled || isSubmitting}
     >
       <FieldSection>
@@ -102,9 +104,7 @@ function MvpPage() {
                 className={styles.searchInput}
                 placeholder="멤버 검색"
                 value={searchQuery}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setSearchQuery(e.target.value)
-                }
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
               />
               {searchQuery && (
                 <button

@@ -41,9 +41,8 @@ const initialMvpDraft: MvpDraft = { memberId: null, reason: '' };
 
 export function CommentFormProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<CommentFormState>(initialData);
-  const [peerRows, setPeerRows] = useState<Record<CommentsKey, PeerCommentRowState[]>>(
-    createInitialPeerRows,
-  );
+  const [peerRows, setPeerRows] =
+    useState<Record<CommentsKey, PeerCommentRowState[]>>(createInitialPeerRows);
   const [mvpDraft, setMvpDraft] = useState<MvpDraft>(initialMvpDraft);
 
   const update = useCallback((partial: Partial<CommentFormState>) => {
@@ -77,7 +76,16 @@ export function CommentFormProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ data, update, peerRows, updatePeerRows, mvpDraft, updateMvpDraft, reset, resetCommentDrafts }),
+    () => ({
+      data,
+      update,
+      peerRows,
+      updatePeerRows,
+      mvpDraft,
+      updateMvpDraft,
+      reset,
+      resetCommentDrafts,
+    }),
     [data, update, peerRows, updatePeerRows, mvpDraft, updateMvpDraft, reset, resetCommentDrafts],
   );
 

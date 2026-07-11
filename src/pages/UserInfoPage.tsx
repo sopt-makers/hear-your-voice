@@ -44,7 +44,9 @@ function UserInfoPage() {
       // 작성자가 바뀌면 조회되는 멤버 목록도 달라지므로 이전 코멘트·MVP 입력은 무효
       const hasUserChanged =
         data.user_name !== '' &&
-        (data.user_name !== name || data.user_team !== teamCode || data.user_chapter !== chapterCode);
+        (data.user_name !== name ||
+          data.user_team !== teamCode ||
+          data.user_chapter !== chapterCode);
       if (hasUserChanged) {
         resetCommentDrafts();
       }
