@@ -6,10 +6,10 @@ import { useCommentForm, useErrorHandler } from '@hooks';
 import { callApi } from '@lib/apiClient';
 
 function SprintCodePage() {
-  const [code, setCode] = useState('');
+  const { data, update } = useCommentForm();
+  const [code, setCode] = useState(() => data.p_sprint_auth_code);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
-  const { update } = useCommentForm();
   const { handleError } = useErrorHandler();
 
   const handleNext = useCallback(async () => {

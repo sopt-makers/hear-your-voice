@@ -12,15 +12,16 @@ import * as styles from './MvpPage.css';
 
 function MvpPage() {
   const navigate = useNavigate();
-  const { data, update } = useCommentForm();
+  const { data, update, mvpDraft, updateMvpDraft } = useCommentForm();
   const peerMembers = usePeerMembers();
   const toast = useToast();
   const { handleError } = useErrorHandler();
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedMember, setSelectedMember] = useState<PeerMember | null>(null);
-  const [reason, setReason] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const selectedMember = peerMembers.find((m) => m.userId === mvpDraft.memberId) ?? null;
+  const reason = mvpDraft.reason;
 
   const filteredMembers = searchQuery
     ? peerMembers.filter((m) => m.name.includes(searchQuery))
@@ -29,7 +30,7 @@ function MvpPage() {
   const isAllFilled = selectedMember !== null && reason.trim().length > 0;
 
   const handleSelectMember = (member: PeerMember) => {
-    setSelectedMember(member);
+    updateMvpDraft({ memberId: member.userId });
     setSearchQuery('');
   };
 
@@ -151,7 +152,7 @@ function MvpPage() {
           required
           placeholder="선정하는 이유"
           value={reason}
-          onChange={setReason}
+          onChange={(value) => updateMvpDraft({ reason: value })}
         />
       </FieldSection>
     </StepLayout>

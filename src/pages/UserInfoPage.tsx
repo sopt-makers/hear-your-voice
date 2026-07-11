@@ -9,15 +9,15 @@ import { useCommentForm, useErrorHandler } from '@hooks';
 import { callApi } from '@lib/apiClient';
 
 function UserInfoPage() {
-  const [name, setName] = useState('');
-  const [chapterCode, setChapterCode] = useState('');
-  const [teamCode, setTeamCode] = useState('');
+  const { data, update } = useCommentForm();
+  const [name, setName] = useState(() => data.user_name);
+  const [chapterCode, setChapterCode] = useState(() => data.user_chapter);
+  const [teamCode, setTeamCode] = useState(() => data.user_team);
   const [isError, setIsError] = useState(false);
   const [chapterOptions, setChapterOptions] = useState<{ label: string; value: string }[]>([]);
   const [teamOptions, setTeamOptions] = useState<{ label: string; value: string }[]>([]);
   const navigate = useNavigate();
   const toast = useToast();
-  const { update } = useCommentForm();
   const { handleError } = useErrorHandler();
 
   useEffect(() => {
@@ -82,11 +82,14 @@ function UserInfoPage() {
       </FieldSection>
 
       <FieldSection>
+        {/* SelectV2는 uncontrolled — 옵션 로딩 완료 시 key로 리마운트해 저장값을 defaultValue로 복원 */}
         <SelectField
+          key={chapterOptions.length === 0 ? 'chapter-loading' : 'chapter-ready'}
           labelText="챕터"
           descriptionText="본인의 챕터를 선택하세요."
           placeholder="챕터를 선택하세요."
           options={chapterOptions}
+          defaultValue={chapterOptions.find((o) => o.value === chapterCode) ?? null}
           required
           isError={isError}
           onChange={(value) => {
@@ -98,10 +101,12 @@ function UserInfoPage() {
 
       <FieldSection>
         <SelectField
+          key={teamOptions.length === 0 ? 'team-loading' : 'team-ready'}
           labelText="팀"
           descriptionText="본인의 팀을 선택하세요."
           placeholder="팀을 선택하세요."
           options={teamOptions}
+          defaultValue={teamOptions.find((o) => o.value === teamCode) ?? null}
           required
           isError={isError}
           onChange={(value) => {

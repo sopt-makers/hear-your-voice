@@ -1,10 +1,15 @@
 import { createContext, useState } from 'react';
 import type { ReactNode } from 'react';
-import type { CommentFormState } from '@types';
+import type { CommentFormState, CommentsKey, MvpDraft, PeerCommentRowState } from '@types';
+import { createEmptyPeerCommentRow } from '@utils/peerCommentUtils';
 
 interface CommentFormContextType {
   data: CommentFormState;
   update: (partial: Partial<CommentFormState>) => void;
+  peerRows: Record<CommentsKey, PeerCommentRowState[]>;
+  updatePeerRows: (key: CommentsKey, rows: PeerCommentRowState[]) => void;
+  mvpDraft: MvpDraft;
+  updateMvpDraft: (partial: Partial<MvpDraft>) => void;
 }
 
 const CommentFormContext = createContext<CommentFormContextType | null>(null);
@@ -20,14 +25,42 @@ const initialData: CommentFormState = {
   mvp: null,
 };
 
+function createInitialPeerRows(): Record<CommentsKey, PeerCommentRowState[]> {
+  return {
+    stop_comments: [createEmptyPeerCommentRow()],
+    start_comments: [createEmptyPeerCommentRow()],
+    continue_comments: [createEmptyPeerCommentRow()],
+  };
+}
+
+const initialMvpDraft: MvpDraft = { memberId: null, reason: '' };
+
 export function CommentFormProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<CommentFormState>(initialData);
+  const [peerRows, setPeerRows] = useState<Record<CommentsKey, PeerCommentRowState[]>>(
+    createInitialPeerRows,
+  );
+  const [mvpDraft, setMvpDraft] = useState<MvpDraft>(initialMvpDraft);
 
   const update = (partial: Partial<CommentFormState>) => {
     setData((prev) => ({ ...prev, ...partial }));
   };
 
-  return <CommentFormContext.Provider value={{ data, update }}>{children}</CommentFormContext.Provider>;
+  const updatePeerRows = (key: CommentsKey, rows: PeerCommentRowState[]) => {
+    setPeerRows((prev) => ({ ...prev, [key]: rows }));
+  };
+
+  const updateMvpDraft = (partial: Partial<MvpDraft>) => {
+    setMvpDraft((prev) => ({ ...prev, ...partial }));
+  };
+
+  return (
+    <CommentFormContext.Provider
+      value={{ data, update, peerRows, updatePeerRows, mvpDraft, updateMvpDraft }}
+    >
+      {children}
+    </CommentFormContext.Provider>
+  );
 }
 
 export { CommentFormContext };
