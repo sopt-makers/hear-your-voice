@@ -1,25 +1,32 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { PeerMember } from '@types';
 import { useCommentForm } from './useCommentForm';
 import { callApi } from '@lib/apiClient';
 import { getUsersBySprint } from '@lib/api/sprintPeers';
 import { useErrorHandler } from './useErrorHandler';
 
+interface PeerMembersResult {
+  /** 이 목록을 조회할 때 사용한 파라미터 key — 현재 파라미터와 다르면 stale */
+  key: string;
+  members: PeerMember[];
+}
+
+const NO_MEMBERS: PeerMember[] = [];
+
 export function usePeerMembers(): PeerMember[] {
   const { data } = useCommentForm();
   const { handleError } = useErrorHandler();
-  const [peerMembers, setPeerMembers] = useState<PeerMember[]>([]);
-  const requestSeqRef = useRef(0);
+  const [result, setResult] = useState<PeerMembersResult | null>(null);
 
   const { p_sprint_auth_code, user_name, user_team, user_chapter } = data;
+  const hasRequiredFields = Boolean(p_sprint_auth_code && user_name && user_team && user_chapter);
+  const paramsKey = `${p_sprint_auth_code}|${user_name}|${user_team}|${user_chapter}`;
 
   useEffect(() => {
-    if (!p_sprint_auth_code || !user_name || !user_team || !user_chapter) {
-      setPeerMembers([]);
+    if (!hasRequiredFields) {
       return;
     }
 
-    const requestSeq = (requestSeqRef.current += 1);
     let disposed = false;
     callApi(() =>
       getUsersBySprint({
@@ -30,19 +37,29 @@ export function usePeerMembers(): PeerMember[] {
       }),
     )
       .then((peers) => {
-        if (disposed || requestSeqRef.current !== requestSeq) return;
-        setPeerMembers(peers.map((p) => ({ name: p.name, userId: p.user_id })));
+        if (disposed) return;
+        setResult({
+          key: paramsKey,
+          members: peers.map((p) => ({ name: p.name, userId: p.user_id })),
+        });
       })
       .catch((error) => {
-        if (disposed || requestSeqRef.current !== requestSeq) return;
+        if (disposed) return;
         handleError(error);
       });
 
     return () => {
       disposed = true;
     };
-  }, [p_sprint_auth_code, user_name, user_team, user_chapter, handleError]);
+  }, [
+    hasRequiredFields,
+    paramsKey,
+    p_sprint_auth_code,
+    user_name,
+    user_team,
+    user_chapter,
+    handleError,
+  ]);
 
-  return peerMembers;
+  return result !== null && result.key === paramsKey ? result.members : NO_MEMBERS;
 }
-

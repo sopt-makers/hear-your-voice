@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ContentHeading from '../common/ui/ContentHeading';
 import FieldSection from '../common/ui/FieldSection';
@@ -6,11 +6,7 @@ import ImageSection from '../common/ui/ImageSection';
 import StepLayout from '../common/layout/StepLayout';
 import PeerCommentRepeater from './PeerCommentRepeater';
 import { useCommentForm, usePeerMembers } from '@hooks';
-import {
-  createEmptyPeerCommentRow,
-  expandPeerRowsToComments,
-  isPeerRowValid,
-} from '@utils/peerCommentUtils';
+import { expandPeerRowsToComments, isPeerRowValid } from '@utils/peerCommentUtils';
 import type { Comment, PeerCommentRowState, CommentsKey, PeerCommentStepContent } from '@types';
 import * as styles from './PeerCommentStepTemplate.css';
 
@@ -36,9 +32,16 @@ function PeerCommentStepTemplate({
 }: PeerCommentStepTemplateProps) {
   const { title, description, guideImages } = content;
   const navigate = useNavigate();
-  const { update } = useCommentForm();
+  const { update, peerRows, updatePeerRows } = useCommentForm();
   const peerMembers = usePeerMembers();
-  const [rows, setRows] = useState<PeerCommentRowState[]>(() => [createEmptyPeerCommentRow()]);
+  const rows = peerRows[content.commentKey];
+
+  const handleRowsChange = useCallback(
+    (next: PeerCommentRowState[]) => {
+      updatePeerRows(content.commentKey, next);
+    },
+    [updatePeerRows, content.commentKey],
+  );
 
   const isNextEnabled = rows.every(isPeerRowValid);
 
@@ -73,7 +76,7 @@ function PeerCommentStepTemplate({
         <PeerCommentRepeater
           content={content}
           rows={rows}
-          onRowsChange={setRows}
+          onRowsChange={handleRowsChange}
           peerMembers={peerMembers}
         />
       </div>

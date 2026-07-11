@@ -47,3 +47,9 @@ export interface PeerCommentRowState {
   memberIds: string[];
   text: string;
 }
+
+/** MVP 단계 입력 중간 상태 — 뒤로가기 후 복원을 위해 Context에 보관 */
+export interface MvpDraft {
+  memberId: string | null;
+  reason: string;
+}
