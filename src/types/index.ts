@@ -9,6 +9,7 @@ export type {
   PeerCommentKind,
   PeerCommentStepContent,
   PeerCommentRowState,
+  MvpDraft,
 } from './comment';
 export type { PeerMember } from './peer';
 export type { SprintInfo, SprintType } from './sprint';

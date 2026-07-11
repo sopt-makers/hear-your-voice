@@ -1,15 +1,22 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SprintCodeInput, SPRINT_CODE_LENGTH, StepLayout, ContentHeading, FieldSection } from '@components';
+import {
+  SprintCodeInput,
+  SPRINT_CODE_LENGTH,
+  StepLayout,
+  ContentHeading,
+  FieldSection,
+} from '@components';
 import { getSprintInfoByCode } from '@lib/api/sprint';
 import { useCommentForm, useErrorHandler } from '@hooks';
 import { callApi } from '@lib/apiClient';
 
 function SprintCodePage() {
-  const [code, setCode] = useState('');
+  const { data, update, resetCommentDrafts } = useCommentForm();
+  const savedCode = data.p_sprint_auth_code;
+  const [code, setCode] = useState(() => savedCode);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
-  const { update } = useCommentForm();
   const { handleError } = useErrorHandler();
 
   const handleNext = useCallback(async () => {
@@ -25,12 +32,18 @@ function SprintCodePage() {
         return;
       }
 
+      // 다른 스프린트 코드로 변경 시 이전 멤버 기준으로 작성한 코멘트·MVP는 무효
+      if (savedCode !== '' && savedCode !== code) {
+        resetCommentDrafts();
+      }
       update({ p_sprint_auth_code: code });
-      navigate('/sprint-intro', { state: { sprintName: data.sprint_name, sprintType: data.sprint_type } });
+      navigate('/sprint-intro', {
+        state: { sprintName: data.sprint_name, sprintType: data.sprint_type },
+      });
     } catch (error) {
       handleError(error);
     }
-  }, [code, update, navigate, handleError]);
+  }, [code, savedCode, update, resetCommentDrafts, navigate, handleError]);
 
   return (
     <StepLayout
@@ -41,7 +54,10 @@ function SprintCodePage() {
       totalSteps={6}
     >
       <FieldSection>
-        <ContentHeading title="스프린트 코드 입력" description="스프린트 확인을 위해 코드를 입력해주세요." />
+        <ContentHeading
+          title="스프린트 코드 입력"
+          description="스프린트 확인을 위해 코드를 입력해주세요."
+        />
       </FieldSection>
 
       <FieldSection>
