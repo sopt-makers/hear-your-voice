@@ -238,7 +238,8 @@ src/
 ### useEffect 의존성 주의
 
 - `useToast()`는 렌더링마다 새 객체를 반환하므로 `useCallback` deps에 직접 넣으면 무한 루프 발생
-- `useErrorHandler` 내부에서 `useRef`로 최신 참조를 유지하는 방식으로 해결되어 있음
+- `useErrorHandler`·`UserInfoPage`처럼 `useRef` + `useEffect`로 최신 참조를 유지하는 방식으로 해결
+  - 렌더 중 `ref.current`에 직접 대입하면 ESLint `react-hooks/refs` 규칙 위반 — 반드시 `useEffect` 안에서 갱신할 것
 - `handleError`를 `useEffect` deps에 넣는 것은 안전하나, `useToast()` 반환값 등 불안정한 참조는 deps에 넣지 않을 것
 
 ### Edge Function 수정 시
