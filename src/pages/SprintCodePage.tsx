@@ -6,8 +6,9 @@ import { useCommentForm, useErrorHandler } from '@hooks';
 import { callApi } from '@lib/apiClient';
 
 function SprintCodePage() {
-  const { data, update } = useCommentForm();
-  const [code, setCode] = useState(() => data.p_sprint_auth_code);
+  const { data, update, resetCommentDrafts } = useCommentForm();
+  const savedCode = data.p_sprint_auth_code;
+  const [code, setCode] = useState(() => savedCode);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
   const { handleError } = useErrorHandler();
@@ -25,12 +26,16 @@ function SprintCodePage() {
         return;
       }
 
+      // 다른 스프린트 코드로 변경 시 이전 멤버 기준으로 작성한 코멘트·MVP는 무효
+      if (savedCode !== '' && savedCode !== code) {
+        resetCommentDrafts();
+      }
       update({ p_sprint_auth_code: code });
       navigate('/sprint-intro', { state: { sprintName: data.sprint_name, sprintType: data.sprint_type } });
     } catch (error) {
       handleError(error);
     }
-  }, [code, update, navigate, handleError]);
+  }, [code, savedCode, update, resetCommentDrafts, navigate, handleError]);
 
   return (
     <StepLayout

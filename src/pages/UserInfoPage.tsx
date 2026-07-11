@@ -9,7 +9,7 @@ import { useCommentForm, useErrorHandler } from '@hooks';
 import { callApi } from '@lib/apiClient';
 
 function UserInfoPage() {
-  const { data, update } = useCommentForm();
+  const { data, update, resetCommentDrafts } = useCommentForm();
   const [name, setName] = useState(() => data.user_name);
   const [chapterCode, setChapterCode] = useState(() => data.user_chapter);
   const [teamCode, setTeamCode] = useState(() => data.user_team);
@@ -41,12 +41,19 @@ function UserInfoPage() {
         return;
       }
 
+      // 작성자가 바뀌면 조회되는 멤버 목록도 달라지므로 이전 코멘트·MVP 입력은 무효
+      const hasUserChanged =
+        data.user_name !== '' &&
+        (data.user_name !== name || data.user_team !== teamCode || data.user_chapter !== chapterCode);
+      if (hasUserChanged) {
+        resetCommentDrafts();
+      }
       update({ user_name: name, user_team: teamCode, user_chapter: chapterCode });
       navigate('/stop-comment');
     } catch (error) {
       handleError(error);
     }
-  }, [name, teamCode, chapterCode, toast, update, navigate, handleError]);
+  }, [name, teamCode, chapterCode, data, toast, update, resetCommentDrafts, navigate, handleError]);
 
   return (
     <StepLayout

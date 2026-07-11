@@ -12,6 +12,8 @@ interface CommentFormContextType {
   updateMvpDraft: (partial: Partial<MvpDraft>) => void;
   /** 제출 완료 후 모든 입력 상태를 초기값으로 되돌립니다. */
   reset: () => void;
+  /** 스프린트 코드·작성자 정보가 바뀌면 이전 멤버 목록 기준의 코멘트·MVP 입력을 초기화합니다. */
+  resetCommentDrafts: () => void;
 }
 
 const CommentFormContext = createContext<CommentFormContextType | null>(null);
@@ -62,9 +64,21 @@ export function CommentFormProvider({ children }: { children: ReactNode }) {
     setMvpDraft(initialMvpDraft);
   };
 
+  const resetCommentDrafts = () => {
+    setData((prev) => ({
+      ...prev,
+      stop_comments: [],
+      start_comments: [],
+      continue_comments: [],
+      mvp: null,
+    }));
+    setPeerRows(createInitialPeerRows());
+    setMvpDraft(initialMvpDraft);
+  };
+
   return (
     <CommentFormContext.Provider
-      value={{ data, update, peerRows, updatePeerRows, mvpDraft, updateMvpDraft, reset }}
+      value={{ data, update, peerRows, updatePeerRows, mvpDraft, updateMvpDraft, reset, resetCommentDrafts }}
     >
       {children}
     </CommentFormContext.Provider>
