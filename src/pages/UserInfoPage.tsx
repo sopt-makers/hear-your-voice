@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StepLayout, ContentHeading, FieldSection, SelectField } from '@components';
 import * as styles from './UserInfoPage.css';
@@ -18,7 +18,13 @@ function UserInfoPage() {
   const [teamOptions, setTeamOptions] = useState<{ label: string; value: string }[]>([]);
   const navigate = useNavigate();
   const toast = useToast();
+  const toastRef = useRef(toast);
   const { handleError } = useErrorHandler();
+
+  // useToast() 반환값은 렌더마다 바뀌므로 ref로 최신 참조만 유지 (deps에 직접 넣지 않음)
+  useEffect(() => {
+    toastRef.current = toast;
+  }, [toast]);
 
   useEffect(() => {
     callApi(() => Promise.all([getChapterCodes(), getTeamCodes()]))
@@ -37,7 +43,10 @@ function UserInfoPage() {
 
       if (!valid) {
         setIsError(true);
-        toast.open({ icon: 'error', content: '존재하지 않는 회원이에요. 다시 확인해주세요.' });
+        toastRef.current.open({
+          icon: 'error',
+          content: '존재하지 않는 회원이에요. 다시 확인해주세요.',
+        });
         return;
       }
 
@@ -55,7 +64,7 @@ function UserInfoPage() {
     } catch (error) {
       handleError(error);
     }
-  }, [name, teamCode, chapterCode, data, toast, update, resetCommentDrafts, navigate, handleError]);
+  }, [name, teamCode, chapterCode, data, update, resetCommentDrafts, navigate, handleError]);
 
   return (
     <StepLayout
