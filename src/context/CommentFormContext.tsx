@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useCallback, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { CommentFormState, CommentsKey, MvpDraft, PeerCommentRowState } from '@types';
 import { createEmptyPeerCommentRow } from '@utils/peerCommentUtils';
@@ -46,25 +46,25 @@ export function CommentFormProvider({ children }: { children: ReactNode }) {
   );
   const [mvpDraft, setMvpDraft] = useState<MvpDraft>(initialMvpDraft);
 
-  const update = (partial: Partial<CommentFormState>) => {
+  const update = useCallback((partial: Partial<CommentFormState>) => {
     setData((prev) => ({ ...prev, ...partial }));
-  };
+  }, []);
 
-  const updatePeerRows = (key: CommentsKey, rows: PeerCommentRowState[]) => {
+  const updatePeerRows = useCallback((key: CommentsKey, rows: PeerCommentRowState[]) => {
     setPeerRows((prev) => ({ ...prev, [key]: rows }));
-  };
+  }, []);
 
-  const updateMvpDraft = (partial: Partial<MvpDraft>) => {
+  const updateMvpDraft = useCallback((partial: Partial<MvpDraft>) => {
     setMvpDraft((prev) => ({ ...prev, ...partial }));
-  };
+  }, []);
 
-  const reset = () => {
+  const reset = useCallback(() => {
     setData(initialData);
     setPeerRows(createInitialPeerRows());
     setMvpDraft(initialMvpDraft);
-  };
+  }, []);
 
-  const resetCommentDrafts = () => {
+  const resetCommentDrafts = useCallback(() => {
     setData((prev) => ({
       ...prev,
       stop_comments: [],
@@ -74,15 +74,14 @@ export function CommentFormProvider({ children }: { children: ReactNode }) {
     }));
     setPeerRows(createInitialPeerRows());
     setMvpDraft(initialMvpDraft);
-  };
+  }, []);
 
-  return (
-    <CommentFormContext.Provider
-      value={{ data, update, peerRows, updatePeerRows, mvpDraft, updateMvpDraft, reset, resetCommentDrafts }}
-    >
-      {children}
-    </CommentFormContext.Provider>
+  const value = useMemo(
+    () => ({ data, update, peerRows, updatePeerRows, mvpDraft, updateMvpDraft, reset, resetCommentDrafts }),
+    [data, update, peerRows, updatePeerRows, mvpDraft, updateMvpDraft, reset, resetCommentDrafts],
   );
+
+  return <CommentFormContext.Provider value={value}>{children}</CommentFormContext.Provider>;
 }
 
 export { CommentFormContext };
