@@ -117,7 +117,7 @@ src/
 │   ├── ClosingPage
 │   └── ErrorPage
 ├── types/                       → 도메인 타입 정의
-│   ├── comment.ts               (Comment, Mvp, CommentFormState, CommentSubmissionPayload, CommentsKey, PeerCommentKind, PeerCommentRowState, CommentSubmitResult)
+│   ├── comment.ts               (Comment, Mvp, CommentFormState, CommentSubmissionPayload, CommentsKey, PeerCommentKind, PeerCommentRowState, MvpDraft, CommentSubmitResult)
 │   ├── peer.ts                  (PeerMember)
 │   ├── chapter.ts
 │   └── sprint.ts
