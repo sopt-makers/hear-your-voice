@@ -16,8 +16,24 @@ async function slackFetch(url: string, token: string, body: unknown): Promise<Re
   }
 }
 
-export async function slackSendDm(token: string, slackUserName: string, blocks: unknown[]): Promise<string> {
-  const openRes = await slackFetch(`${SLACK_API}/conversations.open`, token, { users: slackUserName });
+export async function slackPostToChannel(
+  token: string,
+  channel: string,
+  text: string,
+): Promise<void> {
+  const res = await slackFetch(`${SLACK_API}/chat.postMessage`, token, { channel, text });
+  const json = await res.json();
+  if (!json.ok) throw new Error(`Slack post error: ${json.error}`);
+}
+
+export async function slackSendDm(
+  token: string,
+  slackUserName: string,
+  blocks: unknown[],
+): Promise<string> {
+  const openRes = await slackFetch(`${SLACK_API}/conversations.open`, token, {
+    users: slackUserName,
+  });
   const openJson = await openRes.json();
   if (!openJson.ok) throw new Error(`Slack open error: ${openJson.error}`);
 

@@ -60,7 +60,7 @@ Slack DM이 Notion보다 10분 뒤에 실행되도록 분리되어 있어, 두 �
 2. `SUPABASE_URL`과 `CRON_SECRET`을 GitHub Secrets에서 읽는다.
 3. `curl`로 Supabase Edge Function endpoint에 `POST` 요청을 보낸다.
 4. `Authorization: Bearer ${CRON_SECRET}` 헤더로 배치 호출을 인증한다.
-5. HTTP status가 `200`이 아니거나(`sync-sprint-to-notion`의 경우) 응답 body의 `failed`가 `0`이 아니면 workflow를 실패 처리한다.
+5. HTTP status가 `200`이 아니거나 응답 body의 `failed`(`send-sprint-dm`는 `enqueue_failed`도 함께)가 `0`이 아니면 workflow를 실패 처리한다.
 
 즉, GitHub Actions는 실제 비즈니스 로직을 수행하지 않고, 안전하게 Edge Function을 깨우는 스케줄러 역할을 맡는다.
 
@@ -186,6 +186,7 @@ Edge Function은 아래 형태의 집계 결과를 반환한다.
 
 - `SLACK_BOT_TOKEN`
 - `CRON_SECRET`
+- `SLACK_ALERT_CHANNEL_ID` (실패 알림용, 선택 — 없으면 알림만 건너뛰고 발송은 정상 수행)
 
 ### 실행 조건
 
@@ -207,6 +208,7 @@ Edge Function은 아래 형태의 집계 결과를 반환한다.
 11. `get_due_sprint_dm_deliveries(p_run_date)` RPC로 오늘 실제 발송해야 할 delivery를 조회하며 동시에 `processing`으로 점유한다.
 12. 각 delivery마다 Slack DM을 발송한다.
 13. 성공 시 `mark_sprint_dm_sent(...)`, 실패 시 `mark_sprint_dm_failed(...)`를 호출한다.
+14. enqueue 실패 또는 발송 실패가 하나라도 있으면 `SLACK_ALERT_CHANNEL_ID` 채널로 실패 요약(대상별 에러 메시지 포함)을 Slack으로 알린다. 함수 자체가 예외로 죽는 경우에도 동일하게 알린다.
 
 ### 구현 상세
 
