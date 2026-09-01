@@ -26,4 +26,6 @@ jobs:
             -X POST "${SUPABASE_URL}/functions/v1/send-sprint-dm" \
             -H "Authorization: Bearer ${CRON_SECRET}")
           echo "Response: $(cat response.json)"
-          [ "$HTTP_STATUS" = "200" ] || exit 1
+          FAILED=$(jq -r '.failed // 1' response.json)
+          ENQUEUE_FAILED=$(jq -r '.enqueue_failed // 1' response.json)
+          [ "$HTTP_STATUS" = "200" ] && [ "$FAILED" = "0" ] && [ "$ENQUEUE_FAILED" = "0" ] || exit 1
