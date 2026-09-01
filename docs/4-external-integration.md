@@ -60,7 +60,7 @@ Slack DM이 Notion보다 10분 뒤에 실행되도록 분리되어 있어, 두 �
 2. `SUPABASE_URL`과 `CRON_SECRET`을 GitHub Secrets에서 읽는다.
 3. `curl`로 Supabase Edge Function endpoint에 `POST` 요청을 보낸다.
 4. `Authorization: Bearer ${CRON_SECRET}` 헤더로 배치 호출을 인증한다.
-5. HTTP status가 `200`이 아니면 workflow를 실패 처리한다.
+5. HTTP status가 `200`이 아니거나(`sync-sprint-to-notion`의 경우) 응답 body의 `failed`가 `0`이 아니면 workflow를 실패 처리한다.
 
 즉, GitHub Actions는 실제 비즈니스 로직을 수행하지 않고, 안전하게 Edge Function을 깨우는 스케줄러 역할을 맡는다.
 
@@ -81,6 +81,7 @@ Slack DM이 Notion보다 10분 뒤에 실행되도록 분리되어 있어, 두 �
 - `NOTION_COMMENTS_DB_ID`
 - `NOTION_MVP_DB_ID`
 - `CRON_SECRET`
+- `SLACK_BOT_TOKEN`, `SLACK_ALERT_CHANNEL_ID` (실패 알림용, 선택 — 없으면 알림만 건너뛰고 동기화는 정상 수행)
 
 ### 실행 조건
 
@@ -100,6 +101,7 @@ Slack DM이 Notion보다 10분 뒤에 실행되도록 분리되어 있어, 두 �
 9. `mvp` 코멘트는 Notion MVP DB에 별도로 업로드한다.
 10. 스프린트 단위 성공 시 `mark_sprint_notion_synced(p_sprint_id)`를 호출한다.
 11. 스프린트 단위 실패 시 `mark_sprint_notion_failed(p_sprint_id, p_error, p_run_date)`를 호출한다.
+12. 실행 전체에서 실패가 하나라도 있으면 `SLACK_ALERT_CHANNEL_ID` 채널로 실패 요약(스프린트별 에러 메시지 포함)을 Slack으로 알린다. 함수 자체가 예외로 죽는 경우에도 동일하게 알린다.
 
 ### 구현 상세
 
@@ -154,7 +156,7 @@ Notion 동기화 상태는 `sprints` 테이블에 기록한다.
 - `notion_sync_attempt_count`
 - `notion_last_attempted_at`
 - `notion_last_error`
-- `notion_retry_deadline`
+- `notion_retry_deadline` (레거시 컬럼, 더 이상 조회 조건에 사용되지 않음 — [이슈 #52](https://github.com/sopt-makers/hear-your-voice/issues/52) 참고)
 
 ### 반환값
 

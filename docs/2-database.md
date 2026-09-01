@@ -660,9 +660,9 @@ $function$
 - 동작:
   - 종료일이 실행일 전날 이전인 스프린트 중
   - `notion_sync_status in ('pending', 'failed')`
-  - `notion_sync_attempt_count < 3`
-  - `p_run_date <= notion_retry_deadline`
+  - `notion_sync_attempt_count < 10`
   - 같은 날짜에 이미 시도하지 않은 건만 반환한다.
+- 참고: 과거에는 `notion_retry_deadline` 컬럼과 비교하는 조건이 있었으나, 이 컬럼을 채워주는 로직이 어디에도 없어 항상 NULL 비교로 실패 처리되며 스프린트가 영구히 동기화 대상에서 제외되는 버그가 있었다. Slack DM과 달리 Notion 아카이빙은 오래된 데이터도 계속 재시도해도 무방하므로 해당 조건을 제거했다.
 
 <details>
 <summary>SQL 보기</summary>
@@ -676,8 +676,7 @@ AS $function$
   FROM sprints
   WHERE end_date <= p_run_date - interval '1 day'
     AND notion_sync_status IN ('pending', 'failed')
-    AND notion_sync_attempt_count < 3
-    AND p_run_date <= notion_retry_deadline
+    AND notion_sync_attempt_count < 10
     AND (
       notion_last_attempted_at IS NULL
       OR timezone('Asia/Seoul', notion_last_attempted_at)::date < p_run_date
@@ -756,8 +755,9 @@ $function$
 - 목적: Notion 동기화 실패와 재시도 상태를 기록한다.
 - 동작:
   - 시도 횟수를 증가시킨다.
-  - 3회 이상 시도했거나 재시도 마감일을 넘기면 `expired`, 아니면 `failed`로 전환한다.
+  - 10회 이상 시도했으면 `expired`, 아니면 `failed`로 전환한다.
   - 마지막 시도 시각과 에러 메시지를 저장한다.
+- 참고: `p_run_date`는 호출부(Edge Function) 호환을 위해 시그니처에 남아있지만 더 이상 재시도 마감일 판단에는 쓰이지 않는다.
 
 <details>
 <summary>SQL 보기</summary>
@@ -773,15 +773,14 @@ CREATE OR REPLACE FUNCTION public.mark_sprint_notion_failed(
 AS $function$
 DECLARE
   v_new_count  integer;
-  v_deadline   date;
   v_new_status text;
 BEGIN
-  SELECT notion_sync_attempt_count + 1, notion_retry_deadline
-  INTO   v_new_count, v_deadline
+  SELECT notion_sync_attempt_count + 1
+  INTO   v_new_count
   FROM   sprints
   WHERE  id = p_sprint_id;
 
-  IF v_new_count >= 3 OR p_run_date > v_deadline THEN
+  IF v_new_count >= 10 THEN
     v_new_status := 'expired';
   ELSE
     v_new_status := 'failed';
