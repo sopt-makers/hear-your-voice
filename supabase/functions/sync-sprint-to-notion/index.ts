@@ -19,13 +19,17 @@ async function notifySlackFailure(text: string) {
   const slack_bot_token = Deno.env.get('SLACK_BOT_TOKEN');
   const slack_alert_channel_id = Deno.env.get('SLACK_ALERT_CHANNEL_ID');
   if (!slack_bot_token || !slack_alert_channel_id) {
-    console.error('[notion-sync] Slack alert skipped: missing SLACK_BOT_TOKEN or SLACK_ALERT_CHANNEL_ID');
+    console.error(
+      '[notion-sync] Slack alert skipped: missing SLACK_BOT_TOKEN or SLACK_ALERT_CHANNEL_ID',
+    );
     return;
   }
   try {
     await slackPostToChannel(slack_bot_token, slack_alert_channel_id, text);
   } catch (err) {
-    console.error(`[notion-sync] Slack alert failed: ${(err as any)?.message ?? JSON.stringify(err)}`);
+    console.error(
+      `[notion-sync] Slack alert failed: ${(err as any)?.message ?? JSON.stringify(err)}`,
+    );
   }
 }
 
@@ -53,8 +57,10 @@ Deno.serve(async (req) => {
     const runDate = getKstDateString();
     console.log(`[notion-sync] runDate=${runDate}`);
 
-    const { data: sprints, error: sprintError } = await supabase
-      .rpc('get_sprints_for_notion_delivery', { p_run_date: runDate });
+    const { data: sprints, error: sprintError } = await supabase.rpc(
+      'get_sprints_for_notion_delivery',
+      { p_run_date: runDate },
+    );
     if (sprintError) throw sprintError;
 
     console.log(`[notion-sync] sprints=${(sprints ?? []).length}`);
@@ -66,8 +72,10 @@ Deno.serve(async (req) => {
       stats.processed++;
 
       try {
-        const { data: comments, error: commentError } = await supabase
-          .rpc('get_comments_for_sprint', { p_sprint_id: sprint.id });
+        const { data: comments, error: commentError } = await supabase.rpc(
+          'get_comments_for_sprint',
+          { p_sprint_id: sprint.id },
+        );
         if (commentError) throw commentError;
 
         const rows = (comments ?? []) as CommentRow[];
@@ -76,12 +84,15 @@ Deno.serve(async (req) => {
         for (const c of rows) {
           if (c.type !== 'start' && c.type !== 'continue') continue;
           const key = `${c.sender_id}__${c.type}__${c.content}`;
-          if (!groupMap.has(key)) groupMap.set(key, { type: c.type, content: c.content, targets: [] });
+          if (!groupMap.has(key))
+            groupMap.set(key, { type: c.type, content: c.content, targets: [] });
           groupMap.get(key)!.targets.push(c.target_name);
         }
 
         const mvpRows = rows.filter((c) => c.type === 'mvp');
-        console.log(`[notion-sync] sprint=${sprint.id} comments=${rows.length} groups=${groupMap.size} mvps=${mvpRows.length}`);
+        console.log(
+          `[notion-sync] sprint=${sprint.id} comments=${rows.length} groups=${groupMap.size} mvps=${mvpRows.length}`,
+        );
 
         for (const group of groupMap.values()) {
           const P = NOTION_PROPS.COMMENTS;
@@ -114,7 +125,9 @@ Deno.serve(async (req) => {
           });
         }
 
-        const { error: syncError } = await supabase.rpc('mark_sprint_notion_synced', { p_sprint_id: sprint.id });
+        const { error: syncError } = await supabase.rpc('mark_sprint_notion_synced', {
+          p_sprint_id: sprint.id,
+        });
         if (syncError) throw syncError;
         stats.synced++;
       } catch (err) {
@@ -143,7 +156,9 @@ Deno.serve(async (req) => {
   } catch (err) {
     const message = (err as any)?.message ?? JSON.stringify(err);
     console.error(message);
-    await notifySlackFailure(`🚨 [너목들] Notion 아카이빙 함수 실행 자체가 실패했습니다.\n${message}`);
+    await notifySlackFailure(
+      `🚨 [너목들] Notion 아카이빙 함수 실행 자체가 실패했습니다.\n${message}`,
+    );
     return new Response(JSON.stringify({ error: message }), { status: 500 });
   }
 });

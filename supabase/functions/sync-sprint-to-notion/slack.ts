@@ -1,6 +1,10 @@
 const SLACK_API = 'https://slack.com/api';
 
-export async function slackPostToChannel(token: string, channel: string, text: string): Promise<void> {
+export async function slackPostToChannel(
+  token: string,
+  channel: string,
+  text: string,
+): Promise<void> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10_000);
   try {
