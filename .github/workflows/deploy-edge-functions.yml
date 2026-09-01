@@ -24,6 +24,7 @@ jobs:
             NOTION_COMMENTS_DB_ID=${{ secrets.NOTION_COMMENTS_DB_ID }} \
             NOTION_MVP_DB_ID=${{ secrets.NOTION_MVP_DB_ID }} \
             SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }} \
+            SLACK_ALERT_CHANNEL_ID=${{ secrets.SLACK_ALERT_CHANNEL_ID }} \
             --project-ref ${{ secrets.SUPABASE_PROJECT_ID }}
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}

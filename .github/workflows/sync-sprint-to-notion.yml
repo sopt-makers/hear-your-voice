@@ -26,4 +26,5 @@ jobs:
             -X POST "${SUPABASE_URL}/functions/v1/sync-sprint-to-notion" \
             -H "Authorization: Bearer ${CRON_SECRET}")
           echo "Response: $(cat response.json)"
-          [ "$HTTP_STATUS" = "200" ] || exit 1
+          FAILED=$(jq -r '.failed // 1' response.json)
+          [ "$HTTP_STATUS" = "200" ] && [ "$FAILED" = "0" ] || exit 1

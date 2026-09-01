@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { getKstDateString } from '../_shared/dates.ts';
 import { notionPost, NOTION_PROPS, NOTION_GENERATION } from './notion.ts';
+import { slackPostToChannel } from './slack.ts';
 
 interface SprintRow {
   id: number;
@@ -12,6 +13,20 @@ interface CommentRow {
   content: string;
   sender_id: number;
   target_name: string;
+}
+
+async function notifySlackFailure(text: string) {
+  const slack_bot_token = Deno.env.get('SLACK_BOT_TOKEN');
+  const slack_alert_channel_id = Deno.env.get('SLACK_ALERT_CHANNEL_ID');
+  if (!slack_bot_token || !slack_alert_channel_id) {
+    console.error('[notion-sync] Slack alert skipped: missing SLACK_BOT_TOKEN or SLACK_ALERT_CHANNEL_ID');
+    return;
+  }
+  try {
+    await slackPostToChannel(slack_bot_token, slack_alert_channel_id, text);
+  } catch (err) {
+    console.error(`[notion-sync] Slack alert failed: ${(err as any)?.message ?? JSON.stringify(err)}`);
+  }
 }
 
 Deno.serve(async (req) => {
@@ -45,6 +60,7 @@ Deno.serve(async (req) => {
     console.log(`[notion-sync] sprints=${(sprints ?? []).length}`);
 
     const stats = { processed: 0, synced: 0, failed: 0 };
+    const failures: { id: number; name: string; error: string }[] = [];
 
     for (const sprint of (sprints ?? []) as SprintRow[]) {
       stats.processed++;
@@ -110,14 +126,24 @@ Deno.serve(async (req) => {
           p_run_date: runDate,
         });
         stats.failed++;
+        failures.push({ id: sprint.id, name: sprint.name, error: message });
       }
     }
 
     console.log(`[notion-sync] done`, stats);
+
+    if (stats.failed > 0) {
+      const detail = failures.map((f) => `• sprint ${f.id} (${f.name}): ${f.error}`).join('\n');
+      await notifySlackFailure(
+        `🚨 [너목들] Notion 아카이빙 실패 (${runDate})\nprocessed=${stats.processed} synced=${stats.synced} failed=${stats.failed}\n${detail}`,
+      );
+    }
+
     return new Response(JSON.stringify(stats), { status: 200 });
   } catch (err) {
     const message = (err as any)?.message ?? JSON.stringify(err);
     console.error(message);
+    await notifySlackFailure(`🚨 [너목들] Notion 아카이빙 함수 실행 자체가 실패했습니다.\n${message}`);
     return new Response(JSON.stringify({ error: message }), { status: 500 });
   }
 });
