@@ -142,6 +142,7 @@ export const NOTION_GENERATION = '38'; // 매 기수마다 업데이트
 | `NOTION_COMMENTS_DB_ID` | 코멘트 DB ID |
 | `NOTION_MVP_DB_ID` | MVP DB ID |
 | `SLACK_BOT_TOKEN` | Slack Bot 인증 |
+| `SLACK_ALERT_CHANNEL_ID` | Notion 아카이빙 실패 시 알림을 보낼 Slack 채널 ID |
 
 ## 배포
 
